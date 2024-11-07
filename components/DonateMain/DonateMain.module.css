@@ -1,0 +1,481 @@
+.DonateMain { 
+    display: flex;
+    flex-direction: column;
+    padding: 0 20%;
+    background: url('/bg_donate.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    margin-top: -75px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 400;
+    font-size: 72px;
+    margin-top: calc(6rem + 75px);
+}
+
+.image {
+    position: absolute;
+    top: -50px;
+}
+
+.status_container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+
+}
+
+.status_content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 5rem;
+}
+
+.cheap_status {
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+    padding: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.1s ease;
+    -webkit-transition: 0.1s ease;
+    -moz-transition: 0.1s ease;
+    -ms-transition: 0.1s ease;
+    -o-transition: 0.1s ease;
+    padding: 2rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cheap_status:hover { 
+    scale: 120%;
+}
+
+.Exprensive_status {
+    width: 100%;
+    width: 450px;
+    height: 600px;
+    border-radius: 20px;
+    padding: 2rem;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.1s ease;
+    -webkit-transition: 0.1s ease;
+    -moz-transition: 0.1s ease;
+    -ms-transition: 0.1s ease;
+    -o-transition: 0.1s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    align-items: center;
+    position: relative;
+}
+
+.Exprensive_status:hover { 
+    scale: 120%;
+}
+
+.button_get {
+    padding: 15px 35px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    display: flex;
+    font-size: 20px;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    font-weight: 600;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: max-content;
+}
+
+.chevron_right {
+    opacity: 0.7;
+    font-size: 20px;
+    height: 28px;
+}
+
+.donate_status_title {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.donate_status_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.donate_status_naming {
+    padding: 0px 30px;
+    display: flex;
+    font-size: 32px;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.price {
+    display: flex;
+    flex-direction: rw;
+    font-size: 40px;
+    font-weight: 500;
+    gap: 0.5rem;
+    text-align: center;
+    align-items: end;
+}
+
+.price span {
+    opacity: 0.7;
+    font-weight: 400 !important;
+    font-size: 32px;
+}
+
+.price h3 {
+    opacity: 0.7;
+    font-weight: 400 !important;
+}
+.vip {
+    background: hsl(0, 0%, 0%) radial-gradient(hsl(34deg 85% 60% / 30%), #00000000 70%) center bottom;
+    background-size: 200% 200%;
+}
+
+.premium {
+    background: hsl(0, 0%, 0%) radial-gradient(hsl(201deg 85% 55% / 30%), #00000000 70%) center bottom;
+    background-size: 200% 200%;
+}
+
+.deluxe {
+    background: hsl(0, 0%, 0%) radial-gradient(hsl(163deg 85% 55% / 30%), #00000000 70%) center bottom;
+    background-size: 200% 200%;
+}
+
+.ultra {
+    background: hsl(0, 0%, 0%) radial-gradient(hsl(270deg 85% 60% / 30%), #00000000 70%) center bottom;
+    background-size: 200% 200%;
+}
+
+.legend {
+    background: hsl(0, 0%, 0%) radial-gradient(hsl(0deg 85% 60% / 30%), #00000000 70%) center bottom;
+    background-size: 200% 200%;
+}
+
+
+.vip_b {
+    background: hsl(55, 100%, 70%) linear-gradient(0, hsl(34, 100%, 60%), hsl(55, 100%, 70%) 135%);
+}
+
+.premium_b {
+    background: hsl(180, 100%, 70%) linear-gradient(0, hsl(212, 100%, 50%), hsl(180, 100%, 70%) 135%);
+}
+
+.deluxe_b {
+    background: hsl(55, 100%, 70%) linear-gradient(0, hsl(151, 100%, 45%), hsl(55, 100%, 70%) 135%);
+}
+
+.ultra_b {
+    background: hsl(275, 100%, 70%) linear-gradient(0, hsl(270, 100%, 50%), hsl(275, 100%, 70%) 135%);
+}
+
+.legend_b {
+    background: hsl(0, 100%, 70%) linear-gradient(0, hsl(0, 100%, 50%), hsl(0, 100%, 70%) 135%);
+}
+
+.donate_table {
+    width: 100%;
+    height: auto;
+    background-color: rgb(18, 18, 18);
+    border: 1px solid #202020;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+}
+
+.donate_table_header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    padding-bottom: 0px;
+    background-color: rgba(255, 255, 255, 0.01);
+    overflow: hidden;
+}
+
+.skills {
+    height: 50px;
+}
+
+.heading {
+    text-align: left;
+    display: flex;
+    width: 30%;
+    justify-content: left;
+    align-items: left;
+    display: flex;
+    flex-direction: column;    
+    overflow: hidden;
+}
+
+
+.donate_table_statuses {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.donate_status {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 1rem;
+    overflow: hidden;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.donate_status span { 
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.border_ultra {
+    border-top: 1px solid rgb(226, 82, 255);
+    border-right: 1px solid rgb(226, 82, 255);
+    border-left: 1px solid rgb(226, 82, 255);
+}
+
+.border_legend {
+    border-top: 2px solid rgb(255, 82, 82);
+    border-right: 2px solid rgb(255, 82, 82);
+    border-left: 2px solid rgb(255, 82, 82);
+    animation: legend 2s ease infinite;
+}
+
+@keyframes legend {
+    0% {
+        border-top: 2px solid rgb(255, 82, 82);
+        border-right: 2px solid rgb(255, 82, 82);
+        border-left: 2px solid rgb(255, 82, 82);
+    }
+
+    50% {
+        border-top: 2px solid rgb(153, 46, 46);
+        border-right: 2px solid rgb(153, 46, 46);
+        border-left: 2px solid rgb(153, 46, 46);
+    }
+
+    100% {
+        border-top: 2px solid rgb(255, 82, 82);
+        border-right: 2px solid rgb(255, 82, 82);
+        border-left: 2px solid rgb(255, 82, 82);
+    }
+}
+
+
+
+.donate_table_skills {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    padding: 0 20px;
+    min-height: 50px;
+    border-top: 1px solid #202020;
+}
+
+.donate_table_skills_name {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.7;
+    gap: 0.5rem;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+}
+
+.donate_table_skills_name span {
+    font-size: 14px;
+}
+
+.donate_table_skill {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: max-content;
+}
+
+.skill_status {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100%;
+}
+
+.specialIcon3 {
+    border-right: 1px solid rgb(226, 82, 255);
+    border-left: 1px solid rgb(226, 82, 255);
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    text-align: center;
+    z-index: 999;
+    min-height: 50px;
+    background-color: rgba(226, 82, 255, 0.05);
+}
+.specialIcon4 {
+    border-right: 2px solid rgb(255, 82, 82);
+    border-left: 2px solid rgb(255, 82, 82);
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: max-content;
+    z-index: 999;
+    min-height: 50px;
+    overflow: hidden;
+    background-color: rgba(255, 82, 82, 0.1);
+    animation: icon4animation 2s ease infinite;
+}
+
+@keyframes icon4animation {
+    0% {
+        border-right: 2px solid rgb(255, 82, 82);
+        border-left: 2px solid rgb(255, 82, 82);
+    }
+
+    50% {
+        border-right: 2px solid rgb(153, 46, 46);
+        border-left: 2px solid rgb(153, 46, 46);
+    }
+
+    100% {
+        border-right: 2px solid rgb(255, 82, 82);
+        border-left: 2px solid rgb(255, 82, 82);
+    }
+}
+
+.specialIcon2 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: max-content;
+    z-index: 999;
+    min-height: 50px;
+    overflow: hidden;
+    background-color: rgba(21, 71, 28, 0.1);
+}
+
+.specialIcon1 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: max-content;
+    z-index: 999;
+    min-height: 50px;
+    overflow: hidden;
+    background-color: rgba(21, 61, 67, 0.1); 
+}
+
+.specialIcon0 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: max-content;
+    z-index: 999;
+    min-height: 50px;
+    overflow: hidden;
+    background-color: rgba(75, 67, 23, 0.1);  
+}
+
+.bg_0 {
+    background-color: rgba(75, 67, 23, 0.2);  
+}
+
+.bg_1 {
+    background-color: rgba(21, 61, 67, 0.2);  
+}
+
+.bg_2 {
+    background-color: rgba(21, 71, 28, 0.2);  
+}
+
+.bg_3 {
+    background-color: rgba(226, 82, 255, 0.1);  
+}
+
+.bg_4 {
+    background-color: rgba(255, 82, 82, 0.2);
+}
+
+.title_price {
+    opacity: 0.7;
+}

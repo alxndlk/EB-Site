@@ -1,0 +1,140 @@
+.footer {
+    width: 100%;
+    height: auto;
+    border: 1px solid #202020;
+    background-color: rgb(18, 18, 18);
+    padding: 40px  80px 40px 80px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.footer_container {
+    width: 100%;
+}
+
+.footer_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    gap: 3rem;
+    width: 100%;
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    gap: 1rem;
+    opacity: 0.7;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;  
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 18px;
+}
+
+.ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.ul li a {
+    transition: 0.1s ease;
+    -webkit-transition: 0.1s ease;
+    -moz-transition: 0.1s ease;
+    -ms-transition: 0.1s ease;
+    -o-transition: 0.1s ease;
+    font-size: 18px;
+}
+
+.gap_li {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.link:hover {
+    color: #9b9b9b;
+}
+
+.button {
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 10px 20px;
+    transition: 0.1s ease;
+    -webkit-transition: 0.1s ease;
+    -moz-transition: 0.1s ease;
+    -ms-transition: 0.1s ease;
+    border-radius: 50px;
+    -o-transition: 0.1s ease;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    z-index: 999;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    box-shadow: 0px 0px 20px 0px rgb(34, 197, 94);
+    animation: circle_animation 3s ease infinite;
+    -webkit-animation: circle_animation 3s ease infinite;
+    z-index: 999;
+    background-color: rgb(34, 197, 94);
+}
+
+.button_login {
+    border: 1px solid #202020;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    transition: 0.1s ease;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    -o-border-radius: 50px;
+    font-weight: 600; 
+}
+
+.button_login:hover {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+} 
