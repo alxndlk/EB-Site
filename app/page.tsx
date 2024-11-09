@@ -8,7 +8,7 @@ import Footer from "@/layout/Footer";
 export default function Home() {
   return (
     <Wrapper>
-      <Header />
+      <Header textColor="white"/>
       <Main />
       <Footer />
     </Wrapper>
