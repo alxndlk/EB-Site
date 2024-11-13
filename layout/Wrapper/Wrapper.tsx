@@ -2,10 +2,11 @@
 
 
 import { ReactNode } from 'react';
+import styles from './Wrapper.module.css'
 
 export const Wrapper = ({ children }: { children: ReactNode }) => {
     return (
-        <div>
+        <div className={styles.wrapper}>
             {children}
         </div>
     );

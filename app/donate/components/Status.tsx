@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ReusableIcon from './ReusableIcon';
-import styles from './DonateMain.module.css';
+import styles from './DonateMain.module.css'
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 import { XIcon } from 'lucide-react';
 
@@ -33,7 +33,7 @@ const Modal: React.FC<{ src: string; text: string; onClose: () => void }> = ({ s
   );
 };
 
-export const Status: React.FC<IStatus> = ({ text, spanText, icons, kit, src, visible }) => {
+export const Status: React.FC<IStatus> = ({ text, spanText, icons, kit, src }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

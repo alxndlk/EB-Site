@@ -1,7 +1,7 @@
 import Header from "@/layout/Header";
 import { Wrapper } from "@/layout/Wrapper/Wrapper";
-import DonateMain from "@/components/DonateMain";
 import Footer from "@/layout/Footer";
+import DonateMain from "./components";
 
 
 

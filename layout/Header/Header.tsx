@@ -36,10 +36,14 @@ export const Header: React.FC<HeaderProps> = ({ textColor = "black" }) => {
                         <Link href="https://discord.gg/w3ts4QTB" target='_blank' className={`${styles.link} text-${textColor}`}>Дискорд</Link>
                     </li>
                     <li className={styles.gap_li}>
-                        <Link className={`${styles.button_login} 'bg-gray-100 rounded-full `} style={{ color: textColor }} href="#">
-                            Войти
+                        <Link 
+                            className={`${styles.button_login} 'bg-gray-100 rounded-full `}
+                            style={{ color: textColor }}
+                            href='/auth'
+                            >
+                                Войти
                         </Link>
-                        <Link className={`${styles.button} 'bg-gray-100 rounded-full `} style={{ color: textColor }} passHref href='/Эпоха Блоков.exe'>
+                        <Link className={`${styles.button} 'bg-gray-100 rounded-full `} style={{ color: textColor }} href='/'>
                             Начать играть
                         </Link>
                     </li>

@@ -1,7 +1,4 @@
 import { CheckIcon, XIcon } from 'lucide-react';
-import styles from './DonateMain.module.css'
-import { ChevronRightIcon } from '@radix-ui/react-icons';
-
 interface IIconProps {
   type: 'check' | 'xmark' | 'none'
   color: string;

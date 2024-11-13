@@ -3,7 +3,7 @@
     width: 100%;
     padding: 0 20%;
     margin-top: -75px;
-    background-image: url(/title_bg.png);
+    background-image: url(/main_bg.png);
     background-repeat: no-repeat;
     z-index: 1;
 }
@@ -104,11 +104,13 @@
 }
 
 .patch span {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .description {
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    font-size: 18px;
+    font-weight: 500;
 }

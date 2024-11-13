@@ -10,6 +10,8 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    z-index: 99999;
+    position: relative;
 }
 
 .footer_container {

@@ -69,11 +69,11 @@
 }
 
 .button:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 
 
@@ -122,6 +122,8 @@
     font-size: 20px;
     font-weight: 600;
     color: #fff !important;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
 }
 
 .button_login {
@@ -140,13 +142,15 @@
     font-weight: 600;
     color: #FFF !important;
     position: relative;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
 }
 
 
 .button_login:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
 } 
