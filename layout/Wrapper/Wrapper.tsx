@@ -1,13 +1,19 @@
 "use client";
 
+import { ReactNode, useEffect, useState } from 'react';
+import styles from './Wrapper.module.css';
 
-import { ReactNode } from 'react';
-import styles from './Wrapper.module.css'
+type WrapperProps = {
+  children: ReactNode;
+};
 
-export const Wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-        <div className={styles.wrapper}>
-            {children}
-        </div>
-    );
-}
+export const Wrapper: React.FC<WrapperProps> = ({ children}) => {
+    
+  return (
+    <>
+      <div className={styles.wrapper}>
+        {children}
+      </div>
+    </>
+  );
+};

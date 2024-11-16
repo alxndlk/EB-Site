@@ -12,12 +12,13 @@ type HeaderProps = {
 };
 
 export const Header: React.FC<HeaderProps> = ({ textColor = "black" }) => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
-  const isLoading = status === "loading";
 
   return (
+
     <header className={styles.header}>
+
       <div className={styles.nav_bar}>
         <div className={styles.logo}>
           <Image width={32} height={32} src="/logo-top.png" alt="" className={`${styles.logoImage}`} />
@@ -39,11 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ textColor = "black" }) => {
             <Link href="https://discord.gg/w3ts4QTB" target="_blank" className={`${styles.link} text-${textColor}`}>Дискорд</Link>
           </li>
           <li className={styles.gap_li}>
-            {isLoading ? (
-              <div className={styles.loadingWrapper}>
-                <TailSpin color={textColor} width={24} height={24} radius={1}/>
-              </div>
-            ) : session ? (
+            {session ? (
               <Link href="/profile" className={styles.profile}>
                 {session.user?.name || "Пользователь"}
               </Link>
