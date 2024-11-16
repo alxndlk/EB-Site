@@ -62,7 +62,9 @@
     "react-dom": "^18",
     "react-hook-form": "^7.53.1",
     "react-intersection-observer": "^9.13.1",
+    "react-loader-spinner": "^6.1.6",
     "react-resizable-panels": "^2.1.5",
+    "react-spinners": "^0.14.1",
     "recharts": "^2.13.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.4",
@@ -72,9 +74,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@types/three": "^0.170.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
