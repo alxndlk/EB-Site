@@ -1,10 +1,16 @@
 .header {
     width: 100%;
-    height: 75px;
+    height: 64px;
     padding: 0 20%;
     font-weight: 500;
     font-size: 16px;
-    z-index: 999;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    font-size: 14px;
+    background-color: #000000cc;
+    backdrop-filter: saturate(180%) blur(5px);
+    box-shadow: inset 0 -1px 0 0 #333;
 }
 
 .nav_bar {
@@ -29,7 +35,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;    
+    font-weight: 400;
 }
 
 .ul {
@@ -41,13 +48,20 @@
     align-items: center;
 }
 
+.ul li {
+    display: flex;
+    flex-direction: row;
+    color: #888;
+}
+
 .ul li a {
     transition: 0.1s ease;
     -webkit-transition: 0.1s ease;
     -moz-transition: 0.1s ease;
     -ms-transition: 0.1s ease;
     -o-transition: 0.1s ease;
-    font-size: 18px;
+    font-size: 14px;
+    color: #888;
 }
 
 .gap_li {
@@ -68,117 +82,68 @@
     color: #ffffff;
 }
 
-.button:hover {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-}
-
-
-.circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    box-shadow: 0px 0px 20px 0px rgb(34, 197, 94);
-    animation: circle_animation 3s ease infinite;
-    -webkit-animation: circle_animation 3s ease infinite;
+.button, .button_login, .profile {
+    padding: 0px 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    border-radius: 6px;
     z-index: 999;
-    background-color: rgb(34, 197, 94);
-}
-
-@keyframes circle_animation {
-    0% {
-        box-shadow: 0px 0px 10px 0px rgb(34, 197, 94);
-    }
-
-    50% {
-        box-shadow: 0px 0px 30px 0px rgb(34, 197, 94);
-    }
-
-    100% {
-        box-shadow: 0px 0px 10px 0px rgb(34, 197, 94);
-    }
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: 500;
 }
 
 .button {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 10px 20px;
-    transition: 0.1s ease;
-    -webkit-transition: 0.1s ease;
-    -moz-transition: 0.1s ease;
-    -ms-transition: 0.1s ease;
-    border-radius: 50px;
-    -o-transition: 0.1s ease;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
-    z-index: 999;
-    font-size: 20px;
-    font-weight: 600;
+    background-color: #fff;
+    color: #000 !important;
+}
+
+.button:hover {
+    background-color: #dbdbdb;
+}
+
+.button_login, .profile {
+    border: 1px solid #ffffff24;
+    background: #0a0a0a;
     color: #fff !important;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
 }
 
-.button_login {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-    padding: 10px 20px;
-    transition: 0.1s ease;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    font-size: 20px;
+.button_login:hover, .profile:hover {
+    background-color: #ffffff17;
+}
+
+.badge {
+    height: 20px;
+    line-height: 20px;
+    border-radius: 6px;
+    padding: 0 6px;
+    font-size: 12px;
+    color: hsla(0,0%,93%,1);
+    background: hsla(0,0%,10%,1);
+    font-weight: 500;
+    font-family: inherit;
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .145);
+    border: none;
+    margin-left: 16px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 1);
+    display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
-    -o-border-radius: 50px;
-    font-weight: 600;
-    color: #FFF !important;
-    position: relative;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-}
-
-
-.button_login:hover {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-} 
-
-.profile {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-    padding: 10px 20px;
-    transition: 0.1s ease;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    font-size: 20px;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    -o-border-radius: 50px;
-    font-weight: 600;
-    color: #FFF !important;
-    position: relative;
-    cursor: pointer;
-    backdrop-filter: blur(5px); 
-}
-
-.profile:hover {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
+    z-index: 1000;
+    flex-direction: column;
+    gap: 24px;
 }

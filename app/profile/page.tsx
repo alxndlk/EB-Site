@@ -6,15 +6,15 @@ import Footer from "@/layout/Footer";
 import Main from "./components";
 
 
-const Donate = () => {
+const Profile = () => {
 
     return (
       <Wrapper >
-        <Header textColor="white"/>
+        <Header />
         <Main />
         <Footer />
       </Wrapper>
     )
 }
   
-  export default Donate;
+  export default Profile;

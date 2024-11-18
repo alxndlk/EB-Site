@@ -1,5 +1,6 @@
 "use client";
 
+import Launcher from '../Launcher';
 import Features from '../Features';
 import ModList from '../ModList';
 import Mods from '../Mods';
@@ -15,6 +16,7 @@ export const Main = () => {
             <Mods />
             <ModList />
             <Optimization />
+            <Launcher />
         </div>
     );
 };

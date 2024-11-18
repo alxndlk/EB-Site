@@ -5,15 +5,20 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from "next-auth/react";
-import { TailSpin } from 'react-loader-spinner'
+import { GoArrowUpRight } from "react-icons/go";
+import { TailSpin } from 'react-loader-spinner';
 
-type HeaderProps = {
-  textColor?: string;
-};
+export const Header: React.FC = () => {
+  const { data: session, status } = useSession();
 
-export const Header: React.FC<HeaderProps> = ({ textColor = "black" }) => {
-  const { data: session } = useSession();
-
+  if (status === "loading" || !session) {
+    return (
+      <div className={styles.loading}>
+        <TailSpin color='white' width={50} height={50} radius={1} />
+        Загрузка сайта...
+      </div>
+    )
+  }
 
   return (
 
@@ -21,39 +26,49 @@ export const Header: React.FC<HeaderProps> = ({ textColor = "black" }) => {
 
       <div className={styles.nav_bar}>
         <div className={styles.logo}>
-          <Image width={32} height={32} src="/logo-top.png" alt="" className={`${styles.logoImage}`} />
-          <Link href="/" className={`${styles.link} text-${textColor}`}>
+          <Image width={24} height={24} src="/logo-top.png" alt="" className={`${styles.logoImage}`} />
+          <Link href="/" className={`${styles.link}`}>
             Эпоха Блоков
           </Link>
         </div>
         <ul className={styles.ul}>
           <li>
-            <Link href="/news" className={`${styles.link} text-${textColor} relative`}>
-              Обновления
-              <div className={styles.circle}></div>
+            <Link href="/servers" className={`${styles.link} relative`}>
+              Сервера
             </Link>
           </li>
           <li>
-            <Link href="/donate" className={`${styles.link} text-${textColor}`}>Донат</Link>
+            <Link href="/news" className={`${styles.link} relative`}>
+              Обновления
+            </Link>
           </li>
           <li>
-            <Link href="https://discord.gg/w3ts4QTB" target="_blank" className={`${styles.link} text-${textColor}`}>Дискорд</Link>
+            <Link href="/donate" className={`${styles.link}`}>Донат</Link>
+          </li>
+
+          <li>
+            <Link href="https://discord.gg/w3ts4QTB" target="_blank" className={`${styles.link}`}>Дискорд</Link>
+            <GoArrowUpRight size={10}/>
+          </li>
+          <li>
+            <Link href="/forum" target="_blank" className={`${styles.link}`}>Форум</Link>
+            <GoArrowUpRight size={10}/>
           </li>
           <li className={styles.gap_li}>
             {session ? (
               <Link href="/profile" className={styles.profile}>
-                {session.user?.name || "Пользователь"}
+                {session.user?.name}
+                <div className={styles.badge}>игрок</div>
               </Link>
             ) : (
               <Link
-                className={`${styles.button_login} bg-gray-100 rounded-full`}
-                style={{ color: textColor }}
+                className={`${styles.button_login}`}
                 href="/auth"
               >
                 Войти
               </Link>
             )}
-            <Link className={`${styles.button} bg-gray-100 rounded-full`} style={{ color: textColor }} href="/">
+            <Link className={`${styles.button}`} href="/">
               Начать играть
             </Link>
           </li>

@@ -1,0 +1,28 @@
+.InputActive {
+    height: 36px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: #000;
+    color: #EDEDED;
+    transition: 0.1s ease;
+    padding: 4px 10px;
+    font-size: 14px;
+    line-height: 26px;
+    outline: 0
+}
+
+.log_out {
+    background-color: hsla(358,69%,52%,1);
+    color: #fff;
+    border-color: hsla(358,69%,52%,1);
+    padding: 0 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.log_out:hover {
+    background-color: hsla(358,100%,69%,1);
+}
