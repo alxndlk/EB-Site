@@ -1,142 +1,104 @@
 .footer {
     width: 100%;
-    height: auto;
-    border: 1px solid #202020;
-    background-color: rgb(18, 18, 18);
-    padding: 40px  80px 40px 80px;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    z-index: 99999;
-    position: relative;
-}
-
-.footer_container {
-    width: 100%;
-}
-
-.footer_header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    height: 100%;
-    gap: 3rem;
-    width: 100%;
-}
-
-.titles {
-    display: flex;
-    flex-direction: column;
+    padding: 36px 20%;
+    font-weight: 500;
+    z-index: 9999;
     font-size: 14px;
-    gap: 1rem;
-    opacity: 0.7;
+    background-color: #000000cc;
+    backdrop-filter: saturate(180%) blur(5px);
+    border-top: 1px solid #333;
+    flex-direction: column;
 }
 
-.button:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
+.footer_content {
+    display: flex;
+    gap: 24px;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.content, .content_logo {
+    width: max-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .logo {
     display: flex;
-    flex-direction: row;  
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+    flex-direction: row;
+    width: auto;
     gap: 1rem;
-    font-size: 18px;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;    
+    font-weight: 500;
+    color: #EDEDED;
 }
 
-.ul {
+.content h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    line-height: 20px;
+    color: #EDEDED;
+}
+
+.content a {
+    line-height: 20px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #888;
+    border-radius: 2px;
+    font-weight: 400;
+    transition: 0.1s ease;
     display: flex;
     flex-direction: row;
-    gap: 2rem;
-    justify-content: center;
-    text-align: center;
+    gap: 12px;
+    justify-content: left;
+    text-align: left;
     align-items: center;
+    max-width: 200px;
 }
 
-.ul li a {
+.content a:hover {
+    color: #EDEDED;
+}
+
+.paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #888;
+    margin-top: 48px;
+    border-radius: 2px;
+    font-weight: 400;
+}
+
+.content button {
+    background-color: #0A0A0A;
+    color: #EDEDED !important;
+    padding: 0px 12px;
+    height: 32px;
     transition: 0.1s ease;
-    -webkit-transition: 0.1s ease;
-    -moz-transition: 0.1s ease;
-    -ms-transition: 0.1s ease;
-    -o-transition: 0.1s ease;
-    font-size: 18px;
-}
-
-.gap_li {
+    border-radius: 6px;
+    z-index: 999;
+    font-size: 14px;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-}
-
-.link:hover {
-    color: #9b9b9b;
-}
-
-.button {
-    background: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    padding: 10px 20px;
-    transition: 0.1s ease;
-    -webkit-transition: 0.1s ease;
-    -moz-transition: 0.1s ease;
-    -ms-transition: 0.1s ease;
-    border-radius: 50px;
-    -o-transition: 0.1s ease;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
-    z-index: 999;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    box-shadow: 0px 0px 20px 0px rgb(34, 197, 94);
-    animation: circle_animation 3s ease infinite;
-    -webkit-animation: circle_animation 3s ease infinite;
-    z-index: 999;
-    background-color: rgb(34, 197, 94);
-}
-
-.button_login {
-    border: 1px solid #202020;
-    color: #fff;
-    border-radius: 50px;
-    padding: 10px 20px;
-    transition: 0.1s ease;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    font-size: 20px;
     justify-content: center;
     text-align: center;
     align-items: center;
-    -o-border-radius: 50px;
-    font-weight: 600; 
+    font-weight: 500;
+    margin-bottom: 12px;
+    border: 1px solid #ffffff24;
 }
 
-.button_login:hover {
-    transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-} 
+.content button:hover {
+    background-color: #ffffff17;
+}
