@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import styles from './Header.module.css'; 
 import React from 'react';
@@ -7,18 +7,19 @@ import Image from 'next/image';
 import { useSession } from "next-auth/react";
 import { GoArrowUpRight } from "react-icons/go";
 import { TailSpin } from 'react-loader-spinner';
+import { Navbar } from './Navbar';
 
 export const Header: React.FC = () => {
   const { data: session, status } = useSession();
 
-  if (status === "loading" || !session) {
-    return (
-      <div className={styles.loading}>
-        <TailSpin color='white' width={50} height={50} radius={1} />
-        Загрузка сайта...
-      </div>
-    )
-  }
+  // if (status === "loading" || !session) {
+  //   return (
+  //     <div className={styles.loading}>
+  //       <TailSpin color='white' width={50} height={50} radius={1} />
+  //       Загрузка сайта...
+  //     </div>
+  //   )
+  // }
 
   return (
 
@@ -32,28 +33,7 @@ export const Header: React.FC = () => {
           </Link>
         </div>
         <ul className={styles.ul}>
-          <li>
-            <Link href="/servers" className={`${styles.link} relative`}>
-              Сервера
-            </Link>
-          </li>
-          <li>
-            <Link href="/news" className={`${styles.link} relative`}>
-              Обновления
-            </Link>
-          </li>
-          <li>
-            <Link href="/donate" className={`${styles.link}`}>Донат</Link>
-          </li>
-
-          <li>
-            <Link href="https://discord.gg/w3ts4QTB" target="_blank" className={`${styles.link}`}>Дискорд</Link>
-            <GoArrowUpRight size={10}/>
-          </li>
-          <li>
-            <Link href="/forum" target="_blank" className={`${styles.link}`}>Форум</Link>
-            <GoArrowUpRight size={10}/>
-          </li>
+          <Navbar />
           <li className={styles.gap_li}>
             {session ? (
               <Link href="/profile" className={styles.profile}>

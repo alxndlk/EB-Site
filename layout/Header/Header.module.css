@@ -54,6 +54,13 @@
     color: #888;
 }
 
+.li {
+    display: flex;
+    flex-direction: row;
+    color: #888;
+    gap: 2rem;
+}
+
 .ul li a {
     transition: 0.1s ease;
     -webkit-transition: 0.1s ease;
@@ -76,6 +83,10 @@
     -moz-transition: 0.1s ease;
     -ms-transition: 0.1s ease;
     -o-transition: 0.1s ease;
+}
+
+.link_active {
+    color: hsla(210,100%,66%,1) !important;
 }
 
 .link:hover {
