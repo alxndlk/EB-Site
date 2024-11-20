@@ -12,14 +12,14 @@ import { Navbar } from './Navbar';
 export const Header: React.FC = () => {
   const { data: session, status } = useSession();
 
-  // if (status === "loading" || !session) {
-  //   return (
-  //     <div className={styles.loading}>
-  //       <TailSpin color='white' width={50} height={50} radius={1} />
-  //       Загрузка сайта...
-  //     </div>
-  //   )
-  // }
+  if (status === "loading") {
+    return (
+      <div className={styles.loading}>
+        <TailSpin color='white' width={50} height={50} radius={1} />
+        Загрузка сайта...
+      </div>
+    )
+  }
 
   return (
 

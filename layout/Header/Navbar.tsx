@@ -9,7 +9,7 @@ const navigation = [
     {id: 2, title: 'Обновления', path: '/updates', target: '_self' },
     {id: 3, title: 'Донат', path: '/donate', target: '_self' },
     {id: 4, title: 'Дискорд', path: 'https://discord.gg/w3ts4QTB', target: '_blank' },
-    {id: 4, title: 'Форум', path: '/forum', target: '_blank',  },
+    {id: 5, title: 'Форум', path: '/forum', target: '_blank',  },
 ]
 
 export const Navbar = () => {
