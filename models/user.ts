@@ -12,8 +12,8 @@ const UserSchema = new Schema<UserDocument>({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, default: "default" },
-  balance: { type: Number, default: 100 },
+  role: { type: String },
+  balance: { type: Number },
 });
 
 const User = (mongoose.models.User || mongoose.model<UserDocument>("User", UserSchema)) as Model<UserDocument>;

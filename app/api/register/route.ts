@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       email,
       password: hashedPassword,
       role: 'default',
-      balance: 100
+      balance: 49.99
     });
 
     console.log("Новый пользователь создан:", newUser);
