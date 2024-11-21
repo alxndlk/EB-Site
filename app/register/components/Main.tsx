@@ -5,48 +5,49 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 
-import { ChevronRightIcon, EyeIcon, XIcon } from "lucide-react";
 import styles from "./Main.module.css";
-import press_Start_2P from "@/app";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ThreeDots } from "react-loader-spinner";
+import { InputActive } from "@/app/ui/input";
+import StatusBar from "@/components/StatusBar";
 
 export const Main = () => {
-
     const router = useRouter();
 
-    const [passwordType, setPasswordType] = useState("password");
+    const [nameIcon, setNameIcon] = useState(false);
+    const [emailIcon, setEmailIcon] = useState(false);
+    const [passwordIcon, setPasswordIcon] = useState(false);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [message, setMessage] = useState<{ text: string | null; type: 'success' | 'error' | null }>({
+        text: null,
+        type: null,
+    });
 
-    const togglePasswordVisibility = () => {
-        setPasswordType(prevType => prevType === "password" ? "text" : "password");
+    const validateName = (value: string) => {
+        const latinPattern = /^[a-zA-Z0-9]+$/;
+        if (value.length >= 3 && latinPattern.test(value)) {
+            setNameIcon(true);
+        } else {
+            setNameIcon(false);
+        }
     };
 
-    const validateFields = () => {
-
-        const latinPattern = /^[a-zA-Z0-9]+$/;
+    const validateEmail = (value: string) => {
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        setEmailIcon(emailPattern.test(value));
+    };
 
-        if (!name || !email || !password) return "Заполните все поля"
-
-        if (name.length <= 2) return "Длина ника не должна быть менее 3 символов"
-
-        if (!latinPattern.test(name)) return "Никнейм должен содержать только латинские буквы без спецсимволов"
-
-        if (!emailPattern.test(email)) return "Введите корректный email";
-
+    const validatePassword = (value: string) => {
+        setPasswordIcon(value.length >= 6);
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const validationError = validateFields();
-        
-        if (validationError) {
-            setError(validationError);
+        if (!name || !email || !password) {
+            setMessage({ text: "Заполните все поля", type: 'error' });
             return;
         }
 
@@ -59,10 +60,10 @@ export const Main = () => {
                 body: JSON.stringify({ email, name }),
             });
 
-            const { user } = await resUserExists.json()
+            const { user } = await resUserExists.json();
 
             if (user) {
-                setError("Пользователь с таким ником или почтой уже существует")
+                setMessage({ text: "Пользователь с таким ником или почтой уже существует", type: 'error' });
                 return;
             }
 
@@ -74,8 +75,7 @@ export const Main = () => {
                 body: JSON.stringify({ name, email, password }),
             });
 
-            if (!res.ok) throw new Error("Ошибка при регистрации")
-            
+            if (!res.ok) throw new Error("Ошибка при регистрации");
 
             const signInResult = await signIn("credentials", {
                 redirect: false,
@@ -84,101 +84,81 @@ export const Main = () => {
             });
 
             if (signInResult?.ok) {
-                setSuccess("Аккаунт успешно создан");
+                setMessage({ text: "Аккаунт успешно создан", type: 'success' });
                 router.push("/");
-            } else setError("Не удалось авторизоваться. Попробуйте войти вручную.")
-
+            } else {
+                setMessage({ text: "Не удалось авторизоваться. Попробуйте войти вручную.", type: 'error' });
+            }
         } catch (error) {
             console.error("Ошибка при регистрации: ", error);
-            setError("Произошла ошибка при регистрации");
+            setMessage({ text: "Произошла ошибка при регистрации", type: 'error' });
         }
     };
 
     return (
         <main className={styles.main}>
-            {error && (
-                <div className={styles.error}>
-                    {error}
-                    <XIcon onClick={() => setError("")} className="cursor-pointer" />
-                </div>
+            {message && (
+                <StatusBar message={message.text} type={message.type} onClose={() => setMessage({ text: null, type: null })} />
             )}
-            {success && (
-                <div className={styles.success}>
-                    {success}
-                </div>
-            )}
-            <div className={styles.title_container}>
-                <div className={styles.title}>
-                    <h1 className={`text-white ${press_Start_2P.className}`}>СОЗДАТЬ</h1>
-                    <div className={styles.account_link_container}>
-                        <div className={styles.account}>Уже есть аккаунт?</div>
-                        <Link href="/auth">
-                            Войти
-                            <ChevronRightIcon />
-                        </Link>
-                    </div>
-                </div>
-            </div>
             <div className={styles.form}>
-                <div className={`${styles.form_content}`}>
+                <div className={styles.form_content}>
                     <form className={styles.form_content_wrapper} onSubmit={handleSubmit}>
-                        <div className={`${styles.form_title}`}>Регистрация</div>
+                        <div className={`${styles.form_title}`}>
+                            <h4>Регистрация</h4>
+                            <p>Есть аккаунт?<Link href='/auth'>Войти</Link></p>
+                        </div>
                         <div className={styles.form_input_content}>
-                            <div className={styles.checkIcon_holder}>
-                                <input
-                                    placeholder="Никнейм"
-                                    type="text"
-                                    onChange={(e) => {
+                            <div className={styles.input_content}>
+                                <p>Никнейм</p>
+                                <InputActive
+                                    placeholder='Мой ник'
+                                    onChange={e => {
                                         setName(e.target.value);
+                                        validateName(e.target.value);
                                     }}
+                                    type='text'
+                                    autoComplete='off'
+                                    icon={nameIcon}
                                 />
                             </div>
 
-                            <div className={styles.checkIcon_holder}>
-                                <input
-                                    placeholder="Электронная почта"
-                                    onChange={(e) => {
+                            <div className={styles.input_content}>
+                                <p>Почта</p>
+                                <InputActive
+                                    placeholder='you@example.com'
+                                    onChange={e => {
                                         setEmail(e.target.value);
+                                        validateEmail(e.target.value);
                                     }}
+                                    type='text'
+                                    autoComplete='off'
+                                    icon={emailIcon} 
                                 />
                             </div>
 
-                            <div className={styles.password}>
-                                <div className={styles.checkIcon_holder}>
-                                    <input
-                                        placeholder="Пароль"
-                                        autoComplete="new-password"
-                                        name="new-password"
-                                        required
-                                        minLength={8}
-                                        value={password}
-                                        type={passwordType}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className={styles.eye} onClick={togglePasswordVisibility}>
-                                    <EyeIcon color="white" />
-                                </div>
-                            </div>
-                            <div className={styles.links}>
-                                <div className={styles.checkbox}>
-                                    <Checkbox className={styles.checkbox_ui} />
-                                    <div>
-                                        <span className="opacity-70">Согласен с </span>
-                                        <Link href="/rules" className="hover:underline">
-                                            правилами сервера
-                                        </Link>
-                                    </div>
-                                </div>
+                            <div className={styles.input_content}>
+                                <p>Пароль</p>
+                                <InputActive
+                                    placeholder='Придумайте пароль'
+                                    onChange={e => {
+                                        setPassword(e.target.value);
+                                        validatePassword(e.target.value);
+                                    }}
+                                    type='password'
+                                    autoComplete='off'
+                                    icon={passwordIcon}
+                                />
                             </div>
                         </div>
-                        <div className="flex gap-4 flex-col">
-                            <button className={styles.button} onClick={() => setError("")}>
-                                Создать аккаунт
-                                <ChevronRightIcon />
+                        {message.type === 'success' ? (
+                            <button className={styles.button}>
+                                <ThreeDots width={32} height={32} color='#000' />
                             </button>
-                        </div>
+                        ) : (
+                            <button className={styles.button} onClick={() => {setMessage({text: '', type: 'error'})}}>
+                                Создать аккаунт
+                            </button>
+                        )}
                     </form>
                 </div>
             </div>

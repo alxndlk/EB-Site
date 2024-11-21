@@ -6,16 +6,19 @@ import Link from 'next/link';
 import components from '@/app/ui';
 import styles from './Main.module.css';
 import { FaDiscord, FaTelegram } from 'react-icons/fa';
-import { ArrowRightCircle, CameraIcon, ExternalLink, PlusCircleIcon } from 'lucide-react';
+import { ArrowRightCircle, ExternalLink, PlusCircleIcon } from 'lucide-react';
 const { InputActive, ButtonRed } = components;
 
 import SkinViewerComponent from './skinViewer';
 import { SkinUploader } from './skinChange';
 import { useUserData } from '@/hooks/useUserData';
 
+
 export const Main = () => {
-  const { data: session } = useSession();
+
   const { userData } = useUserData();
+  const { data: session } = useSession();
+  
 
   return (
     <div className={styles.profile}>
@@ -27,16 +30,26 @@ export const Main = () => {
           ) : (
             <span>...</span>
           )}
-          <span className={styles.status}>Активен</span>
+
+          {userData?.active ? (
+          <span className={styles.status_active}>
+            Активен
+          </span>
+          ) : (
+          <span className={styles.status_banned}>
+            Забанен
+          </span>
+          )}
+
         </div>
       </div>
       <div className={styles.profile_padding}>
         <div className={styles.row}>
           <div className={styles.skin}>
             <div className={styles.profile_data}>
-              <SkinViewerComponent />
+              <SkinViewerComponent/>
             </div>
-            <SkinUploader />
+            <SkinUploader/>
           </div>
           <div className={styles.stats}>
             <div className={`${styles.avatar_balance} `}>
@@ -85,22 +98,6 @@ export const Main = () => {
                   <ArrowRightCircle size={16} />
                 </Link>
               </div>
-            </div>
-
-            <div className={`${styles.avatar} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Аватар</h4>
-                  <span className={styles.optional}>Опция</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>Это Ваш аватар.<br />Нажмите на аватар, чтобы использовать свое изображение.</p>
-                </div>
-              </div>
-              <div className={styles.title}>Аватар не обязателен, но рекомендуется его установить.</div>
-              <button className={styles.avatar_button}>
-                <CameraIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
-              </button>
             </div>
 
             <div className={`${styles.avatar} `}>

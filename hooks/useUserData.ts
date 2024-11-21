@@ -1,38 +1,34 @@
-// hooks/useUserData.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 
 interface UserData {
   balance: number;
   role: string;
+  skin: string;
+  active: boolean;
 }
 
 export const useUserData = () => {
   const { data: session } = useSession();
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (!session) return;
+  // Функция для обновления данных пользователя
+  const fetchUserData = useCallback(async () => {
+    if (!session) return;
 
-      setLoading(true);
-
-      const response = await fetch('/api/user-data');
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data);
-      } else {
-        console.error('Ошибка при получении данных пользователя');
-      }
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 100); 
-    };
-
-    fetchUserData();
+    const response = await fetch('/api/user-data');
+    if (response.ok) {
+      const data = await response.json();
+      setUserData(data);
+    } else {
+      console.error('Ошибка при получении данных пользователя');
+    }
   }, [session]);
 
-  return { userData, loading };
+  // Загружаем данные при изменении сессии
+  useEffect(() => {
+    fetchUserData();
+  }, [session, fetchUserData]);
+
+  return { userData, refetch: fetchUserData };
 };

@@ -1,33 +1,30 @@
 "use client";
 
-import { ChevronRightIcon, EyeIcon, XIcon } from 'lucide-react';
 import styles from './Main.module.css';
-import press_Start_2P from '@/app'
-import { Checkbox } from '@/components/ui/checkbox';
-import Link from 'next/link';
 import { useState } from 'react';
 import { signIn } from "next-auth/react";
 import { FormEvent } from 'react';
 import { useRouter } from "next/navigation";
+import { InputActive } from '@/app/ui/input';
+import StatusBar from '@/components/StatusBar';
+import Link from 'next/link';
+import { ThreeDots} from 'react-loader-spinner'
 
 export const Main = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [passwordType, setPasswordType] = useState('password');
+    const [message, setMessage] = useState<{ text: string | null; type: 'success' | 'error' | null }>({
+        text: null,
+        type: null,
+    });
     const router = useRouter();
-    
-
-    const togglePasswordVisibility = () => {
-        setPasswordType(prevType => (prevType === 'password' ? 'text' : 'password'));
-      };
 
       const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if ( !email || !password) {
-            setError('Заполните все поля');
+            setMessage({ text: 'Заполните все поля.', type: 'error' });
             return;
         }
     
@@ -39,80 +36,69 @@ export const Main = () => {
             });
     
             if (res && res.error) {
-                setError(res.error || "Неправильные данные");
+                setMessage({ text: 'Неправильные данные.', type: 'error' });
                 return;
             }
-    
-            router.replace("/");
+            setMessage({ text: 'Входи выполнен.', type: 'success' });
+            setTimeout(() => {
+                router.replace("/");
+              }, 1000)
+
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            setMessage({ text: 'Что-то пошло не так.', type: 'error' });
             console.error(err);
         }
     };
 
     return (
         <main className={styles.main}>
-            {error  && (
-                <div className={styles.error}>
-                    {error}
-                    <XIcon 
-                        onClick={() => setError('')}
-                        className='cursor-pointer'/>
-                </div>)
-            }
-            <div className={styles.title_container}>
-                <div className={styles.title}>
-                    <h1 className={`text-white ${press_Start_2P.className}`}>ВОЙТИ</h1>
-                    <div className={styles.account_link_container}>
-                        <div>Нет аккаунта?</div>
-                        <Link href='/register'>
-                            Создать
-                            <ChevronRightIcon />
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            {message && (
+                <>
+                    <StatusBar message={message.text} type={message.type} onClose={() => setMessage({ text: null, type: null })}/>
+                </>
+            )}
             <div className={styles.form}>
-
                 <div className={styles.form_content}>
                     <form className={styles.form_content_wrapper} onSubmit={handleSubmit}>
                         <div className={`${styles.form_title}`}>
-                            Авторизация
+                            <h4 >Авторизация</h4>
+                            <p>Нет аккаунта?<Link href='/register'>Создать</Link></p>
                         </div>
                         <div className={styles.form_input_content}>
 
-                            <input 
-                                placeholder='Никнейм или почта' 
-                                autoComplete="new-username"
-                                name="new-username"
-                                onChange={e => setEmail(e.target.value)}
-                            />
-
-                            <div className={styles.password}>
-
-                                <input 
-                                placeholder='Пароль' 
-                                type={passwordType}
-                                autoComplete="new-password"
-                                name="new-password"  
-                                id='password'
-                                onChange={e => setPassword(e.target.value)}
-                                /> 
-
-                                <div className={styles.eye} onClick={togglePasswordVisibility}><EyeIcon color='white'/></div>
+                            <div className={styles.input_content}>
+                                <p>Почта</p>
+                                <InputActive 
+                                    placeholder='you@example.com'
+                                    onChange={e => setEmail(e.target.value)}
+                                    type='text'
+                                    autoComplete='off'
+                                />
                             </div>
-                            <div className={styles.links}>
-                                <div className={styles.checkbox}>
-                                    <Checkbox className={styles.checkbox_ui}/>
-                                    Запомнить меня 
+
+                            <div className={styles.input_content}>
+                                <div className={styles.input_content_password}>
+                                    <span>Пароль</span>
+                                    <Link href="/reset" tabIndex={-1}>Забыли пароль?</Link>
                                 </div>
-                                <span className={styles.forgot_password}>Забыл пароль</span>
+                                <InputActive
+                                    placeholder='Введите пароль'
+                                    onChange={e => setPassword(e.target.value)}
+                                    type='password'
+                                    autoComplete='off'
+                                />
                             </div>
+
                         </div>
-                        <button className={styles.button} onClick={() => setError('')}>
-                            Войти в аккаунт
-                            <ChevronRightIcon />
-                        </button>
+                        {message.type === 'success' ? (
+                            <button className={styles.button}>
+                                <ThreeDots width={32} height={32} color='#000'/>
+                            </button>
+                        ) : (
+                            <button className={styles.button}>
+                                Войти в аккаунт
+                            </button>
+                        )}
                     </form>
                 </div>
             </div>

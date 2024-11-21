@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'; 
 
 export async function GET(req: Request) {
+
   try {
     const session = await getServerSession(authOptions);
 
@@ -24,6 +25,8 @@ export async function GET(req: Request) {
     return NextResponse.json({
       balance: user.balance,
       role: user.role,
+      skin: user.skin,
+      active: user.active
     });
 
   } catch (error) {

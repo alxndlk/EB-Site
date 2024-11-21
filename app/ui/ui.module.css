@@ -8,8 +8,26 @@
     padding: 4px 10px;
     font-size: 14px;
     line-height: 26px;
-    outline: 0
+    transition: 0.1s ease;
+    outline: 0;
+    font-weight: 400;
+    position: relative;
 }
+
+.InputActive:hover, .InputActive:focus {
+    border: 1px solid #555;
+}
+
+.InputActive:-webkit-autofill {
+    background-color: #000 !important;
+    color: #EDEDED !important;
+    border: 1px solid #333 !important;
+    -webkit-text-fill-color: #EDEDED !important;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: #EDEDED !important;
+    font-weight: 400 !important;
+}
+
 
 .log_out {
     background-color: hsla(358,69%,52%,1);
@@ -25,4 +43,23 @@
 
 .log_out:hover {
     background-color: hsla(358,100%,69%,1);
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.CheckIcon {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
