@@ -2,8 +2,8 @@
 
 import { Wrapper } from "@/layout/Wrapper/Wrapper";
 import { Header } from "@/layout/Header/Header";
-import Main from "@/layout/Main";
 import Footer from "@/layout/Footer";
+import Main from "@/components/HomePage";
 
 export default function Home() {
   return (

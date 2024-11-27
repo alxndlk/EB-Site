@@ -44,7 +44,7 @@ export const InputActive = ({
             />
             {icon && (
                 <div className={styles.CheckIcon}>
-                    <CheckIcon size={16} color='#449d5d' absoluteStrokeWidth/>
+                    <CheckIcon size={16} color='lime' absoluteStrokeWidth/>
                 </div>
             )}
         </div>

@@ -1,0 +1,213 @@
+.under_main {
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20%;
+    margin-top: 6rem;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.under_main h2 {
+    font-size: 30px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.content {
+	width: 100%;
+	height: 450px;
+	background-color: rgb(18, 18, 18);
+	border-radius: 40px;
+	display: flex;
+	padding: 2rem;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #202020;
+}
+
+.text_1 {
+    width: 50%;
+    height: 100%;
+    text-align: left;
+    justify-content: center;
+    align-items: left;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.text_1 h3 {
+    color: rgb(37 99 235);
+    font-weight: 600;
+    font-size: 20px;
+    text-align: left;
+}
+
+
+.text_1 h4 {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.image_1 {
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: left center;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.1s ease;
+    -webkit-transition: 0.1s ease;
+    -moz-transition: 0.1s ease;
+    -ms-transition: 0.1s ease;
+    -o-transition: 0.1s ease;
+}
+
+.image_1:hover {
+    scale: 103%;
+}
+
+.mod_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+}
+
+.mod_content {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    padding: 5rem;
+    justify-content: center;
+    background-size: fill;
+    background-position: 0% 60%;
+    align-items: left;
+    text-align: left;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mod_content_1 {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    padding: 5rem;
+    justify-content: center;
+    background-size: 150%;
+    align-items: left;
+    text-align: left;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mod_content_1 h1 {
+    font-size: 24px;
+    font-weight: 600;
+    
+}
+
+.mod_content_1 h2 {
+    font-size: 36px;
+    font-weight: 600;
+    width: 50%;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.mod_content h1 {
+    font-size: 24px;
+    font-weight: 600;
+    
+}
+
+.mod_content h2 {
+    font-size: 36px;
+    font-weight: 600;
+    width: 50%;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.most_container {
+    width: 100%;
+    height: 500px;
+    background-color: red;
+}
+
+.mod_content_2 {
+    width: 100%;
+    height: 650px;
+    display: flex;
+    padding: 5rem;
+    justify-content: center;
+    background-size: 130%;
+    align-items: left;
+    text-align: left;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    flex-direction: column;
+    gap: 1rem;
+    background-position: 70% 50%;
+}
+
+.mod_content_2 h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.mod_content_2 h2 {
+    font-size: 36px;
+    font-weight: 600;
+    width: 50%;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.mods {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
+
+.container_features {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}

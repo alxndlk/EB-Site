@@ -1,0 +1,323 @@
+.main {
+    height: auto;
+    display: flex;
+    padding: 0 20%;
+    color: #EDEDED;
+    padding-top: calc(70px + 24px);
+    flex-direction: row;
+    gap: 24px;
+    min-height: 90vh;
+    position: relative;
+}
+
+.line {
+    background: rgb(6,182,212);
+    background: linear-gradient(199deg, rgba(6,182,212,0) 0%, rgb(89, 167, 255) 50%, rgba(74,222,128,0) 100%);
+    width: 60%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+}
+
+.radial {
+    background: radial-gradient(50% 50% at 50% 50%, #0095ff 0%, rgba(171, 171, 171, 0) 100%);
+    border-radius: 8px;
+    bottom: -430px;
+    flex: none;
+    height: 730px;
+    left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
+    max-width: 1800px;
+    opacity: .4;
+    overflow: hidden;
+    position: absolute;
+    width: 1440px;
+    z-index: 5;
+}
+
+
+
+.update {
+    min-height: 75px;
+    width: 400px;
+    display: flex;
+    border-radius: 8px;
+    background: #000;
+    border: 1px solid rgb(255 255 255 / 12%);
+    flex-direction: column;
+    padding: 16px;
+    gap: 8px;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+.update_col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.update:hover {
+    border: 1px solid rgb(255 255 255 / 20%);
+}
+
+.update_top, .update_bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.update_top p {
+    font-size: 14px;
+    padding: 0px 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+    color: #449d5d;
+    background: #449d5d25;
+}
+
+.update_top h4 {
+    color: #EDEDED;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.update_top span {
+    color: hsla(0,0%,63%,1);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.update_bottom p, 
+.update_bottom span,
+.update_bottom h4 {
+    font-size: 11px;
+    padding: 0px 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+
+.update_bottom h4,
+.update_bottom span,
+.update_bottom p {
+    background-color: #ffffff17;
+}
+
+.update_bottom span {
+    color: hsla(0,0%,63%,1);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.update_list, .server_list {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: start;
+    justify-content: start;
+    text-align: left;
+    font-weight: 500;
+    color: #EDEDED;
+    font-size: 14px;
+    height: 100%;
+}
+
+.server_list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+.button {
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    overflow: hidden;
+    padding: 12px 20px;
+    position: relative;
+    text-decoration: none;
+    width: max-content;
+    backdrop-filter: blur(0px);
+    background-color: #ffffff17;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+    opacity: 1;
+    z-index: 999;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #ffffff27;
+}
+
+.servers {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    display: flex;
+    gap: 24px;
+}
+
+.server {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    border-radius: 8px;
+    background: #000;
+    border: 1px solid rgb(255 255 255 / 12%);
+    flex-direction: row;
+    padding: 16px;
+    gap: 24px;
+    transition: 0.1s ease;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.server:hover {
+    border: 1px solid rgb(255 255 255 / 20%);
+}
+
+.image {
+    border-radius: 5px;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid #333;
+    
+}
+
+.image image {
+    border-radius: 5px;
+}
+
+.server_info  {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.server_info h4 {
+    font-size: 20px;
+    color: #EDEDED;
+    line-height: 2rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+.context {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+}
+
+.context p {
+    color: #a1a1a1;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.context span {
+    font-weight: 400;
+}
+
+.badge_online {
+    color: #449d5d;
+    background: #449d5d25;
+    font-size: 14px;
+    line-height: 16px;
+    padding: .25rem .5rem;
+    border-radius: 100px;
+    font-weight: 400;
+}
+
+.badge_offline {
+    background: hsla(357, 37%, 12%, 1);
+    color: hsla(358, 100%, 69%, 1);
+    font-size: 14px;
+    line-height: 16px;
+    padding: .25rem .5rem;
+    border-radius: 100px;
+    font-weight: 400;
+}
+
+.online {
+    padding: 0px 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    font-weight: 400;
+    background-color: #ffffff17;
+    width: max-content  ;
+}
+
+.background {
+    -webkit-mask: linear-gradient(180deg, rgba(0, 0, 0, 0) 55.13020833333333%, rgba(0, 0, 0, 1) 100%) add;
+    background: radial-gradient(62% 67.9245283018868% at 39% 41.5%, rgba(0, 81, 255, 0) 0%, rgba(0, 153, 255, 0) 36%, rgba(0, 153, 255, 0) 63%, rgba(0, 128, 255, .25) 83%, rgb(0, 51, 255) 100%);
+    bottom: 0;
+    flex: none;
+    height: 498px;
+    left: 0;
+    mask: linear-gradient(180deg, rgba(0, 0, 0, 0) 55.13020833333333%, rgba(0, 0, 0, 1) 100%) add;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    width: 100%;
+}
+
+.radial {
+    background: radial-gradient(50% 50% at 50% 50%, #0095ff 0%, rgba(171, 171, 171, 0) 100%);
+    border-radius: 8px;
+    bottom: -430px;
+    flex: none;
+    height: 730px;
+    left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
+    max-width: 1800px;
+    opacity: .4;
+    overflow: hidden;
+    position: absolute;
+    width: 1440px;
+    z-index: 1;
+}

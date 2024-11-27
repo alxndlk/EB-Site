@@ -1,17 +1,22 @@
 .header {
     width: 100%;
-    height: 64px;
+    height: 70px;
     padding: 0 20%;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     z-index: 9999;
     position: fixed;
     top: 0;
-    font-size: 14px;
-    background-color: #000000cc;
-    backdrop-filter: saturate(180%) blur(5px);
-    box-shadow: inset 0 -1px 0 0 #333;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+    background-color: transparent;
+    backdrop-filter: none;
+  }
+  
+.header.scrolled {
+    background-color: rgba(0, 0, 0, 0.75); 
+    backdrop-filter: blur(10px) saturate(180%);
 }
+  
 
 .nav_bar {
     width: 100%;
@@ -35,7 +40,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 16px;    
+    font-size: 18px;    
     font-weight: 400;
 }
 
@@ -67,7 +72,7 @@
     -moz-transition: 0.1s ease;
     -ms-transition: 0.1s ease;
     -o-transition: 0.1s ease;
-    font-size: 14px;
+    font-size: 16px;
     color: #888;
 }
 
@@ -120,13 +125,12 @@
 }
 
 .button_login, .profile {
-    border: 1px solid #ffffff24;
-    background: #0a0a0a;
+    background-color: #ffffff17;
     color: #fff !important;
 }
 
 .button_login:hover, .profile:hover {
-    background-color: #ffffff17;
+    background-color: #ffffff27;
 }
 
 .badge {

@@ -8,7 +8,7 @@ import DonateMain from "./components";
 const Donate = () => {
     return (
       <Wrapper >
-        <Header textColor="white"/>
+        <Header />
         <DonateMain />
         <Footer />
       </Wrapper>

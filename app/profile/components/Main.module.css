@@ -46,7 +46,6 @@
     text-align: center;
     align-items: left;
 }
-
 .input {
     border-radius: 5px;
     background: #000;
@@ -79,10 +78,6 @@
     text-align: center;
     align-items: center;
     justify-content: space-between;
-}
-
-.balance_value {
-
 }
 
 .profile_data {
@@ -366,6 +361,13 @@
     gap: 12px;
 }
 
+.title_text h4 {
+    font-size: 20px;
+    color: #EDEDED;
+    line-height: 2rem;
+    font-weight: 600;
+}
+
 .optional {
     color: #3b88e9;
     background: #3b88e925;
@@ -488,22 +490,31 @@
 }
 
 .donate_group {
+    padding: 0px 12px;
     height: 32px;
-    line-height: 20px;
+    transition: 0.1s ease;
     border-radius: 6px;
-    padding: 0 12px;
     font-size: 14px;
-    color: hsla(0, 0%, 93%, 1);
-    background: hsla(0, 0%, 10%, 1);
-    font-weight: 500;
-    font-family: inherit;
-    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .145);
-    border: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     text-align: center;
     align-items: center;
+    font-weight: 400;
+    background-color: #ffffff17;
+}
+
+.donate_group_name {
+    padding: 0px 12px;
+    height: 32px;
+    transition: 0.1s ease;
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    font-weight: 400;
+    background-color: #ffffff17;
 }
 
 .skin {
@@ -511,10 +522,6 @@
     flex-direction: column;
     width: 40%;
     gap: 24px;
-}
-
-.skin_container {
-
 }
 
 .skin_uploader input[type="file"] {

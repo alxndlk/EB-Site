@@ -1,20 +1,16 @@
-.wrapper { 
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 .main {
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 0 20%;
     align-items: center;
     text-align: center;
     height: 90vh;
-    justify-content: center;   
-    background: #0a0a0a;
+    justify-content: space-around;   
     color: #EDEDED;
+    background: radial-gradient(100% 75% at 50% 86.3%, #000e3b 0%, rgba(0, 128, 255, 0) 100%); 
+    position: relative;
+    z-index: 999;
 }
 
 
@@ -22,19 +18,88 @@
     display: flex;
     flex-direction: column;
     position: 999;
-    backdrop-filter: blur(5px);
-    background: #0a0a0a;
     border-radius: 6px;
+    z-index: 999;
 }
+
+.form_padding {
+    border-bottom-width: 0px;
+    border-style: solid;
+    border: 1px solid #ffffff1f;
+    align-content: flex-start;
+    align-items: flex-start;
+    backdrop-filter: blur(5px);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 500px;
+    padding: 10px;
+    
+}
+
+.image {
+    position: absolute;
+    right: 1rem;
+    bottom: -5rem;
+    z-index: 2;
+    animation: moveUp infinite 10s ease;
+}
+
+@keyframes moveUp {
+    0% {
+        bottom: 0rem;
+    }
+    50% {
+        bottom: -5rem;
+    }
+    100% {
+        bottom: 0rem;
+    }
+}
+
+.light_2 {
+    background: linear-gradient(270deg, rgba(0, 72, 255, 0) 0%, rgba(255, 187, 0, 0.13) 14.5798%, rgba(255, 145, 0, 0.5) 50%, rgba(255, 60, 0, 0.13) 84.0072%, rgba(0, 72, 255, 0) 100%);
+    bottom: 194px;
+    filter: blur(0px);
+    flex: 0 0 auto;
+    mask: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12%);
+    overflow: hidden;
+    position: absolute;
+    right: 8rem;
+    top: -752px;
+    width: 542px;
+    z-index: 0;
+    transform: perspective(1200px) rotateX(70deg);
+}
+
+.light {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(209, 229, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+    bottom: 208px;
+    filter: blur(0px);
+    flex: 0 0 auto;
+    mask: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12%);
+    overflow: hidden;
+    position: absolute;
+    right: 15rem;
+    z-index: 0;
+}
+
+
 
 .form_content {
     width: 100%;
-    padding: 24px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: radial-gradient(140% 100% at 50% 0%, rgba(255, 255, 255, .05) 0%, rgba(0, 0, 0, 0) 77.93496621621621%);
+    box-shadow: 0 10px 20px #00010a26;
     height: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: 16px;
     text-align: center;
     align-items: center;
+    height: 100%;
 }
 
 .form_content_wrapper {
@@ -146,9 +211,9 @@
 
 .button {
     padding: 0px 12px;
-    height: 32px;
+    height: 40px;
     transition: 0.1s ease;
-    border-radius: 6px;
+    border-radius: 8px;
     z-index: 999;
     font-size: 14px;
     cursor: pointer;
@@ -194,4 +259,72 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+}
+
+
+.line {
+    background: rgb(6,182,212);
+    background: linear-gradient(199deg, rgba(6,182,212,0) 0%, rgb(89, 167, 255) 50%, rgba(74,222,128,0) 100%);
+    width: 60%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+}
+
+.radial {
+    background: radial-gradient(50% 50% at 50% 50%, #0095ff 0%, rgba(171, 171, 171, 0) 100%);
+    border-radius: 8px;
+    bottom: -430px;
+    flex: none;
+    height: 730px;
+    left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
+    max-width: 1800px;
+    opacity: .4;
+    overflow: hidden;
+    position: absolute;
+    width: 1440px;
+    z-index: 5;
+}
+
+.red {
+    background: radial-gradient(50% 50% at 50% 50%, #ff0000 0%, rgba(171, 171, 171, 0) 100%);
+    border-radius: 8px;
+    bottom: -430px;
+    flex: none;
+    height: 730px;
+    left: 0rem;
+    max-width: 1800px;
+    opacity: .4;
+    overflow: hidden;
+    position: absolute;
+    width: 1440px;
+    z-index: 5;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    width: 570px;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.text h4 {
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 80px;
+    justify-content: left;
+    text-align: left;
+}
+
+.text p {
+    font-size: 24px;
+    color: rgb(255 255 255 / 60%);
+    justify-content: left;
+    text-align: left;
 }

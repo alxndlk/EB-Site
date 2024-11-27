@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,9 +11,22 @@ import { useUserData } from '@/hooks/useUserData';
 export const Header: React.FC = () => {
   const { data: session } = useSession();
   const { userData } = useUserData();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      const viewportHeight = document.documentElement.clientHeight;
+
+      setScrolled(scrollPosition > viewportHeight * 0.01);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.nav_bar}>
         <div className={styles.logo}>
           <Image

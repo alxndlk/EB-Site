@@ -55,7 +55,11 @@ export const Status: React.FC<IStatus> = ({ text, spanText, icons, kit, src }) =
   return (
     <div className={styles.donate_table_skills}>
       <div className={styles.donate_table_skills_name}>
-        {kit && <EyeOpenIcon className="cursor-pointer" color="white" onClick={openModal} />}
+        {kit && 
+          <div className={styles.eye_container}>
+            <EyeOpenIcon className="cursor-pointer" color="white" onClick={openModal} />
+          </div>
+        }
         {text}
         {spanText && <span>{spanText}</span>}
       </div>

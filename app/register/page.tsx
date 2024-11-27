@@ -2,10 +2,10 @@ import Header from '@/layout/Header'
 import Footer from '@/layout/Footer'
 import Main from './components'
 
-import styles from './components/Main.module.css';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import { Wrapper } from '@/layout/Wrapper/Wrapper';
 
 const Register = async () => {
 
@@ -14,11 +14,11 @@ const Register = async () => {
     if(session) redirect('/profile');
 
     return (
-        <div className={styles.wrapper}>
+        <Wrapper>
             <Header />
             <Main />
             <Footer />
-        </div>
+        </Wrapper>
     )
 }
 

@@ -22,27 +22,6 @@ export const Main = () => {
 
   return (
     <div className={styles.profile}>
-      <div className={styles.header}>
-        <div className={styles.row_header}>
-          С возвращением,{" "}
-          {session?.user?.name ? (
-            <span>{session.user.name}!</span>
-          ) : (
-            <span>...</span>
-          )}
-
-          {userData?.active ? (
-          <span className={styles.status_active}>
-            Активен
-          </span>
-          ) : (
-          <span className={styles.status_banned}>
-            Забанен
-          </span>
-          )}
-
-        </div>
-      </div>
       <div className={styles.profile_padding}>
         <div className={styles.row}>
           <div className={styles.skin}>
@@ -70,7 +49,7 @@ export const Main = () => {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
                         })
-                      : 'Загрузка...'}{' '}
+                      : null }{' '}
                     ₽
                   </div>
                 </div>
@@ -88,7 +67,7 @@ export const Main = () => {
               <div className={styles.text}>
                 <div className={styles.title_text}>
                   <h4>Донат-статус</h4>
-                  <div className={styles.donate_group}>{userData?.role || 'Загрузка...'}</div>
+                  <div className={styles.donate_group_name}>{userData?.role || null }</div>
                 </div>
               </div>
               <div className={`${styles.title} justify-between`}>

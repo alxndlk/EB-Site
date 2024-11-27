@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from 'lucide-react'
 import Image from 'next/image';
 import styles from './DonateMain.module.css'
 
@@ -18,9 +17,9 @@ const CheapStatus: React.FC<CheapStatusProps> = ({ src, statusClass, statusName,
                 <Image
                     src={src}
                     alt="Minecraft Title"
-                    width={300}
+                    width={150}
                     quality={100}
-                    height={300}
+                    height={150}
                     className={styles.image}
                 />
                 <div className={styles.donate_status_title}>Привилегия</div>
@@ -35,7 +34,6 @@ const CheapStatus: React.FC<CheapStatusProps> = ({ src, statusClass, statusName,
             </div>
             <div className={styles.button_get}>
                 Купить статус
-                <ChevronRightIcon className={styles.chevron_right} />
             </div>
         </div>
     );
