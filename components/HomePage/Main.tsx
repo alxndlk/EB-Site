@@ -15,7 +15,7 @@ export const Main = () => {
                     <div className={styles.top_main_content_title}>
                         <div className={styles.aviable}>
                             <Image 
-                                src='/anvil1.gif' 
+                                src='/anvil.gif' 
                                 alt='anvil'
                                 width={40}
                                 height={40}
