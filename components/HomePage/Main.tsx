@@ -2,7 +2,6 @@ import { PlayCircleIcon } from 'lucide-react'
 import styles from './Main.module.css'
 import Image from 'next/image'
 
-
 export const Main = () => {
     return (
         <main className={styles.main}>
@@ -16,7 +15,7 @@ export const Main = () => {
                     <div className={styles.top_main_content_title}>
                         <div className={styles.aviable}>
                             <Image 
-                                src='/anvil.gif' 
+                                src='/anvil1.gif' 
                                 alt='anvil'
                                 width={40}
                                 height={40}
