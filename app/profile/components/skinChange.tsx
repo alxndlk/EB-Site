@@ -131,7 +131,7 @@ export const SkinUploader: React.FC = () => {
               <ThreeDots width={32} height={32} color='#000' />
             </> 
             )
-            : 'Применить'}
+            : `Применить ${message}`}
           </button>
         </div>
       )}
