@@ -15,10 +15,10 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      const viewportHeight = document.documentElement.clientHeight;
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        const viewportHeight = document.documentElement.clientHeight;
 
-      setScrolled(scrollPosition > viewportHeight * 0.01);
+        setScrolled(scrollPosition > viewportHeight * 0.1);
     };
 
     window.addEventListener('scroll', handleScroll);
