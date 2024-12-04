@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Navbar } from './Navbar';
 import { useSession } from 'next-auth/react';
 import { useUserData } from '@/hooks/useUserData';
+import { Menu } from './Menu';
 
 export const Header: React.FC = () => {
   const { data: session } = useSession();
@@ -15,10 +16,10 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      const viewportHeight = document.documentElement.clientHeight;
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        const viewportHeight = document.documentElement.clientHeight;
 
-      setScrolled(scrollPosition > viewportHeight * 0.01);
+        setScrolled(scrollPosition > viewportHeight * 0.01);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -42,6 +43,7 @@ export const Header: React.FC = () => {
         </div>
         <ul className={styles.ul}>
           <Navbar />
+          <Menu />
           <li className={styles.gap_li}>
             {session ? (
               <Link href="/profile" className={styles.profile}>

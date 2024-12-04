@@ -49,67 +49,69 @@ export const Main = () => {
 
     return (
         <main className={styles.main}>
-            <div className={styles.text}>
-                <h4>Мир ждёт тебя, бери его в свои руки!</h4>
-                <p>Для игроков, которые не боятся принимать вызовы, строить свои миры и достигать новых высот в каждом приключении!</p>
-            </div>
-            <Image src='/island.png' alt='image' height={500} width={500} className={styles.image} quality={100}/>
-            <div className={styles.red}></div>
-            <div className={styles.light_2}></div>
-            {message && (
-                <>
-                    <StatusBar message={message.text} type={message.type} onClose={() => setMessage({ text: null, type: null })}/>
-                </>
-            )}
-            <div className={styles.form}>
-                <div className={styles.form_padding}>
-                    <div className={styles.form_content}>
-                        <form className={styles.form_content_wrapper} onSubmit={handleSubmit}>
-                            <div className={`${styles.form_title}`}>
-                                <h4 >Авторизация</h4>
-                                <p>Нет аккаунта?<Link href='/register'>Создать</Link></p>
-                            </div>
-                            <div className={styles.form_input_content}>
-
-                                <div className={styles.input_content}>
-                                    <p>Почта</p>
-                                    <InputActive 
-                                        placeholder='you@example.com'
-                                        onChange={e => setEmail(e.target.value)}
-                                        type='text'
-                                        autoComplete='off'
-                                    />
-                                </div>
-
-                                <div className={styles.input_content}>
-                                    <div className={styles.input_content_password}>
-                                        <span>Пароль</span>
-                                        <Link href="/reset" tabIndex={-1}>Забыли пароль?</Link>
-                                    </div>
-                                    <InputActive
-                                        placeholder='Введите пароль'
-                                        onChange={e => setPassword(e.target.value)}
-                                        type='password'
-                                        autoComplete='off'
-                                    />
-                                </div>
-
-                            </div>
-                            {message.type === 'success' ? (
-                                <button className={styles.button}>
-                                    <ThreeDots width={32} height={32} color='#000'/>
-                                </button>
-                            ) : (
-                                <button className={styles.button}>
-                                    Войти в аккаунт
-                                </button>
-                            )}
-                        </form>
-                    </div>    
-                    </div>
+            <div className={styles.wrapper_main}>
+                <div className={styles.text}>
+                    <h4>Мир ждёт тебя, бери его в свои руки!</h4>
+                    <p>Для игроков, которые не боятся принимать вызовы, строить свои миры и достигать новых высот в каждом приключении!</p>
                 </div>
-            <div className={styles.line}></div>
-            <div className={styles.radial}></div>
+                <Image src='/island.png' alt='image' height={500} width={500} className={styles.image} quality={100}/>
+                <div className={styles.red}></div>
+                <div className={styles.light_2}></div>
+                {message && (
+                    <>
+                        <StatusBar message={message.text} type={message.type} onClose={() => setMessage({ text: null, type: null })}/>
+                    </>
+                )}
+                <div className={styles.form}>
+                    <div className={styles.form_padding}>
+                        <div className={styles.form_content}>
+                            <form className={styles.form_content_wrapper} onSubmit={handleSubmit}>
+                                <div className={`${styles.form_title}`}>
+                                    <h4 >Авторизация</h4>
+                                    <p>Нет аккаунта?<Link href='/register'>Создать</Link></p>
+                                </div>
+                                <div className={styles.form_input_content}>
+
+                                    <div className={styles.input_content}>
+                                        <p>Почта</p>
+                                        <InputActive 
+                                            placeholder='you@example.com'
+                                            onChange={e => setEmail(e.target.value)}
+                                            type='text'
+                                            autoComplete='off'
+                                        />
+                                    </div>
+
+                                    <div className={styles.input_content}>
+                                        <div className={styles.input_content_password}>
+                                            <span>Пароль</span>
+                                            <Link href="/reset" tabIndex={-1}>Забыли пароль?</Link>
+                                        </div>
+                                        <InputActive
+                                            placeholder='Введите пароль'
+                                            onChange={e => setPassword(e.target.value)}
+                                            type='password'
+                                            autoComplete='off'
+                                        />
+                                    </div>
+
+                                </div>
+                                {message.type === 'success' ? (
+                                    <button className={styles.button}>
+                                        <ThreeDots width={32} height={32} color='#000'/>
+                                    </button>
+                                ) : (
+                                    <button className={styles.button}>
+                                        Войти в аккаунт
+                                    </button>
+                                )}
+                            </form>
+                        </div>    
+                        </div>
+                    </div>
+                <div className={styles.line}></div>
+                <div className={styles.radial}></div>
+            </div>
         </main>
     )
 }

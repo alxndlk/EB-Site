@@ -1,15 +1,21 @@
 .header {
     width: 100%;
     height: 70px;
-    padding: 0 20%;
     font-weight: 500;
     font-size: 14px;
-    z-index: 9999;
+    z-index: 9998;
     position: fixed;
     top: 0;
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
     background-color: transparent;
     backdrop-filter: none;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
   }
   
 .header.scrolled {
@@ -21,10 +27,12 @@
 .nav_bar {
     width: 100%;
     height: 100%;
+    max-width: 1200px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    z-index: 99999;
+    gap: 2rem;
+    z-index: 9998;
 }
 
 .black {
@@ -42,6 +50,7 @@
     text-align: center;
     font-size: 18px;    
     font-weight: 400;
+    z-index: 9998;
 }
 
 .ul {
@@ -54,7 +63,6 @@
 }
 
 .ul li {
-    display: flex;
     flex-direction: row;
     color: #888;
 }
@@ -161,4 +169,164 @@
     z-index: 1000;
     flex-direction: column;
     gap: 24px;
+}
+
+.menu {
+    color: #888;
+    transition: 0.1s ease;
+    cursor: pointer;
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+}
+
+.menu:hover {
+    color: #fff;
+}
+
+.modalHeader {
+    background-color: rgba(0, 0, 0);
+    position: fixed; /* Чтобы модалка оставалась на месте при прокрутке */
+    width: 100vw; /* Полная ширина экрана */
+    height: 100vh; /* Полная высота экрана */
+    top: 0px; 
+    left: 0; 
+    z-index: 9999; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.close {
+    width: 100%;
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+    transition: 0.1s ease;
+    gap: 1rem;
+    font-size: 16px;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+.menu_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+}
+
+.menu_link {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+    left: unset;
+    order: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 2rem 2rem 0;
+    position: relative;
+    font-size: 16px;
+    top: unset;
+    width: 100%;
+    z-index: 2;
+}
+
+.menu_link a {
+    color: #888;
+}
+
+.menu_link li {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.menu_link a:hover {
+    color: #fff;
+}
+
+.menu_logo {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.buttons {
+    width: 100%;
+    padding: 0 2rem;
+    gap: 1rem;
+    display: flex;
+}
+
+.image_header {
+    width: 100%;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.image {
+    background-image: url('/Home/terrain_3.png');
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    background-size: cover;
+}
+
+.shadow {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(169, 169, 169, 0) 100%, rgba(255, 255, 255, 0) 100%);
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 1200px) {
+    .li {
+        display: none;
+    }
+
+    .gap_li {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .menu {
+        font-size: 14px;
+    }
+
+    .menu svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 330px) {
+    .logo a {
+        display: none;
+    }
 }

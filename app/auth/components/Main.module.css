@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     padding-top: calc(70px + 24px);
-    padding: 0 20%;
+    padding: 0 2rem;
     align-items: center;
     text-align: center;
     height: 90vh;
@@ -11,6 +11,21 @@
     background: radial-gradient(100% 75% at 50% 86.3%, #000e3b 0%, rgba(0, 128, 255, 0) 100%); 
     color: #EDEDED;
     position: relative;
+}
+
+.wrapper_main {
+    align-items: center;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    height: min-content;
+    justify-content: space-between;
+    max-width: 1200px;
+    overflow: visible;
+    padding: 0;
+    width: 100%;
 }
 
 
@@ -257,6 +272,10 @@
     font-weight: 500;
 }
 
+.form_content input {
+    width: 300px;
+}
+
 .red {
     background: radial-gradient(50% 50% at 50% 50%, #ff0000 0%, rgba(171, 171, 171, 0) 100%);
     border-radius: 8px;
@@ -297,4 +316,86 @@
     color: rgb(255 255 255 / 60%);
     justify-content: left;
     text-align: left;
+}
+
+@media (max-width: 1400px) {
+    @keyframes moveUp {
+        0% {
+            bottom: -10rem;
+        }
+        50% {
+            bottom: -5rem;
+        }
+        100% {
+            bottom: -10rem;
+        }
+    }
+
+    .image {
+        bottom: -10rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .text {
+        width: 450px;
+    }
+
+    .text h4 {
+        font-size: 52px;
+        line-height: normal;
+    }
+
+    .text p {
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width: 425px) {
+    .wrapper_main {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: unset;
+        padding-top: calc(70px + 2rem);
+    }
+
+    .main {
+        height: auto;
+        padding: 2rem;
+        padding-top: 0rem;
+    }
+
+    .text {
+        width: 90%;
+        gap: 1rem;
+    }
+    
+    .text h4 {
+        font-size: 28px;
+        line-height: normal;
+        text-wrap: balance;
+    }
+
+    .text p {
+        font-size: 14px;
+    }
+
+    .image {
+        width: 75vw;
+        bottom: -10rem;
+    }
+
+    .form_content_wrapper {
+        width: 100%;
+    }
+
+    .form_padding {
+        height: 450px;
+    }
+
+    .form_content input {
+        width: 100%;
+    }
+
 }
