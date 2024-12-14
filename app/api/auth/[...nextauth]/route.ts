@@ -27,7 +27,6 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: CredentialsType | undefined) {
-
         if (!credentials) {
           throw new Error("Отсутствуют учетные данные");
         }
@@ -35,7 +34,6 @@ export const authOptions: AuthOptions = {
         const { email, password } = credentials;
 
         try {
-
           await connectMongoDB();
 
           const user = await User.findOne<UserType>({ email });
@@ -57,14 +55,10 @@ export const authOptions: AuthOptions = {
             role: user.role,
             balance: user.balance,
           };
-
-        } 
-        
-        catch (error) {
+        } catch (error) {
           console.error("Ошибка авторизации:", error);
           throw new Error("Не удалось выполнить авторизацию");
         }
-
       },
     }),
   ],

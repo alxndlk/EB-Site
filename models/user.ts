@@ -6,8 +6,8 @@ export interface UserDocument extends Document {
   password: string;
   role: string;
   balance: number;
-  skin: string,
-  active: boolean
+  skin: string;
+  active: boolean;
 }
 
 const UserSchema = new Schema<UserDocument>({
@@ -16,10 +16,11 @@ const UserSchema = new Schema<UserDocument>({
   password: { type: String, required: true },
   role: { type: String },
   balance: { type: Number },
-  skin: {type: String},
-  active: {type: Boolean}
+  skin: { type: String },
+  active: { type: Boolean },
 });
 
-const User = (mongoose.models.User || mongoose.model<UserDocument>("User", UserSchema)) as Model<UserDocument>;
+const User = (mongoose.models.User ||
+  mongoose.model<UserDocument>("User", UserSchema)) as Model<UserDocument>;
 
 export default User;
