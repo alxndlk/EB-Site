@@ -1,162 +1,82 @@
-'use client';
+"use client";
 
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { useSession } from "next-auth/react";
 
-import components from '@/app/ui';
-import styles from './Main.module.css';
-import { FaDiscord, FaTelegram } from 'react-icons/fa';
-import { ArrowRightCircle, ExternalLink, PlusCircleIcon } from 'lucide-react';
-const { InputActive, ButtonRed } = components;
+import styles from "./Main.module.css";
 
-import SkinViewerComponent from './skinViewer';
-import { SkinUploader } from './skinChange';
-import { useUserData } from '@/hooks/useUserData';
-
+import SkinViewerComponent from "./skinViewer";
+import { Option } from "./Option";
+import { SkinUploader } from "./skinChange";
 
 export const Main = () => {
-
-  const { userData } = useUserData();
   const { data: session } = useSession();
-  
 
   return (
-    <div className={styles.profile}>
+    <main className={styles.profile}>
       <div className={styles.profile_padding}>
-        <div className={styles.row}>
-          <div className={styles.skin}>
-            <div className={styles.profile_data}>
-              <SkinViewerComponent/>
+        <div className={styles.flex_holder}>
+          <div className={styles.skin_holder}>
+            <div className={styles.skin_container}>
+              <div className={styles.skin}>
+                <SkinViewerComponent />
+              </div>
             </div>
-            <SkinUploader/>
+            <div className={styles.skin_uploader}>
+              <SkinUploader />
+            </div>
           </div>
-          <div className={styles.stats}>
-            <div className={`${styles.avatar_balance} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Баланс</h4>
-                  <span className={styles.info}>Инфо</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>Используйте свой баланс для того, чтобы покупать предметы и донат-статусы.</p>
-                </div>
-                <div className={`${styles.input_balance}`}>
-                  Ваш баланс:
-                  <div className={styles.donate_group}>
-                    {userData?.balance
-                      ? userData.balance.toLocaleString('ru-RU', {
-                          style: 'decimal',
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })
-                      : null }{' '}
-                    ₽
-                  </div>
-                </div>
-              </div>
-              <div className={`${styles.title_balance} justify-between`}>
-                Средства не подлежат ограничению по сроку использования.
-                <Link href="/donate" className={styles.up_group}>
-                  Пополнить
-                  <PlusCircleIcon size={16} />
-                </Link>
-              </div>
-            </div>
-
-            <div className={`${styles.avatar} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Донат-статус</h4>
-                  <div className={styles.donate_group_name}>{userData?.role || null }</div>
-                </div>
-              </div>
-              <div className={`${styles.title} justify-between`}>
-                Донат-статус применяется на все сервера.
-                <Link href="/donate" className={styles.up_group}>
-                  Прокачать группу
-                  <ArrowRightCircle size={16} />
-                </Link>
-              </div>
-            </div>
-
-            <div className={`${styles.avatar} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Почта</h4>
-                  <span className={styles.info}>Инфо</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>Ваш основной адрес электронной почты будет использоваться для уведомлений, связанных с учетной записью.</p>
-                </div>
-                <div className={styles.input}>
-                  {session?.user?.email}
-                  <span className={styles.status}>Основная</span>
-                </div>
-              </div>
-              <div className={styles.title}>Почту для входа в учетную запись нельзя изменить.</div>
-            </div>
-
-            <div className={`${styles.avatar} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Промокод</h4>
-                  <span className={styles.optional}>Опция</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>Введите промокод, чтобы получить скидку на донат-группы или другие бонусы.</p>
-                </div>
-                <InputActive width="big" />
-              </div>
-              <div className={`${styles.title} justify-between`}>
-                Промокод можно использовать только 1 раз.
-                <button className={styles.apply}>Применить</button>
-              </div>
-            </div>
-
-            <div className={`${styles.avatar} `}>
-              <div className={styles.text}>
-                <div className={styles.title_text}>
-                  <h4>Стать разработчиком</h4>
-                  <span className={styles.info}>Инфо</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>Вы можете узнать более подробно и пройти собеседование по ссылкам ниже.</p>
-                </div>
-                <div className="flex gap-3">
-                  <div className={styles.link_container}>
-                    <FaTelegram /> Телеграм
-                  </div>
-                  <div className={styles.link_container}>
-                    <FaDiscord /> Дискорд
-                  </div>
-                </div>
-              </div>
-              <div className={styles.title}>
-                Узнать больше тут:
-                <a href="/" className={styles.link}>
-                  Наша команда
-                  <ExternalLink absoluteStrokeWidth size={18} />
-                </a>
-              </div>
-            </div>
-
-            <div className={styles.log_out_container}>
-              <div className={styles.log_out_content}>
-                <div className={styles.title_text}>
-                  <h4>Выйти с аккаунта</h4>
-                  <span className={styles.danger}>Опасно</span>
-                </div>
-                <div className={styles.paragraph}>
-                  <p>В случае утраты пароля его можно восстановить на странице авторизации.</p>
-                </div>
-              </div>
-              <div className={styles.log_out_button}>
-                <ButtonRed onClick={() => signOut()} text="Выйти с аккаунта" />
-              </div>
-            </div>
+          <div className={styles.options}>
+            <Option
+              title="Баланс"
+              topTitle="Используйте свой баланс для того, чтобы покупать предметы и донат-статусы."
+              value="Ваш баланс: "
+              balance={true}
+              bottomTitle="Средства не подлежат ограничению по сроку использования."
+              button="Пополнить"
+              status="feature"
+            />
+            <Option
+              title="Донат-статус"
+              topTitle="При покупке донат-статуса Вам станут доступны новые возможности во время игры в зависимости от самого донат-статуса."
+              value="Текущий статус: "
+              bottomTitle="Донат-статус применяется на все сервера."
+              button="Улучшить"
+              status="feature"
+              role={true}
+            />
+            <Option
+              title="Почта"
+              topTitle="Ваш основной адрес электронной почты будет использоваться для уведомлений, связанных с учетной записью."
+              value={session?.user?.email}
+              status="info"
+            />
+            <Option
+              title="Промокод"
+              topTitle="Введите промокод, чтобы получить скидку на донат-группы или другие бонусы."
+              bottomTitle="Промокод можно использовать только 1 раз."
+              input="Напишите код"
+              status="feature"
+              button="Применить"
+              disabled={true}
+            />
+            <Option
+              title="Стать разработчиком"
+              topTitle="Вы можете узнать более подробно и пройти собеседование по ссылкам ниже."
+              status="info"
+              links={["Telegram", "Discord"]}
+            />
+            <Option
+              title="Выйти с аккаунта"
+              topTitle="В случае утраты пароля его можно восстановить на странице авторизации."
+              bottomTitle="Вы уверены, что хотите выйти?"
+              exitButton="Выйти"
+              status="danger"
+            />
           </div>
         </div>
       </div>
-    </div>
+      <div className={styles.radialB}></div>
+      <div className={styles.line}></div>
+    </main>
   );
 };

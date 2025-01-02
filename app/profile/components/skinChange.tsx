@@ -1,16 +1,23 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { UploadCloudIcon } from 'lucide-react';
-import styles from './Main.module.css';
-import { useSession } from 'next-auth/react';
-import { ThreeDots } from 'react-loader-spinner';
+import { useState, useRef } from "react";
+import { UploadCloudIcon } from "lucide-react";
+import styles from "./Main.module.css";
+import { useSession } from "next-auth/react";
+import { ThreeDots } from "react-loader-spinner";
 
 export const SkinUploader: React.FC = () => {
   const { data: session } = useSession();
-  const [fileInfo, setFileInfo] = useState<{ name: string; size: string; data?: string } | null>(null);
+  const [fileInfo, setFileInfo] = useState<{
+    name: string;
+    size: string;
+    data?: string;
+  } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState<{ text: string | null; type: 'success' | 'error' | null }>({
+  const [message, setMessage] = useState<{
+    text: string | null;
+    type: "success" | "error" | null;
+  }>({
     text: null,
     type: null,
   });
@@ -38,19 +45,19 @@ export const SkinUploader: React.FC = () => {
 
   const clearFile = () => {
     if (inputRef.current) {
-      inputRef.current.value = '';
+      inputRef.current.value = "";
     }
     setFileInfo(null);
   };
 
   const uploadSkin = async () => {
     if (!session?.user?.email) {
-      setMessage({ text: 'Пользователь не авторизован.', type: 'error' });
+      setMessage({ text: "Пользователь не авторизован.", type: "error" });
       return;
     }
 
     if (!fileInfo?.data) {
-      setMessage({ text: 'Файл не выбран.', type: 'error' });
+      setMessage({ text: "Файл не выбран.", type: "error" });
       return;
     }
 
@@ -58,10 +65,10 @@ export const SkinUploader: React.FC = () => {
     setMessage({ text: null, type: null });
 
     try {
-      const response = await fetch('/api/upload-skin', {
-        method: 'POST',
+      const response = await fetch("/api/upload-skin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: session.user.email,
@@ -70,19 +77,24 @@ export const SkinUploader: React.FC = () => {
       });
 
       if (response.ok) {
-        setMessage({ text: 'Скин успешно загружен!', type: 'success' });
+        setMessage({ text: "Скин успешно загружен!", type: "success" });
         clearFile();
 
         setTimeout(() => {
           window.location.reload();
-        }, 1000)
-
+        }, 1000);
       } else {
         const error = await response.json();
-        setMessage({ text: error.error || 'Ошибка загрузки скина.', type: 'error' });
+        setMessage({
+          text: error.error || "Ошибка загрузки скина.",
+          type: "error",
+        });
       }
     } catch (error) {
-      setMessage({ text: `Ошибка соединения с сервером: ${error}`, type: 'error' });
+      setMessage({
+        text: `Ошибка соединения с сервером: ${error}`,
+        type: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -90,18 +102,19 @@ export const SkinUploader: React.FC = () => {
 
   return (
     <div className={styles.avatar}>
-
-      <div className={styles.text}>
-        <div className={styles.title_text}>
-          <h4>Скин</h4>
-          <span className={styles.optional}>Опция</span>
-        </div>
-        <div className={styles.paragraph}>
-          <p>Используйте свой скин для того, чтобы выделиться среди других игроков.</p>
-        </div>
+      <div className={styles.top_text}>
+        <h4>
+          Скин
+          <span className={styles.info}>Инфо</span>
+        </h4>
+        <span>
+          Вы можете установить свой скин, чтобы выделяться среди других игроков.
+          Изображение должно быть строго в формате <strong>PNG</strong> и иметь
+          размеры <strong>64x64</strong> пикселя.
+        </span>
         <label className={styles.upload} htmlFor="upload-photo">
           {!fileInfo ? (
-            <div className="flex flex-col justify-center text-center items-center">
+            <div className="flex flex-col justify-center text-center items-center gap-2">
               <UploadCloudIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
               <p>Выберите файл PNG</p>
             </div>
@@ -124,14 +137,21 @@ export const SkinUploader: React.FC = () => {
       </div>
       {fileInfo && (
         <div className={styles.title_skin}>
-          <button className={styles.cancel} onClick={clearFile}>Отменить</button>
-          <button className={styles.apply} onClick={uploadSkin} disabled={isLoading}>
+          <button className={styles.cancel} onClick={clearFile}>
+            Отменить
+          </button>
+          <button
+            className={styles.apply}
+            onClick={uploadSkin}
+            disabled={isLoading}
+          >
             {isLoading ? (
-            <>
-              <ThreeDots width={32} height={32} color='#000' />
-            </> 
-            )
-            : `Применить ${message}`}
+              <>
+                <ThreeDots width={20} height={20} color="gray" />
+              </>
+            ) : (
+              `Применить`
+            )}
           </button>
         </div>
       )}

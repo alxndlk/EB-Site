@@ -1,17 +1,21 @@
 .footer {
     width: 100%;
-    padding: 36px 20%;
+    padding: 36px 2rem;
     font-weight: 500;
     z-index: 999;
     font-size: 14px;
     background-color: #000000cc;
     backdrop-filter: saturate(180%) blur(5px);
     flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 9999;
 }
 
 .footer_content {
     display: flex;
+    max-width: 1200px;
     gap: 24px;
     flex-direction: row;
     width: 100%;
@@ -31,6 +35,7 @@
     width: auto;
     gap: 1rem;
     justify-content: left;
+    text-wrap: nowrap;
     align-items: center;
     text-align: center;
     font-size: 16px;    
@@ -101,4 +106,17 @@
 
 .content button:hover {
     background-color: #ffffff27;
+}
+
+
+@media (max-width: 1024px) {
+    .content:last-of-type {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer_content {
+        flex-direction: column;
+    }
 }

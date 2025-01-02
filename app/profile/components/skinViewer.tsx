@@ -1,12 +1,9 @@
-
 import { useUserData } from "@/hooks/useUserData";
 import React, { useEffect, useRef } from "react";
 import { SkinViewer, WalkingAnimation } from "skinview3d";
 
-
 const SkinViewerComponent: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
 
   const { userData } = useUserData();
 
@@ -15,8 +12,9 @@ const SkinViewerComponent: React.FC = () => {
 
     const skinViewer = new SkinViewer({
       canvas: canvasRef.current,
-      width: 600,
-      height: 800,
+      width: 500,
+      height: 700,
+      pixelRatio: "match-device",
       skin: userData?.skin,
     });
 

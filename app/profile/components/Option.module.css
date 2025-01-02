@@ -1,0 +1,258 @@
+.option {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  transition: 0.1s ease;
+  position: relative;
+  border: 1px solid rgb(255 255 255 / 12%);
+}
+
+.top_text {
+  padding: 1rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: left;
+  gap: 10px;
+}
+
+.top_text h4 {
+  font-size: 18px;
+  text-align: left;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  font-weight: 500;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.top_text span {
+  font-size: 14px;
+  color: rgb(255 255 255 / 60%);
+  justify-content: left;
+  text-align: left;
+}
+
+.balance {
+  display: flex;
+  color: #fff;
+  font-weight: 400;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 36px;
+  margin-top: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.1s ease;
+  overflow: hidden;
+  font-size: 14px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: max-content;
+  padding: 0 12px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.button {
+  padding: 0px 12px;
+  height: 32px;
+  transition: 0.1s ease;
+  border-radius: 6px;
+  z-index: 999;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-weight: 500;
+  background-color: #fff;
+  color: #000;
+}
+
+.button:hover {
+  background-color: #dbdbdb;
+}
+
+.bottom_text {
+  display: flex;
+  gap: 24px;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.bottom_text p {
+  font-size: 14px;
+  color: rgb(255 255 255 / 60%);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+  min-height: 49px;
+}
+
+.balance_value {
+  color: #fff;
+  font-weight: 500;
+}
+
+.danger {
+  background-color: oklch(22.1% 0.0657 15.11);
+  padding: 4px 6px;
+  color: oklch(69.96% 0.2136 22.03) !important;
+  gap: 10px;
+  border-radius: 6px;
+  display: flex;
+  font-size: 12px !important;
+}
+
+.info {
+  background-color: #3b88e925;
+  color: #3b88e9 !important;
+  padding: 4px 6px;
+  gap: 10px;
+  border-radius: 6px;
+  display: flex;
+  font-size: 12px !important;
+}
+
+.feature {
+  background-color: #d1772425;
+  color: #d17724 !important;
+  gap: 10px;
+  border-radius: 6px;
+  display: flex;
+  font-size: 12px !important;
+  padding: 4px 6px;
+}
+
+.role {
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 2px 6px;
+  min-width: 50px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.default {
+  color: #fff;
+  background-color: rgb(255 255 255 / 10%);
+}
+
+.vip {
+  background-color: #f1c40f25;
+  color: #f1c40f !important;
+}
+
+.premium {
+  background-color: #3498db25;
+  color: #3498db;
+}
+
+.deluxe {
+  background-color: #2ecc7125;
+  color: #2ecc71;
+}
+
+.ultra {
+  background-color: #9b59b625;
+  color: #9b59b6;
+}
+
+.legend {
+  background-color: #e74c3c25;
+  color: #e74c3c;
+}
+
+.admin {
+  background-color: oklch(22.1% 0.0657 15.11);
+  color: oklch(69.96% 0.2136 22.03);
+}
+
+.target_value {
+  display: flex;
+  color: #fff;
+  font-weight: 400;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 36px;
+  margin-top: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.1s ease;
+  overflow: hidden;
+  font-size: 14px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: max-content;
+  padding: 0 12px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.link {
+  display: flex;
+  color: #fff;
+  font-weight: 400;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 36px;
+  margin-top: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.1s ease;
+  overflow: hidden;
+  font-size: 12px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: max-content;
+  padding: 0 12px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1024px) {
+  .option {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 450px) {
+  .option span,
+  .option p {
+    font-size: 12px;
+  }
+
+  .option h4 {
+    font-size: 16px;
+  }
+
+  .bottom_text {
+    gap: 1rem;
+  }
+
+  .bottom_text button {
+    font-size: 12px;
+  }
+}

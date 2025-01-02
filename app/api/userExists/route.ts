@@ -7,14 +7,16 @@ export async function POST(req: Request) {
     await connectMongoDB();
 
     const { name, email } = await req.json();
-    
-    const user = await User.findOne({ $or: [{ name }, { email }] }).select("_id");
+
+    const user = await User.findOne({ $or: [{ name }, { email }] }).select(
+      "_id"
+    );
 
     return NextResponse.json({ user });
   } catch (error) {
     console.log("Error in /api/userExists:", error);
     return NextResponse.json(
-      { message: "An error occurred while checking user existence.", error},
+      { message: "An error occurred while checking user existence.", error },
       { status: 500 }
     );
   }
