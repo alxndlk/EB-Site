@@ -1,16 +1,16 @@
-"use client";
-
+import Header from "@/layout/Header";
 import { Wrapper } from "@/layout/Wrapper/Wrapper";
-import { Header } from "@/layout/Header/Header";
-import Main from "./components/Main";
 import Footer from "@/layout/Footer";
+import { Main } from "./components/Main";
 
-export default function Arcania() {
+const Payments = () => {
   return (
     <Wrapper>
-      <Header/>
+      <Header />
       <Main />
       <Footer />
     </Wrapper>
   );
-}
+};
+
+export default Payments;

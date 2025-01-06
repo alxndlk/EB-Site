@@ -291,6 +291,8 @@
   border-radius: 20px;
   margin-bottom: 5rem;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
   position: relative;
   box-shadow: 0 20px 40px #0009;
   overflow: auto;
@@ -310,13 +312,12 @@
 }
 
 .donate_container h4 {
-  padding: 120px 40px 120px;
+  padding: 120px 0px 120px;
   font-size: clamp(42px, 10vw, 56px);
   font-weight: 600;
   line-height: 1.2;
   justify-content: center;
   text-align: center;
-  display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -331,7 +332,6 @@
   align-items: center;
   text-align: center;
   max-width: 1200px;
-  padding: 0 2rem;
 }
 
 .donate_table_header {
@@ -691,8 +691,23 @@
   z-index: 2;
 }
 
+@media (max-width: 1200px) {
+  .donate_container {
+    align-items: start;
+    overflow: auto;
+  }
+}
+
 @media (max-width: 500px) {
   .balance_container {
     display: none;
+  }
+
+  .donate_table_skills_name {
+    width: 25%;
+  }
+
+  .heading {
+    width: 25%;
   }
 }

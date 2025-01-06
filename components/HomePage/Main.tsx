@@ -61,7 +61,7 @@ export const Main = () => {
               <Image src="/anvil.gif" alt="anvil" width={40} height={40} />
               <div className="flex flex-col items-start">
                 <span>Эпоха Блоков</span>
-                <p>Аркания уже доступна!</p>
+                <p>Техно-Магия: Next уже доступна!</p>
               </div>
             </div>
             <div className={styles.title}>
@@ -184,7 +184,8 @@ export const Main = () => {
           <div className={styles.features_blocks}>
             <div
               className={`${styles.block}`}
-              style={{ flex: "1.5 0 0px", border: "1px solid #222" }}
+              style={{ border: "1px solid #222" }}
+              id="first"
             >
               <div className={styles.shadow_slider} />
               <div className={styles.block_header}>
@@ -225,7 +226,7 @@ export const Main = () => {
               </div>
             </div>
 
-            <div className={styles.block} style={{ flex: "1 0 0px" }}>
+            <div className={styles.block}>
               <div className={styles.block_header}>
                 <h4>Новые пещеры</h4>
                 <p>
@@ -244,7 +245,7 @@ export const Main = () => {
 
           <div className={styles.features_blocks}>
             <div
-              className={`${styles.block}`}
+              className={`${styles.block} ${styles.opt} `}
               style={{
                 border: "1px solid rgb(0, 39, 24)",
                 background:
@@ -259,7 +260,7 @@ export const Main = () => {
                   всех!
                 </p>
               </div>
-              <div className={styles.optimization}>
+              <div className={`${styles.optimization}`}>
                 <h3>Использование ресурсов</h3>
                 <div className={styles.circles}>
                   <div className={styles.circle_container}>
@@ -340,7 +341,7 @@ export const Main = () => {
           </div>
 
           <div className={styles.features_blocks}>
-            <div className={`${styles.block}`} style={{ flex: "1 0 0px" }}>
+            <div className={`${styles.block}`}>
               <div className={styles.block_header}>
                 <h4>Анимированные текстуры</h4>
                 <p>
@@ -360,7 +361,6 @@ export const Main = () => {
             <div
               className={styles.block}
               style={{
-                flex: "1.5 0 0px",
                 background:
                   "radial-gradient(150% 105% at 100% 100%, rgba(171, 171, 171, .25) 0%, rgba(255, 255, 255, 0) 100%)",
                 border: "1px solid rgb(30, 30, 30)",
@@ -403,7 +403,7 @@ export const Main = () => {
           >
             <div className={styles.server_style}>
               <div className={styles.server_text}>
-                <h4>Аркания</h4>1.20.1
+                <h4>Техно-Магия: Next</h4>1.20.1
               </div>
               <p>Погрузись в мир сложных технологий!</p>
               <Link href="/servers">

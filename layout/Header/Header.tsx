@@ -8,11 +8,13 @@ import { Navbar } from "./Navbar";
 import { useSession } from "next-auth/react";
 import { useUserData } from "@/hooks/useUserData";
 import { Menu } from "./Menu";
+import { Servers } from "./Servers";
 
 export const Header: React.FC = () => {
   const { data: session } = useSession();
   const { userData } = useUserData();
   const [scrolled, setScrolled] = useState(false);
+  const [showServers, setShowServers] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +28,14 @@ export const Header: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleServers = () => {
+    setShowServers((prev) => !prev);
+  };
+
+  const closeServers = () => {
+    setShowServers(false);
+  };
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
@@ -43,7 +53,7 @@ export const Header: React.FC = () => {
           </Link>
         </div>
         <ul className={styles.ul}>
-          <Navbar />
+          <Navbar toggleServers={toggleServers} />
           <Menu />
           <li className={styles.gap_li}>
             {session ? (
@@ -61,6 +71,7 @@ export const Header: React.FC = () => {
           </li>
         </ul>
       </div>
+      {showServers && <Servers onClose={closeServers} />}
     </header>
   );
 };

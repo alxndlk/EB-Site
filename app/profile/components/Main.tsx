@@ -1,15 +1,19 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import React, { useState } from "react";
 
 import styles from "./Main.module.css";
 
 import SkinViewerComponent from "./skinViewer";
 import { Option } from "./Option";
 import { SkinUploader } from "./skinChange";
+import { useRouter } from "next/navigation";
 
 export const Main = () => {
   const { data: session } = useSession();
+
+  const router = useRouter();
 
   return (
     <main className={styles.profile}>
@@ -34,6 +38,9 @@ export const Main = () => {
               bottomTitle="Средства не подлежат ограничению по сроку использования."
               button="Пополнить"
               status="feature"
+              onClick={() => {
+                router.push("/payment");
+              }}
             />
             <Option
               title="Донат-статус"
@@ -43,6 +50,9 @@ export const Main = () => {
               button="Улучшить"
               status="feature"
               role={true}
+              onClick={() => {
+                router.push("/donate");
+              }}
             />
             <Option
               title="Почта"

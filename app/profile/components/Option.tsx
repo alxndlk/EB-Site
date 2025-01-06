@@ -19,6 +19,7 @@ interface IOption {
   exitButton?: string;
   role?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 const statuses = {
@@ -32,6 +33,7 @@ export const Option = ({
   topTitle,
   input,
   balance,
+  onClick,
   exitButton,
   role,
   value,
@@ -48,7 +50,7 @@ export const Option = ({
       case "telegram":
         return "https://t.me/yourchannel";
       case "discord":
-        return "https://discord.gg/yourserver";
+        return "https://discord.gg/gQxQNpYjmy";
       default:
         return "#";
     }
@@ -117,6 +119,7 @@ export const Option = ({
               className={styles.button}
               style={disabled ? { cursor: "no-drop" } : {}}
               disabled={disabled}
+              onClick={onClick}
             >
               {button}
             </button>

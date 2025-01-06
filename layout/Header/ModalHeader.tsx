@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useUserData } from "@/hooks/useUserData";
+import { useState } from "react";
+import { Servers } from "./Servers";
 
 type ModalHeaderProps = {
   onClose: () => void;
@@ -12,6 +14,15 @@ type ModalHeaderProps = {
 export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
   const { data: session } = useSession();
   const { userData } = useUserData();
+  const [showServers, setShowServers] = useState(false);
+
+  const toggleServers = () => {
+    setShowServers((prev) => !prev);
+  };
+
+  const closeServers = () => {
+    setShowServers(false);
+  };
 
   return (
     <div className={styles.modalHeader}>
@@ -35,7 +46,9 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
       <div className={styles.menu_content}>
         <div className={styles.menu_link}>
           <li>
-            <Link href="/servers">Сервера</Link>
+            <button onClick={toggleServers} className={styles.link}>
+              Сервера
+            </button>
             <ChevronRight size={16} />
           </li>
           <li>
@@ -43,7 +56,7 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
             <ChevronRight size={16} />
           </li>
           <li>
-            <Link href="/https://discord.gg/w3ts4QTB" target="__blank">
+            <Link href="https://discord.gg/gQxQNpYjmy" target="__blank">
               Дискорд
             </Link>
             <ChevronRight size={16} />
@@ -76,6 +89,7 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
           </Link>
         </div>
       </div>
+      {showServers && <Servers onClose={closeServers} />}
     </div>
   );
 };

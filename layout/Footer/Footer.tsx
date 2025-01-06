@@ -29,7 +29,6 @@ export const Footer = () => {
             <Link href="">Обновления</Link>
             <Link href="">Донат</Link>
             <Link href="">Дискорд</Link>
-            <Link href="">Форум</Link>
           </div>
         </div>
         <div className={styles.content}>
@@ -39,9 +38,9 @@ export const Footer = () => {
               <FaTelegram />
               Telegram
             </Link>
-            <Link href="">
+            <Link href="https://discord.gg/gQxQNpYjmy">
               <FaDiscord />
-              Discrod
+              Discord
             </Link>
             <Link href="">
               <FaTiktok />
@@ -57,8 +56,6 @@ export const Footer = () => {
           <h4>Разное</h4>
           <div className="flex flex-col">
             <Link href="">Работа у нас</Link>
-            <Link href="">Политика конфиденциальности</Link>
-            <Link href="">Политика безопастности платежей</Link>
           </div>
         </div>
         <div className={`${styles.content}`}>

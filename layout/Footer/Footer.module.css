@@ -1,122 +1,122 @@
 .footer {
-    width: 100%;
-    padding: 36px 2rem;
-    font-weight: 500;
-    z-index: 999;
-    font-size: 14px;
-    background-color: #000000cc;
-    backdrop-filter: saturate(180%) blur(5px);
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  width: 100%;
+  padding: 36px 2rem;
+  font-weight: 500;
+  z-index: 99;
+  font-size: 14px;
+  background-color: #000000cc;
+  backdrop-filter: saturate(180%) blur(5px);
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .footer_content {
-    display: flex;
-    max-width: 1200px;
-    gap: 24px;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  max-width: 1200px;
+  gap: 24px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.content, .content_logo {
-    width: max-content;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.content,
+.content_logo {
+  width: max-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    gap: 1rem;
-    justify-content: left;
-    text-wrap: nowrap;
-    align-items: center;
-    text-align: center;
-    font-size: 16px;    
-    font-weight: 500;
-    color: #EDEDED;
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  gap: 1rem;
+  justify-content: left;
+  text-wrap: nowrap;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ededed;
 }
 
 .content h4 {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 16px;
-    line-height: 20px;
-    color: #EDEDED;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  line-height: 20px;
+  color: #ededed;
 }
 
 .content a {
-    line-height: 20px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #888;
-    border-radius: 2px;
-    font-weight: 400;
-    transition: 0.1s ease;
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    justify-content: left;
-    text-align: left;
-    align-items: center;
-    max-width: 200px;
+  line-height: 20px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #888;
+  border-radius: 2px;
+  font-weight: 400;
+  transition: 0.1s ease;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: left;
+  text-align: left;
+  align-items: center;
+  max-width: 200px;
 }
 
 .content a:hover {
-    color: #EDEDED;
+  color: #ededed;
 }
 
 .paragraphs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    line-height: 20px;
-    font-size: 14px;
-    color: #888;
-    margin-top: 48px;
-    border-radius: 2px;
-    font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #888;
+  margin-top: 48px;
+  border-radius: 2px;
+  font-weight: 400;
 }
 
 .content button {
-    place-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    flex-flow: row;
-    gap: 10px;
-    height: min-content;
-    overflow: hidden;
-    padding: 12px 20px;
-    position: relative;
-    text-decoration: none;
-    width: max-content;
-    backdrop-filter: blur(0px);
-    background-color: #ffffff17;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
-    opacity: 1;
+  place-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row;
+  gap: 10px;
+  height: min-content;
+  overflow: hidden;
+  padding: 12px 20px;
+  position: relative;
+  text-decoration: none;
+  width: max-content;
+  backdrop-filter: blur(0px);
+  background-color: #ffffff17;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  opacity: 1;
 }
 
 .content button:hover {
-    background-color: #ffffff27;
+  background-color: #ffffff27;
 }
 
-
 @media (max-width: 1024px) {
-    .content:last-of-type {
-        display: none;
-    }
+  .content:last-of-type {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .footer_content {
-        flex-direction: column;
-    }
+  .footer_content {
+    flex-direction: column;
+  }
 }
