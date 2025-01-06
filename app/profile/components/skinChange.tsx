@@ -14,6 +14,7 @@ export const SkinUploader: React.FC = () => {
     data?: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [message, setMessage] = useState<{
     text: string | null;
     type: "success" | "error" | null;

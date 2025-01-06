@@ -14,6 +14,7 @@ export const Main = () => {
 
   const handleUpdateBalance = async () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await fetch("/api/updateBalance", {
         method: "POST",
         headers: {
@@ -26,7 +27,7 @@ export const Main = () => {
       });
     } catch (error) {
       return NextResponse.json(
-        { message: "Ошибка при обновлении данных" },
+        { message: "Ошибка при обновлении данных", error },
         { status: 500 }
       );
     }
