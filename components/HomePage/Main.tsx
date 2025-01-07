@@ -51,14 +51,20 @@ export const Main = () => {
     <main className={styles.main}>
       <div className={styles.top_main}>
         <div className={styles.top_main_content}>
-          <video muted loop autoPlay className={styles.video}>
+          <video muted loop autoPlay className={styles.video} playsInline>
             <source src="/videos/video.mp4" type="video/mp4" />
           </video>
           <div className={styles.video_overllay} />
           <div className={styles.video_bottom} />
           <div className={styles.top_main_content_title}>
             <div className={styles.aviable}>
-              <Image src="/anvil.gif" alt="anvil" width={40} height={40} />
+              <Image
+                src="/anvil.gif"
+                alt="anvil"
+                width={40}
+                height={40}
+                unoptimized
+              />
               <div className="flex flex-col items-start">
                 <span>Эпоха Блоков</span>
                 <p>Техно-Магия: Next уже доступна!</p>
@@ -235,7 +241,13 @@ export const Main = () => {
                 </p>
               </div>
               <div className={styles.cave}>
-                <video muted loop autoPlay className={styles.animated}>
+                <video
+                  muted
+                  loop
+                  autoPlay
+                  className={styles.animated}
+                  playsInline
+                >
                   <source src="/videos/cave.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -352,7 +364,13 @@ export const Main = () => {
               </div>
 
               <div className={styles.amimated_video}>
-                <video muted loop autoPlay className={styles.animated}>
+                <video
+                  muted
+                  loop
+                  autoPlay
+                  className={styles.animated}
+                  playsInline
+                >
                   <source src="/videos/resources.mp4" type="video/mp4" />
                 </video>
                 <div className={styles.shadow_video} />

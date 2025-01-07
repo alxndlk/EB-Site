@@ -1552,6 +1552,10 @@
   .servers {
     padding: 120px 1rem 60px;
   }
+
+  .amimated_video {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 375px) {
