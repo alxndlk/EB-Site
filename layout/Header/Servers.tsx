@@ -27,13 +27,13 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
   return (
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.servers}>
-        <div
-          className={styles.container}
-          onClick={() => {
-            router.push("/donate");
-          }}
-        >
-          <div className={styles.donate}>
+        <div className={styles.container}>
+          <div
+            className={styles.donate}
+            onClick={() => {
+              router.push("/donate");
+            }}
+          >
             <h4>Стань куда круче с</h4>
             <p>ДОНАТ-СТАТУС</p>
             <Image

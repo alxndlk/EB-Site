@@ -85,10 +85,11 @@
   font-weight: 400;
 }
 
-.content button {
+.content .button {
   place-content: center;
   align-items: center;
   cursor: pointer;
+  color: #fff;
   display: flex;
   flex-flow: row;
   gap: 10px;
@@ -105,7 +106,7 @@
   opacity: 1;
 }
 
-.content button:hover {
+.content .button:hover {
   background-color: #ffffff27;
 }
 

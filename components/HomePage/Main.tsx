@@ -9,6 +9,8 @@ import Image from "next/image";
 import { ImageRow } from "./ImageRow";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Servers } from "./../../layout/Header/Servers";
 
 export const Main = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,6 +36,7 @@ export const Main = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showServers, setShowServers] = useState(false);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -46,6 +49,16 @@ export const Main = () => {
       prevIndex === urlArray.length - 1 ? 0 : prevIndex + 1
     );
   };
+
+  const toggleServers = () => {
+    setShowServers((prev) => !prev);
+  };
+
+  const closeServers = () => {
+    setShowServers(false);
+  };
+
+  const router = useRouter();
 
   return (
     <main className={styles.main}>
@@ -170,7 +183,13 @@ export const Main = () => {
                 Эпохи Блоков.
               </span>
             </div>
-            <button>Подробнее</button>
+            <button
+              onClick={() => {
+                router.push("/tmnext");
+              }}
+            >
+              Подробнее
+            </button>
           </div>
         </div>
       </div>
@@ -424,9 +443,9 @@ export const Main = () => {
                 <h4>Техно-Магия: Next</h4>1.20.1
               </div>
               <p>Погрузись в мир сложных технологий!</p>
-              <Link href="/servers">
+              <button onClick={toggleServers}>
                 Начать играть <ChevronRight size={18} />
-              </Link>
+              </button>
             </div>
             <div className={styles.shadow}></div>
           </div>
@@ -442,9 +461,9 @@ export const Main = () => {
                 <h4>Технария</h4>1.19.2
               </div>
               <p>Погрузись в мир сложных технологий!</p>
-              <Link href="/servers">
+              <button onClick={toggleServers}>
                 Начать играть <ChevronRight size={18} />
-              </Link>
+              </button>
             </div>
             <div className={styles.shadow}></div>
           </div>
@@ -460,9 +479,9 @@ export const Main = () => {
                 <h4>Класиска +</h4>1.21.4
               </div>
               <p>Погрузись в мир сложных технологий!</p>
-              <Link href="/servers">
+              <button onClick={toggleServers}>
                 Начать играть <ChevronRight size={18} />
-              </Link>
+              </button>
             </div>
             <div className={styles.shadow}></div>
           </div>
@@ -479,7 +498,12 @@ export const Main = () => {
               </p>
             </div>
             <div className={styles.launcher_buttons}>
-              <button>Скачать лаунчер</button>
+              <Link
+                href="https://github.com/alxndlk/EB-MLauncher/releases/download/v1.1.0/default.exe"
+                className={styles.button}
+              >
+                Скачать лаунчер
+              </Link>
               <Link href="/auth">Войти в аккаунт</Link>
             </div>
           </div>
@@ -490,6 +514,7 @@ export const Main = () => {
         <div className={styles.radialB}></div>
         <div className={styles.line}></div>
       </div>
+      {showServers && <Servers onClose={closeServers} />}
     </main>
   );
 };
