@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     if (!session || !session.user) {
       return NextResponse.json(
-        { error: "Неавторизованный доступ" },
+        { error: "Неавторизованный доступ для вас" },
         { status: 401 }
       );
     }
