@@ -34,7 +34,7 @@ export const Footer = () => {
         <div className={styles.content}>
           <h4>Социальные сети</h4>
           <div className="flex flex-col">
-            <Link href="">
+            <Link href="https://t.me/+vO9cZ8FtLD85YmYy">
               <FaTelegram />
               Telegram
             </Link>
@@ -61,7 +61,7 @@ export const Footer = () => {
         <div className={`${styles.content}`}>
           <div className="flex flex-col">
             <Link
-              href="https://github.com/alxndlk/EB-MLauncher/releases/download/v1.1.0/default.exe"
+              href="https://github.com/alxndlk/MLauncher/releases/latest/download/epohablokov.exe"
               className={styles.button}
             >
               Скачать лаунчер

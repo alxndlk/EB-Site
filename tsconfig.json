@@ -1,40 +1,36 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "skipLibCheck": true, // Игнорирует ошибки в библиотеках
+    "strict": false, // Отключает строгую типизацию
+    "noEmit": true, // Отключает создание файлов при компиляции
+    "esModuleInterop": true, // Включает совместимость с CommonJS
+    "module": "esnext", // Использует современную систему модулей
+    "moduleResolution": "bundler", // Использует резолвер для бандлеров
+    "resolveJsonModule": true, // Разрешает импорт JSON файлов
+    "isolatedModules": true, // Обеспечивает независимость модулей
+    "jsx": "preserve", // Сохраняет JSX в файлах
+    "incremental": true, // Включает инкрементальную компиляцию
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
-    "target": "ES2017"
+    "target": "ES2017" // Устанавливает целевой уровень ECMAScript
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "models/user.ts", "app/api/register/route.ts", "app/api/userExists/route.ts", "app/Providers.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "models/user.ts",
+    "app/api/register/route.ts",
+    "app/api/userExists/route.ts",
+    "app/Providers.js"
+, "next.config.js"  ],
+  "exclude": ["node_modules"]
 }

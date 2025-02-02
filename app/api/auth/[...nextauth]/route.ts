@@ -13,11 +13,6 @@ interface UserType {
   balance: number;
 }
 
-interface CredentialsType {
-  email: string;
-  password: string;
-}
-
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -26,8 +21,10 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: CredentialsType | undefined) {
-        if (!credentials) {
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined
+      ) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error("Отсутствуют учетные данные");
         }
 
@@ -55,8 +52,12 @@ export const authOptions: AuthOptions = {
             role: user.role,
             balance: user.balance,
           };
-        } catch (error) {
-          console.error("Ошибка авторизации:", error);
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            console.error("Ошибка авторизации:", error.message);
+            throw new Error(error.message);
+          }
+          console.error("Неизвестная ошибка авторизации");
           throw new Error("Не удалось выполнить авторизацию");
         }
       },

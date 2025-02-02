@@ -28,9 +28,8 @@ export async function POST(req: Request) {
       balance: 0,
       skin: defaultSkin,
       active: true,
+      roleExpiresAt: null,
     });
-
-    console.log("Новый пользователь создан:", newUser);
 
     return NextResponse.json(
       { message: "User registered successfully." },

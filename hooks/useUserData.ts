@@ -6,6 +6,7 @@ interface UserData {
   role: string;
   skin: string;
   active: boolean;
+  roleExpiresAt: Date;
 }
 
 export const useUserData = () => {

@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
   balance: number;
   skin: string;
   active: boolean;
+  roleExpiresAt: Date | null;
 }
 
 const UserSchema = new Schema<UserDocument>({
@@ -18,6 +19,7 @@ const UserSchema = new Schema<UserDocument>({
   balance: { type: Number },
   skin: { type: String },
   active: { type: Boolean },
+  roleExpiresAt: { type: Date, required: false, default: null },
 });
 
 const User = (mongoose.models.User ||

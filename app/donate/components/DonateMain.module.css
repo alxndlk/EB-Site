@@ -122,11 +122,44 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: 0.5s ease;
+  transition: 0.1s ease;
   position: relative;
   padding: 3rem 0;
   gap: 1rem;
   align-items: center;
+  background-image: url("/Home/7.png");
+  background-size: cover;
+  animation: slider infinite 60s ease;
+}
+
+@keyframes slider {
+  0% {
+    background-image: url("/Home/1.png");
+  }
+  12.5% {
+    background-image: url("/Home/2.png");
+  }
+  25% {
+    background-image: url("/Home/3.png");
+  }
+  37.5% {
+    background-image: url("/Home/4.png");
+  }
+  50% {
+    background-image: url("/Home/4.png");
+  }
+  62.5% {
+    background-image: url("/Home/5.png");
+  }
+  75% {
+    background-image: url("/Home/6.png");
+  }
+  87.5% {
+    background-image: url("/Home/7.png");
+  }
+  100% {
+    background-image: url("/Home/7.png");
+  }
 }
 
 .cheap_status,
@@ -710,4 +743,24 @@
   .heading {
     width: 25%;
   }
+}
+
+.buy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0.6) 0%,
+    rgba(0, 212, 255, 0.6) 100%
+  );
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5rem;
+  overflow-y: auto;
+  backdrop-filter: blur(5px) saturate(180%);
 }

@@ -4,7 +4,6 @@ import User from "@/models/user";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -32,6 +31,7 @@ export async function GET(req: Request) {
       role: user.role,
       skin: user.skin,
       active: user.active,
+      roleExpiresAt: user.roleExpiresAt,
     });
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);

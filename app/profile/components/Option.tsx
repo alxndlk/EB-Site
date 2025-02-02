@@ -20,6 +20,7 @@ interface IOption {
   role?: boolean;
   disabled?: boolean;
   onClick?: () => void;
+  date?: string | null;
 }
 
 const statuses = {
@@ -42,13 +43,14 @@ export const Option = ({
   bottomTitle,
   button,
   disabled = false,
+  date,
 }: IOption) => {
   const { userData } = useUserData();
 
   const generateLink = (name: string) => {
     switch (name.toLowerCase()) {
       case "telegram":
-        return "https://t.me/yourchannel";
+        return "https://t.me/+vO9cZ8FtLD85YmYy";
       case "discord":
         return "https://discord.gg/gQxQNpYjmy";
       default:
@@ -97,6 +99,11 @@ export const Option = ({
               </div>
             )}
           </span>
+        )}
+        {date && (
+          <div className={styles.date}>
+            Донат-статус действителен до {new Date(date).toLocaleDateString()}.
+          </div>
         )}
         {links && links.length > 0 && (
           <ul className={styles.links}>

@@ -7,12 +7,32 @@ import ExpensiveStatus from "./ExpensiveStatus";
 import { TableTitle } from "./TableTitle";
 import { cheapData, expensiveData } from "./constants";
 import { Status } from "./Status";
-import { useUserData } from "@/hooks/useUserData";
-import { FaWallet } from "react-icons/fa";
-import { ArrowDownIcon } from "lucide-react";
+import { Buy } from "./Buy";
+import { useState } from "react";
 
 export const DonateMain = () => {
-  const { userData } = useUserData();
+  const [showBuy, setShowBuy] = useState(false);
+
+  const closeBuy = () => {
+    setShowBuy(false);
+  };
+
+  const [selectedStatus, setSelectedStatus] = useState({
+    name: "",
+    price: "",
+    imageURL: "",
+    bg_color: "",
+  });
+
+  const handleStatusSelect = (
+    name: string,
+    price: string,
+    imageURL: string,
+    bg_color: string
+  ) => {
+    setSelectedStatus({ name, price, imageURL, bg_color });
+    setShowBuy(true);
+  };
 
   return (
     <div className={styles.DonateMain}>
@@ -26,7 +46,14 @@ export const DonateMain = () => {
             <div className={styles.statuses}>
               <div className={styles.stat}>
                 {cheapData.map(
-                  ({ src, statusClass, statusName, price, buttonColor }) => (
+                  ({
+                    src,
+                    statusClass,
+                    statusName,
+                    price,
+                    buttonColor,
+                    bg_color,
+                  }) => (
                     <CheapStatus
                       key={statusClass}
                       src={src}
@@ -34,11 +61,21 @@ export const DonateMain = () => {
                       statusName={statusName}
                       price={price}
                       buttonColor={buttonColor}
+                      onClick={() =>
+                        handleStatusSelect(statusName, price, src, bg_color)
+                      }
                     />
                   )
                 )}
                 {expensiveData.map(
-                  ({ src, statusClass, statusName, price, buttonColor }) => (
+                  ({
+                    src,
+                    statusClass,
+                    statusName,
+                    price,
+                    buttonColor,
+                    bg_color,
+                  }) => (
                     <ExpensiveStatus
                       key={statusClass}
                       src={src}
@@ -46,25 +83,13 @@ export const DonateMain = () => {
                       statusName={statusName}
                       price={price}
                       buttonColor={buttonColor}
+                      onClick={() =>
+                        handleStatusSelect(statusName, price, src, bg_color)
+                      }
                     />
                   )
                 )}
               </div>
-            </div>
-            <div className={styles.balance}>
-              <div className={styles.balance_container}>
-                <a href="#improve">
-                  Подробнее
-                  <ArrowDownIcon size={18} />
-                </a>
-              </div>
-              {userData?.balance && (
-                <div className="flex flex-row gap-2 items-center">
-                  <FaWallet />
-                  <p>Ваш баланс:</p>
-                  <span>{userData.balance}₽</span>
-                </div>
-              )}
             </div>
           </div>
           <div className={styles.line}></div>
@@ -200,14 +225,6 @@ export const DonateMain = () => {
                 icons={["xmark", "check", "check", "check", "check"]}
               />
               <Status
-                text="Команда /repairall"
-                icons={["xmark", "check", "check", "check", "check"]}
-              />
-              <Status
-                text="Команда /xt"
-                icons={["xmark", "xmark", "check", "check", "check"]}
-              />
-              <Status
                 text="Команда /tppos"
                 icons={["xmark", "xmark", "check", "check", "check"]}
               />
@@ -249,6 +266,15 @@ export const DonateMain = () => {
       </div>
       <div className={styles.radial}></div>
       <div className={styles.line}></div>
+      {showBuy && (
+        <Buy
+          onClose={closeBuy}
+          nameStatus={selectedStatus.name}
+          priceStatus={selectedStatus.price}
+          imageURL={selectedStatus.imageURL}
+          bg_color={selectedStatus.bg_color}
+        />
+      )}
     </div>
   );
 };

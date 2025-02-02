@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Servers.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,26 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
+  };
+
+  const [serverData, setServerData] = useState<string[]>(null);
+
+  useEffect(() => {
+    fetch("/api/mc-status")
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data);
+      })
+      .catch((err) => {
+        console.error("Ошибка:", err);
+      });
+  }, [serverData]);
+
+  const getPlayerCountLabel = (count: number) => {
+    if (count === 1) return "ИГРОК";
+    if (count >= 2 && count <= 4) return "ИГРОКА";
+    if (count >= 5) return "ИГРОКОВ";
+    return "ИГРОКОВ";
   };
 
   const router = useRouter();
@@ -61,7 +81,10 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
                 <span className={styles.mTitle}>
                   Погрузись в мир сложных технологий!
                 </span>
-                <p>НА СЕРВЕРЕ 384 ИГРОКА</p>
+                <p>
+                  НА СЕРВЕРЕ {serverData?.players.online}{" "}
+                  {getPlayerCountLabel(serverData?.players.online)}
+                </p>
               </div>
             </div>
           </div>

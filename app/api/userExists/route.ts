@@ -14,7 +14,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ user });
   } catch (error) {
-    console.log("Error in /api/userExists:", error);
     return NextResponse.json(
       { message: "An error occurred while checking user existence.", error },
       { status: 500 }

@@ -205,7 +205,7 @@ export const Main = () => {
             </div>
             <div className={styles.launcher_buttons}>
               <Link
-                href="https://github.com/alxndlk/EB-MLauncher/releases/download/v1.1.0/default.exe"
+                href="https://github.com/alxndlk/MLauncher/releases/latest/download/epohablokov.exe"
                 className={styles.button}
               >
                 Скачать лаунчер
