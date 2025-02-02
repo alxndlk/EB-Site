@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     const { amount, paymentMethodId, email, userName } = await req.json();
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Number(amount) * 100,
-      currency: "czk",
+      currency: "rub",
       payment_method: paymentMethodId,
       confirm: true,
       receipt_email: email,
