@@ -6,7 +6,7 @@ import ExpensiveStatus from "./ExpensiveStatus";
 
 import { TableTitle } from "./TableTitle";
 import { cheapData, expensiveData } from "./constants";
-import { Status } from "./Status";
+import { Modal, Status } from "./Status";
 import { Buy } from "./Buy";
 import { useState } from "react";
 
@@ -150,31 +150,31 @@ export const DonateMain = () => {
                 text="Кит набор Vip"
                 icons={["check", "check", "check", "check", "check"]}
                 kit={true}
-                src="/image.png"
+                src="/Home/1.png"
               />
               <Status
                 text="Кит набор Premium"
                 icons={["xmark", "check", "check", "check", "check"]}
                 kit={true}
-                src="/image.png"
+                src="/premium_kit.png"
               />
               <Status
                 text="Кит набор Deluxe"
                 icons={["xmark", "xmark", "check", "check", "check"]}
                 kit={true}
-                src="/image.png"
+                src="/deluxe_kit.png"
               />
               <Status
                 text="Кит набор ULTRA"
                 icons={["xmark", "xmark", "xmark", "check", "check"]}
                 kit={true}
-                src="/image.png"
+                src="/ultra_kit.png"
               />
               <Status
                 text="Кит набор LEGEND"
                 icons={["xmark", "xmark", "xmark", "xmark", "check"]}
                 kit={true}
-                src="/image.png"
+                src="/legend_kit.png"
               />
               <Status
                 text=""

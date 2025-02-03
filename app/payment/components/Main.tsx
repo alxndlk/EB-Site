@@ -135,7 +135,6 @@ export const Main = () => {
   const [name, setName] = useState(session?.user?.name || "");
   const [error, setError] = useState<string | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const validateForm = () => {
     setError(null);
     if (Number(value) < 65) {
@@ -176,8 +175,8 @@ export const Main = () => {
                   placeholder="Ник игрока"
                 />
                 <p>
-                  Можно написать ник другого игрока — тогда покупка придёт к
-                  нему на аккаунт. Поздравь и порадуй друга или подругу :)
+                  Транзакция происходит в рублях. Украинские карты не принимают
+                  платеж. Попробуйте через карты Relovut или другие.
                 </p>
               </div>
             </div>

@@ -124,7 +124,6 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  overflow-x: auto;
 }
 
 .container {
@@ -582,6 +581,10 @@
   .features_blocks {
     flex-direction: column;
     height: auto;
+  }
+
+  .mods {
+    overflow-x: auto;
   }
 
   .block {

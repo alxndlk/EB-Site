@@ -333,3 +333,9 @@
   justify-content: left;
   text-align: left;
 }
+
+@media (max-width: 500px) {
+  .card {
+    width: 100%;
+  }
+}
