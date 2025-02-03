@@ -1,6 +1,7 @@
 import "./globals.css";
 import { AuthProvider } from "./Providers";
 import { montserrat } from "./fonts/fonts";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,10 @@ export default function RootLayout({
         <link rel="icon" href="./logo.ico" />
       </head>
       <body className={montserrat.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          <Analytics />
+        </AuthProvider>
       </body>
     </html>
   );
