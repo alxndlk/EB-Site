@@ -12,7 +12,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Эпоха Блоков</title>
-        <meta name="description" content="Description" />
+        <meta
+          name="description"
+          content="Лучшие сервера Minecraft с модами. Мир безграничных возможностей! Исследуйте и создавайте вместе с нами."
+        />
         <link rel="icon" href="./logo.ico" />
       </head>
       <body className={montserrat.className}>
