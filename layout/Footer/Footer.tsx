@@ -42,11 +42,11 @@ export const Footer = () => {
               <FaDiscord />
               Discord
             </Link>
-            <Link href="">
+            <Link href="https://www.tiktok.com/@epohablokov">
               <FaTiktok />
               TikTok
             </Link>
-            <Link href="">
+            <Link href="https://www.youtube.com/@epohablokov/featured">
               <FaYoutube />
               YouTube
             </Link>
@@ -61,7 +61,7 @@ export const Footer = () => {
         <div className={`${styles.content}`}>
           <div className="flex flex-col">
             <Link
-              href="https://github.com/alxndlk/MLauncher/releases/latest/download/epohablokov.exe"
+              href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
               className={styles.button}
             >
               Скачать лаунчер

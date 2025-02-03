@@ -96,7 +96,11 @@ export const Main = () => {
               <Link className={styles.start_play} href="#launcher">
                 Начать играть
               </Link>
-              <a className={styles.watch_trailer}>
+              <a
+                className={styles.watch_trailer}
+                href="https://www.youtube.com/@epohablokov/videos"
+                target="__blank"
+              >
                 <PlayCircleIcon size={16} />
                 Смотреть трейлер
               </a>
@@ -476,7 +480,7 @@ export const Main = () => {
           >
             <div className={styles.server_style}>
               <div className={styles.server_text}>
-                <h4>Класиска +</h4>1.21.4
+                <h4>Классика +</h4>1.21.4
               </div>
               <p>Погрузись в мир сложных технологий!</p>
               <button onClick={toggleServers}>
@@ -499,7 +503,7 @@ export const Main = () => {
             </div>
             <div className={styles.launcher_buttons}>
               <Link
-                href="https://github.com/alxndlk/MLauncher/releases/latest/download/epohablokov.exe"
+                href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
                 className={styles.button}
               >
                 Скачать лаунчер

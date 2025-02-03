@@ -61,12 +61,6 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
             </Link>
             <ChevronRight size={16} />
           </li>
-          <li>
-            <Link href="/forum" target="__blank">
-              Форум
-            </Link>
-            <ChevronRight size={16} />
-          </li>
         </div>
 
         <div className={styles.image_header}>
