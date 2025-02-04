@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import User from "@/models/user";
 
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-12-18.acacia",
 });
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         payment_method: paymentMethodId,
         confirm: true,
         receipt_email: email,
-        return_url: "https://epohablokov.com",
+        return_url: "https://epohablokov.com/payment-status",
       });
     } catch (stripeError: any) {
       console.error("Ошибка Stripe:", stripeError);
@@ -42,6 +42,16 @@ export async function POST(req: NextRequest) {
 
     // Логирование деталей платежа
     console.log("Статус платежа:", paymentIntent.status);
+
+    if (paymentIntent.status === "requires_action") {
+      return NextResponse.json(
+        {
+          requires_action: true,
+          next_action: paymentIntent.next_action,
+        },
+        { status: 200 }
+      );
+    }
 
     if (paymentIntent.status !== "succeeded") {
       return NextResponse.json(

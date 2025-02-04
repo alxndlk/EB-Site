@@ -152,8 +152,8 @@ export const Buy: React.FC<BuyProps> = ({
                       <span>Купить на 30 дней.</span>
                       <p id="price30">
                         за{" "}
-                        {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(1)}
-                        $ / мес.
+                        {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(1)}$
+                        / мес.
                       </p>
                     </div>
                     <ArrowRight size={64} />

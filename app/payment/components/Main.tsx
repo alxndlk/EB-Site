@@ -10,8 +10,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import StatusBar from "@/app/ui/StatusBar";
-import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -20,45 +19,63 @@ const stripePromise = loadStripe(
 const PaymentForm = ({ value, session, name }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [message, setMessage] = useState<{
+  const [error, setError] = useState<{
     text: string | null;
-    type: "success" | "error" | null;
+    status: number | null;
   }>({
     text: null,
-    type: null,
+    status: null,
   });
 
-  const router = useRouter();
+  const [success, setSuccess] = useState<{
+    text: string | null;
+    status: number | null;
+  }>({
+    text: null,
+    status: null,
+  });
+
+  const [warning, setWarning] = useState<{
+    text: string | null;
+    status: number | null;
+  }>({
+    text: null,
+    status: null,
+  });
+
+  const handleResetErrors = () => {
+    setError({ text: null, status: null });
+  };
 
   const handleUpdateBalance = async () => {
-    setMessage({ text: "", type: "error" });
+    setError({ text: null, status: null });
 
     if (!stripe || !elements) {
-      setMessage({
+      setError({
         text: "Ошибка при инициализации платежной системы",
-        type: "error",
+        status: 500,
       });
       return;
     }
 
-    if (!session?.user?.email) {
-      setMessage({ text: "Необходимо авторизоваться", type: "error" });
-      return;
-    }
+    // if (!session?.user?.email) {
+    //   setError({ text: "Необходимо авторизоваться"});
+    //   return;
+    // }
 
     if (!name) {
-      setMessage({ text: "Введите никнейм", type: "error" });
+      setError({ text: "Введите никнейм", status: 400 });
       return;
     }
 
-    if (Number(value) < 1) {
-      setMessage({ text: "Минимальная сумма пополнения 1$", type: "error" });
+    if (Number(value) === 0) {
+      setError({ text: "Минимальная сумма пополнения 1$", status: 400 });
       return;
     }
 
     const cardElement = elements.getElement(CardElement);
     if (!cardElement) {
-      setMessage({ text: "Данные карты не найдены", type: "error" });
+      setError({ text: "Данные карты не найдены", status: 400 });
       return;
     }
 
@@ -68,9 +85,11 @@ const PaymentForm = ({ value, session, name }) => {
     });
 
     if (error) {
-      setMessage({ text: "Некорректные данные карты", type: "error" });
+      setError({ text: "Некорректные данные карты", status: 400 });
       return;
     }
+
+    console.log(Number(value));
 
     try {
       const response = await fetch("/api/payment", {
@@ -85,28 +104,26 @@ const PaymentForm = ({ value, session, name }) => {
       });
 
       const result = await response.json();
+
       if (result.success) {
-        setMessage({ text: "Оплата прошла успешно", type: "success" });
-        setTimeout(() => {
-          router.push("/profile");
-        }, 2000);
+        setSuccess({ text: "Оплата прошла успешно", status: 200 });
+      } else if (!result.success) {
+        setError({ text: result.error, status: 500 });
+      } else if (result.requires_action) {
+        setWarning({
+          text: "Необходима дополнительная проверка платежа",
+          status: 300,
+        });
       } else {
-        setMessage({ text: "Ошибка при обработке платежа", type: "error" });
+        setError({ text: "Ошибка при обработке платежа", status: 500 });
       }
     } catch (error) {
-      setMessage({ text: "Сервер недоступен", type: "error" });
+      setError({ text: "Сервер недоступен", status: 500 });
     }
   };
 
   return (
     <>
-      {message && (
-        <StatusBar
-          message={message.text}
-          type={message.type}
-          onClose={() => setMessage(null)}
-        />
-      )}
       <CardElement
         className={styles.card}
         options={{
@@ -116,28 +133,48 @@ const PaymentForm = ({ value, session, name }) => {
           },
         }}
       />
-
       <p className={styles.pay_paragraph}>
-        Транзакция происходит в рублях. Украинские карты не принимают
-        платеж. Попробуйте через карты Relovut или другие.
+        Транзакция происходит в долларах. Некоторые карты могут не принимать эти
+        платежи или будут требовать подтверждение. В случае ошибки, пишите в
+        поддержку.
       </p>
 
-      <button className={styles.button} onClick={handleUpdateBalance}>
-        Продолжить
-      </button>
+      {error.text && (
+        <div
+          className={`${styles.button} ${styles.error_button}`}
+          onClick={handleResetErrors}
+        >
+          <span>Ошибка</span>
+          <p>{error.text}</p>
+        </div>
+      )}
+
+      {!error.text && !warning.text && (
+        <div className={styles.button} onClick={handleUpdateBalance}>
+          <span>Продолжить</span>
+          <ArrowRight className={styles.ArrowRight} />
+        </div>
+      )}
+
+      {warning.text && (
+        <div className={`${styles.button} ${styles.warning_button}`}>
+          <span>Ожидание подтверждения</span>
+          <ArrowRight className={styles.ArrowRight} />
+        </div>
+      )}
     </>
   );
 };
 
 export const Main = () => {
   const { data: session } = useSession();
-  const [value, setValue] = useState("2,5");
+  const [value, setValue] = useState("2.5");
   const [name, setName] = useState(session?.user?.name || "");
   const [error, setError] = useState<string | null>(null);
 
   const validateForm = () => {
     setError(null);
-    if (Number(value) < 65) {
+    if (Number(value) < 1) {
       setError("Ошибка: Минимальная сумма пополнения 1$");
       return false;
     }
@@ -151,68 +188,72 @@ export const Main = () => {
   return (
     <div className={styles.main}>
       <div className={styles.mainContainer}>
-        <div className={styles.title}>
-          <h4>Пополнить баланс</h4>
-          <p>
-            Все ваши платежи надежно защищены благодаря современным технологиям
-            безопасности
-          </p>
-        </div>
-
-        <div className={styles.content}>
-          {error && <StatusBar message={error} type={"error"} />}
-
-          <div className={styles.container}>
-            <div className={styles.title_container}>
-              <h4>Введите ник</h4>
-            </div>
-            <div className={styles.info}>
-              <div className={styles.inputs}>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Ник игрока"
-                />
-                <p>
-                Можно написать ник другого игрока — тогда покупка придёт к нему на
-                аккаунт. Поздравь и порадуй друга или подругу :)
-                </p>
-              </div>
-            </div>
+        <div className={styles.holder_content}>
+          <div className={styles.title}>
+            <h4>Пополнить баланс</h4>
+            <p>
+              Все ваши платежи надежно защищены благодаря современным
+              технологиям безопасности
+            </p>
           </div>
 
-          <div className={styles.container}>
-            <div className={styles.title_container}>
-              <h4>Выберите сумму</h4>
-            </div>
-            <div className={styles.values}>
-              <div className={styles.value}>
-                {[2.5, 5, 10, 25, 50].map((amount) => (
-                  <button key={amount} onClick={() => setValue(String(amount))}>
-                    {amount} $
-                  </button>
-                ))}
+          <div className={styles.content}>
+            <div className={styles.container}>
+              <div className={styles.title_container}>
+                <h4>1. Введите ник</h4>
               </div>
-              <div className={styles.finish}>
-                <input
-                  type="number"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  placeholder="Не менее 1 $"
-                />
+              <div className={styles.info}>
+                <div className={styles.inputs}>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Ник игрока"
+                  />
+                  <p>
+                    Можно написать ник другого игрока — тогда покупка придёт к
+                    нему на аккаунт. Поздравь и порадуй друга или подругу :)
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className={styles.container}>
-            <div className={styles.title_container}>
-              <h4>Оплата</h4>
+            <div className={styles.container}>
+              <div className={styles.title_container}>
+                <h4>2. Выберите сумму</h4>
+              </div>
+              <div className={styles.values}>
+                <div className={styles.value}>
+                  {[2.5, 5, 10, 25, 50].map((amount) => (
+                    <button
+                      key={amount}
+                      onClick={() => setValue(String(amount))}
+                    >
+                      {amount} $
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.finish}>
+                  <input
+                    type="number"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    placeholder="Не менее 1 $"
+                  />
+                  <div className={styles.dollar}>$</div>
+                </div>
+              </div>
             </div>
-            <div className={styles.pay}>
-              <Elements stripe={stripePromise}>
-                <PaymentForm value={value} session={session} name={name} />
-              </Elements>
+
+            <div className={styles.container}>
+              <div className={styles.title_container}>
+                <h4>3. Оплата</h4>
+              </div>
+              <div className={styles.pay}>
+                <Elements stripe={stripePromise}>
+                  <PaymentForm value={value} session={session} name={name} />
+                </Elements>
+              </div>
             </div>
           </div>
         </div>
