@@ -143,7 +143,7 @@ export const Buy: React.FC<BuyProps> = ({
                       setDataToBuy({
                         days: 30,
                         price: Number(
-                          Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(0)
+                          Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(1)
                         ),
                       });
                     }}
@@ -152,7 +152,7 @@ export const Buy: React.FC<BuyProps> = ({
                       <span>Купить на 30 дней.</span>
                       <p id="price30">
                         за{" "}
-                        {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(0)}
+                        {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(1)}
                         $ / мес.
                       </p>
                     </div>
@@ -166,7 +166,7 @@ export const Buy: React.FC<BuyProps> = ({
                         price: Number(
                           (
                             Number(priceStatus.replace(/[^\d.]/g, "")) * 2.4
-                          ).toFixed(0)
+                          ).toFixed(1)
                         ),
                       });
                     }}
@@ -177,7 +177,7 @@ export const Buy: React.FC<BuyProps> = ({
                         за{" "}
                         {(
                           Number(priceStatus.replace(/[^\d.]/g, "")) * 2.4
-                        ).toFixed(0)}
+                        ).toFixed(1)}
                         $ / 3 мес.
                       </p>
                     </div>
@@ -190,7 +190,7 @@ export const Buy: React.FC<BuyProps> = ({
                 <div className={styles.continue_to_buy}>
                   <div className={styles.question}>
                     <span>Действительно купить на {dataToBuy.days} дней</span>
-                    <p>за {dataToBuy.price}$ / мес?</p>
+                    <p>за {dataToBuy.price}$ ?</p>
                   </div>
                   <div className={styles.buttons}>
                     <button
