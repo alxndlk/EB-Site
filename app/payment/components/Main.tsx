@@ -131,7 +131,7 @@ const PaymentForm = ({ value, session, name }) => {
 
 export const Main = () => {
   const { data: session } = useSession();
-  const [value, setValue] = useState("200");
+  const [value, setValue] = useState("2,5");
   const [name, setName] = useState(session?.user?.name || "");
   const [error, setError] = useState<string | null>(null);
 
