@@ -188,7 +188,7 @@ export const Main = () => {
             </div>
             <div className={styles.values}>
               <div className={styles.value}>
-                {[100, 200, 400, 700, 1000].map((amount) => (
+                {[2.5, 5, 10, 25, 50].map((amount) => (
                   <button key={amount} onClick={() => setValue(String(amount))}>
                     {amount} $
                   </button>

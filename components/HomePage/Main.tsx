@@ -308,12 +308,6 @@ export const Main = () => {
                     </div>
                     <p>Процессор</p>
                   </div>
-                  <div className={styles.circle_container}>
-                    <div className={styles.circle}>
-                      <div className={styles.circleBlock}>3-6 ГБ</div>
-                    </div>
-                    <p>Видеокарта</p>
-                  </div>
                 </div>
               </div>
             </div>
