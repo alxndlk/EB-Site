@@ -26,11 +26,11 @@ export async function POST(req: NextRequest) {
     try {
       paymentIntent = await stripe.paymentIntents.create({
         amount: Number(amount) * 100,
-        currency: "rub",
+        currency: "usd",
         payment_method: paymentMethodId,
         confirm: true,
         receipt_email: email,
-        return_url: "https://epohablokov/",
+        return_url: "https://epohablokov.com",
       });
     } catch (stripeError: any) {
       console.error("Ошибка Stripe:", stripeError);

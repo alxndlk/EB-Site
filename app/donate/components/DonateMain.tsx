@@ -113,35 +113,35 @@ export const DonateMain = () => {
                   text="Vip"
                   background="bg_0"
                   border=""
-                  price="99₽"
+                  price="0.99$"
                 />
                 <TableTitle
                   src="/premium_picture.png"
                   text="Premium"
                   background="bg_1"
                   border=""
-                  price="299₽"
+                  price="2.99$"
                 />
                 <TableTitle
                   src="/deluxe_picture.png"
                   text="Deluxe"
                   background="bg_2"
                   border=""
-                  price="499₽"
+                  price="4.99$"
                 />
                 <TableTitle
                   src="/ultra_picture.png"
                   text="ULTRA"
                   background="bg_3"
                   border="border_ultra"
-                  price="999₽"
+                  price="9.99$"
                 />
                 <TableTitle
                   src="/legend_picture.png"
                   text="LEGEND"
                   background="bg_4"
                   border="border_legend"
-                  price="1499₽"
+                  price="14.99$"
                 />
               </div>
             </div>

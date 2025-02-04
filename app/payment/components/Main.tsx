@@ -51,8 +51,8 @@ const PaymentForm = ({ value, session, name }) => {
       return;
     }
 
-    if (Number(value) < 65) {
-      setMessage({ text: "Минимальная сумма пополнения 65 ₽", type: "error" });
+    if (Number(value) < 1) {
+      setMessage({ text: "Минимальная сумма пополнения 1$", type: "error" });
       return;
     }
 
@@ -138,7 +138,7 @@ export const Main = () => {
   const validateForm = () => {
     setError(null);
     if (Number(value) < 65) {
-      setError("Ошибка: Минимальная сумма пополнения 65 ₽");
+      setError("Ошибка: Минимальная сумма пополнения 1$");
       return false;
     }
     if (!name) {
@@ -190,7 +190,7 @@ export const Main = () => {
               <div className={styles.value}>
                 {[100, 200, 400, 700, 1000].map((amount) => (
                   <button key={amount} onClick={() => setValue(String(amount))}>
-                    {amount} ₽
+                    {amount} $
                   </button>
                 ))}
               </div>
@@ -199,7 +199,7 @@ export const Main = () => {
                   type="number"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  placeholder="Не менее 65 ₽"
+                  placeholder="Не менее 1 $"
                 />
               </div>
             </div>

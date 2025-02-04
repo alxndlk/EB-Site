@@ -87,7 +87,7 @@ export const Option = ({
                 style: "decimal",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })} ₽`}</div>
+              })} $`}</div>
             )}
             {role && userData?.role && (
               <div
