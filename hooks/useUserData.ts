@@ -23,7 +23,7 @@ export const useUserData = () => {
     } else {
       console.error("Ошибка при получении данных пользователя");
     }
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     fetchUserData();

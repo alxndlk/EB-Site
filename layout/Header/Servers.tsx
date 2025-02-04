@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Servers.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaUser } from "react-icons/fa";
 
 interface ServersProps {
   onClose: () => void;
@@ -33,14 +34,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
       .catch((err) => {
         console.error("Ошибка:", err);
       });
-  }, [serverData]);
-
-  const getPlayerCountLabel = (count: number) => {
-    if (count === 1) return "ИГРОК";
-    if (count >= 2 && count <= 4) return "ИГРОКА";
-    if (count >= 5) return "ИГРОКОВ";
-    return "ИГРОКОВ";
-  };
+  }, []);
 
   const router = useRouter();
 
@@ -81,10 +75,9 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
                 <span className={styles.mTitle}>
                   Погрузись в мир сложных технологий!
                 </span>
-                <p>
-                  НА СЕРВЕРЕ {serverData?.players.online}{" "}
-                  {getPlayerCountLabel(serverData?.players.online)}
-                </p>
+                <div className={styles.online_container}>
+                  {serverData?.players.online} <FaUser />
+                </div>
               </div>
             </div>
           </div>

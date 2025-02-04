@@ -59,6 +59,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  
 }
 
 .shadow {
@@ -84,24 +85,14 @@
 
 .content h4 {
   z-index: 9999;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 700;
 }
 
-.holder p {
-  z-index: 9999;
-  font-size: 20px;
-  font-weight: 600;
-  background-color: white;
-  color: #000;
-  width: max-content;
-  padding: 0 12px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border-radius: 6px;
-  margin-top: 1rem;
+.content span {
+  font-size: 24px;
+  font-weight: 600 ;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .content,
@@ -190,6 +181,7 @@
   font-size: 32px;
   font-weight: 600;
   z-index: 9999;
+  color: rgb(255 255 255 / 60%);
 }
 
 .mTitle {
@@ -202,6 +194,12 @@
   display: flex;
   flex-direction: column;
   width: max-content;
+}
+
+.holder p {
+  font-size: 24px;
+  font-weight: 600;
+  z-index: 9999;
 }
 
 .image {
@@ -281,4 +279,32 @@
     padding: 2rem;
     height: auto;
   }
+}
+
+.online_container {
+  z-index: 999;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 20px;
+  position: absolute;
+  color: rgb(255 255 255 / 60%);
+  display: flex;
+  line-height: 26px;
+  transition: 0.1s ease;
+  outline: 0;
+  font-weight: 600;
+  top: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  width: max-content;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(0, 0, 0, 60%);
+  box-shadow: 0 20px 40px #0009;
+}
+
+.online_container:hover {
+  color: #fff;
 }
