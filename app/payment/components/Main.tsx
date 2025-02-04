@@ -10,7 +10,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckIcon } from "lucide-react";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -149,7 +149,7 @@ const PaymentForm = ({ value, session, name }) => {
         </div>
       )}
 
-      {!error.text && !warning.text && (
+      {!error.text && !warning.text && !success.text && (
         <div className={styles.button} onClick={handleUpdateBalance}>
           <span>Продолжить</span>
           <ArrowRight className={styles.ArrowRight} />
@@ -160,6 +160,13 @@ const PaymentForm = ({ value, session, name }) => {
         <div className={`${styles.button} ${styles.warning_button}`}>
           <span>Ожидание подтверждения</span>
           <ArrowRight className={styles.ArrowRight} />
+        </div>
+      )}
+
+      {success.text && (
+        <div className={`${styles.button} ${styles.warning_button}`}>
+          <span>Платеж прошел успешно</span>
+          <CheckIcon className={styles.ArrowRight} />
         </div>
       )}
     </>
