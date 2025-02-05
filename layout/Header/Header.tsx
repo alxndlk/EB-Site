@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
       {showServers && <Servers onClose={closeServers} />}
       <div className={styles.serverOpenDate}>
         <div className={styles.serverOpenContainer}>
-          Открытие сервера уже 14 января!
+          Открытие сервера уже 14 февраля!
         </div>
       </div>
     </header>
