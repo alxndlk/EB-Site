@@ -9,12 +9,14 @@ import { useSession } from "next-auth/react";
 import { useUserData } from "@/hooks/useUserData";
 import { Menu } from "./Menu";
 import { Servers } from "./Servers";
+import { XIcon } from "lucide-react";
 
 export const Header: React.FC = () => {
   const { data: session } = useSession();
   const { userData } = useUserData();
   const [scrolled, setScrolled] = useState(false);
   const [showServers, setShowServers] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,11 +74,20 @@ export const Header: React.FC = () => {
         </ul>
       </div>
       {showServers && <Servers onClose={closeServers} />}
-      <div className={styles.serverOpenDate}>
-        <div className={styles.serverOpenContainer}>
-          Открытие сервера уже c 14 февраля! 🥳
+      {isVisible && (
+        <div className={styles.serverOpenDate}>
+          <div className={styles.serverOpenContainer}>
+            <div className={styles.xicon_holder}>
+              <XIcon
+                size={12}
+                onClick={() => setIsVisible(false)}
+                className={styles.xicon}
+              />
+            </div>
+            Открытие сервера уже c 14 февраля! 🥳
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };

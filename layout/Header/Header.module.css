@@ -360,5 +360,26 @@
 .serverOpenContainer {
   max-width: 1200px;
   width: 100%;
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: left;
+  gap: 10px;
+}
+
+.xicon {
+  cursor: pointer;
+}
+
+.xicon_holder {
+  background-color: rgba(255, 255, 255, 12%);
+  border: 1px solid rgba(255, 255, 255, 12%);
+  border-radius: 50%;
+  padding: 4px;
+  transition: 0.1s ease;
+}
+
+.xicon_holder:hover {
+  scale: 105%;
 }
