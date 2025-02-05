@@ -23,10 +23,33 @@ async function checkServerAvailability() {
 
   try {
     await rcon.connect();
-    await rcon.send("ping"); // Проверка доступности сервера
+    await rcon.send("ping");
+    await rcon.end();
     return true;
   } catch (err) {
     console.error("Не удалось подключиться к серверу RCON:", err);
+    return false;
+  }
+}
+
+async function checkPlayerOnline(userName: string): Promise<boolean> {
+  const rcon = new Rcon({
+    host: "65.21.216.251",
+    port: 25842,
+    password: "1234",
+  });
+  try {
+    await rcon.connect();
+    const listResult = await rcon.send("list");
+    await rcon.end();
+    
+    if (listResult.toLowerCase().includes(userName.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.error("Ошибка при проверке онлайн-статуса игрока:", err);
     return false;
   }
 }
@@ -63,6 +86,15 @@ export async function POST(req: Request) {
       RCON_PASSSWORD,
     } = await req.json();
 
+    // Проверяем, есть ли пользователь на сервере
+    const isPlayerOnline = await checkPlayerOnline(userName);
+    if (!isPlayerOnline) {
+      return NextResponse.json(
+        { error: "Игрок не найден на сервере" },
+        { status: 400 }
+      );
+    }
+
     const user = await User.findOne({ name: userName });
 
     if (!user) {
@@ -84,12 +116,10 @@ export async function POST(req: Request) {
     const currentDate = new Date();
     let expirationDate: Date;
 
-    // Если роль уже такая же, то просто увеличиваем срок
     if (user.role === status && user.roleExpiresAt) {
       expirationDate = new Date(user.roleExpiresAt);
       expirationDate.setDate(expirationDate.getDate() + daysToBuy);
     } else {
-      // Если роль меняется, то назначаем новую дату
       expirationDate = new Date();
       expirationDate.setDate(currentDate.getDate() + daysToBuy);
     }
@@ -102,7 +132,9 @@ export async function POST(req: Request) {
       },
       { new: true, upsert: true }
     );
+
     if (result) {
+      // Выполняем дополнительные действия через RCON, если пользователь успешно обновлён
       const rcon = new Rcon({
         host: "65.21.216.251",
         port: 25842,
@@ -114,6 +146,7 @@ export async function POST(req: Request) {
       await rcon.send(
         `msg ${userName} Спасибо за покупку! Ваша роль ${status} активирована на ${daysToBuy} дней.`
       );
+      await rcon.end();
     }
 
     if (!result) {
