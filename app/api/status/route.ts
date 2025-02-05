@@ -86,7 +86,6 @@ export async function POST(req: Request) {
       RCON_PASSSWORD,
     } = await req.json();
 
-    // Проверяем, есть ли пользователь на сервере
     const isPlayerOnline = await checkPlayerOnline(userName);
     if (!isPlayerOnline) {
       return NextResponse.json(

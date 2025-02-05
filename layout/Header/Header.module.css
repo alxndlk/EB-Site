@@ -337,3 +337,28 @@
     display: none;
   }
 }
+
+.serverOpenDate {
+  position: absolute;
+  width: 100vw;
+  left: 0;
+  top: 70px;
+  align-items: center;
+  text-align: left;
+  justify-content: center;
+  display: flex;
+  padding: 2rem;
+  gap: 24px;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgba(0,230,119,0.5) 0%, rgba(255,201,44,0) 50%) 1;
+  background: linear-gradient(90deg, rgba(0,230,119,0.5) 0%, rgba(255,201,44,0) 50%);
+  z-index: 0;
+}
+
+.serverOpenContainer {
+  max-width: 1200px;
+  width: 100%;
+  
+}
