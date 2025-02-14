@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import ReusableIcon from "./ReusableIcon";
 import styles from "./DonateMain.module.css";
 import { EyeOpenIcon } from "@radix-ui/react-icons";
-import { XIcon } from "lucide-react";
 
 interface IStatus {
   text: string;

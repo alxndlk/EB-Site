@@ -150,7 +150,7 @@ export const DonateMain = () => {
                 text="Кит набор Vip"
                 icons={["check", "check", "check", "check", "check"]}
                 kit={true}
-                src="/Home/1.png"
+                src="/vip_kit.png"
               />
               <Status
                 text="Кит набор Premium"
