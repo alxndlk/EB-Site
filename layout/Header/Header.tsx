@@ -73,6 +73,7 @@ export const Header: React.FC = () => {
           </li>
         </ul>
       </div>
+
       {showServers && <Servers onClose={closeServers} />}
       {/* {isVisible && (
         <div className={styles.serverOpenDate}>
