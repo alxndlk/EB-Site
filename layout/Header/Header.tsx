@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
         </ul>
       </div>
       {showServers && <Servers onClose={closeServers} />}
-      {isVisible && (
+      {/* {isVisible && (
         <div className={styles.serverOpenDate}>
           <div className={styles.serverOpenContainer}>
             <div className={styles.xicon_holder}>
@@ -87,7 +87,7 @@ export const Header: React.FC = () => {
             Открытие сервера уже c 14 февраля! 🥳
           </div>
         </div>
-      )}
+      )} */}
     </header>
   );
 };
