@@ -31,6 +31,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
       .then((data) => {
         setServerData(data);
       })
+
       .catch((err) => {
         console.error("Error:", err);
       });
