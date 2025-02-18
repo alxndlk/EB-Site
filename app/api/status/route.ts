@@ -16,9 +16,9 @@ const rolesHierarchy: Record<string, number> = {
 
 async function checkServerAvailability() {
   const rcon = new Rcon({
-    host: "65.21.216.251",
-    port: 25842,
-    password: "1234",
+    host: process.env.RCON_HOST,
+    port: Number(process.env.RCON_PORT),
+    password: process.env.RCON_PASSWORD,
   });
 
   try {
@@ -42,7 +42,7 @@ async function checkPlayerOnline(userName: string): Promise<boolean> {
     await rcon.connect();
     const listResult = await rcon.send("list");
     await rcon.end();
-    
+
     if (listResult.toLowerCase().includes(userName.toLowerCase())) {
       return true;
     } else {
@@ -135,9 +135,9 @@ export async function POST(req: Request) {
     if (result) {
       // Выполняем дополнительные действия через RCON, если пользователь успешно обновлён
       const rcon = new Rcon({
-        host: "65.21.216.251",
-        port: 25842,
-        password: "1234",
+        host: process.env.RCON_HOST,
+        port: Number(process.env.RCON_PORT),
+        password: process.env.RCON_PASSWORD,
       });
 
       await rcon.connect();
