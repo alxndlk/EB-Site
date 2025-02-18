@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const serverAddress = "z13.joinserver.xyz:25985";
+  const serverAddress = "ip207.ip-54-38-48.eu:25590";
   const apiUrl = `https://api.mcstatus.io/v2/status/java/${serverAddress}?query=true&timeout=5.0`;
 
   try {
