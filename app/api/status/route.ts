@@ -34,9 +34,9 @@ async function checkServerAvailability() {
 
 async function checkPlayerOnline(userName: string): Promise<boolean> {
   const rcon = new Rcon({
-    host: "65.21.216.251",
-    port: 25842,
-    password: "1234",
+    host: process.env.RCON_HOST,
+    port: Number(process.env.RCON_HOST),
+    password: process.env.RCON_PASSWORD,
   });
   try {
     await rcon.connect();

@@ -5,7 +5,7 @@ export async function GET() {
   const apiUrl = `https://api.mcstatus.io/v2/status/java/${serverAddress}?query=true&timeout=5.0`;
 
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrl, { next: { revalidate: 60 } });
     if (!response.ok) throw new Error("Ошибка получения данных");
 
     const data = await response.json();
