@@ -34,7 +34,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
       .catch((err) => {
         console.error("Ошибка:", err);
       });
-  }, []);
+  }, [serverData]);
 
   const router = useRouter();
 
