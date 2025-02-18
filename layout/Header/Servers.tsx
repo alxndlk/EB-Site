@@ -32,7 +32,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
         setServerData(data);
       })
       .catch((err) => {
-        console.error("Ошибка:", err);
+        console.error("Error:", err);
       });
   }, [serverData]);
 
