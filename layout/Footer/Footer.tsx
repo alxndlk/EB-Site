@@ -55,7 +55,9 @@ export const Footer = () => {
         <div className={styles.content}>
           <h4>Разное</h4>
           <div className="flex flex-col">
-            <Link href="">Работа у нас</Link>
+            <Link target="_blank" href="https://t.me/alxndlk">
+              Работа у нас
+            </Link>
           </div>
         </div>
         <div className={`${styles.content}`}>
@@ -71,10 +73,26 @@ export const Footer = () => {
       </div>
       <div className={styles.paragraphs}>
         <p>© 2024 Эпоха Блоков. Все права защищены.</p>
-        <p>
-          NOT OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH
-          MOJANG SYNERGIES AB.
-        </p>
+        <div className={styles.kassa}>
+          <p>
+            NOT OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH
+            MOJANG SYNERGIES AB.
+          </p>
+          <a
+            href="https://freekassa.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="https://cdn.freekassa.net/banners/small-dark-1.png"
+              title="Прием платежей на сайте"
+              width={85}
+              quality={100}
+              height={30}
+              alt="freekassa"
+            />
+          </a>
+        </div>
       </div>
     </footer>
   );

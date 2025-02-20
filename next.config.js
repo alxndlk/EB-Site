@@ -6,4 +6,12 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.freekassa.net",
+      },
+    ],
+  },
 };

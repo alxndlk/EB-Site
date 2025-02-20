@@ -69,6 +69,15 @@
   max-width: 200px;
 }
 
+.kassa {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
 .content a:hover {
   color: #ededed;
 }
