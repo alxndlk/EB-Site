@@ -7,9 +7,10 @@ export const Navbar = ({ toggleServers }: { toggleServers: () => void }) => {
 
   const navigation = [
     { id: 1, title: "Сервера", path: null },
-    { id: 2, title: "Донат", path: "/donate", target: "_self" },
+    { id: 2, title: "Правила", path: "/rules", target: "_blank" },
+    { id: 3, title: "Донат", path: "/donate", target: "_self" },
     {
-      id: 3,
+      id: 4,
       title: "Дискорд",
       path: "https://discord.gg/gQxQNpYjmy",
       target: "_blank",

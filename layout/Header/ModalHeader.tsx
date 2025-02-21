@@ -52,6 +52,12 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
             <ChevronRight size={16} />
           </li>
           <li>
+            <Link href="/rules" target="_self">
+              Правила
+            </Link>
+            <ChevronRight size={16} />
+          </li>
+          <li>
             <Link href="/donate">Донат</Link>
             <ChevronRight size={16} />
           </li>

@@ -1,0 +1,243 @@
+.MainRules {
+  display: flex;
+  padding-top: calc(70px + 2rem);
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.line {
+  background: rgb(6, 182, 212);
+  background: linear-gradient(
+    199deg,
+    rgba(6, 182, 212, 0) 0%,
+    rgb(255, 89, 111) 50%,
+    rgba(74, 222, 128, 0) 100%
+  );
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.radial {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #ff005583 0%,
+    rgba(171, 171, 171, 0) 100%
+  );
+  border-radius: 8px;
+  bottom: -430px;
+  flex: none;
+  height: 730px;
+  left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
+  max-width: 1800px;
+  opacity: 0.4;
+  pointer-events: none;
+  overflow: hidden;
+  position: absolute;
+  width: 1440px;
+  z-index: 2;
+}
+
+.mainContainer {
+  width: 100%;
+  height: 100%;
+  border-radius: 60px 60px 0px 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.title h4 {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 60px;
+  background: linear-gradient(
+    45deg,
+    hsl(0deg 0% 0% / 70%) 15%,
+    hsl(0deg 0% 0% / 20%) 85%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  text-align: left;
+  text-wrap: balance;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  justify-content: left;
+  align-items: left;
+  background: linear-gradient(
+    45deg,
+    hsl(0deg 0% 0% / 70%) 15%,
+    hsl(0deg 0% 0% / 20%) 85%
+  );
+  background-color: rgb(158, 158, 158);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px #0009;
+  overflow: hidden;
+  position: relative;
+  padding: 45px 60px;
+}
+
+.title p {
+  font-size: 20px;
+  color: rgb(255 255 255 / 60%);
+  text-wrap: balance;
+  background: linear-gradient(
+    45deg,
+    hsl(0deg 0% 0% / 70%) 15%,
+    hsl(0deg 0% 0% / 20%) 85%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.holder_content {
+  background-color: white;
+  border-radius: 16px;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  max-width: 880px;
+  width: 100%;
+  padding: 40px;
+  transition: 0.1s ease;
+  align-items: left;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  box-shadow: 0 10px 20px #00010a26;
+  animation: Buy_moveUp__qKJT6 0.3s ease;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: min-content;
+  padding: 30px 45px;
+  gap: 40px;
+  text-align: left;
+  border-radius: 16px;
+  background-color: #000;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px #0009;
+}
+
+.title_container {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputs p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ban {
+  font-size: 14px;
+  color: rgb(255, 0, 0);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .title h4 {
+    font-size: 36px;
+    line-height: 1.2em;
+    text-wrap: wrap;
+  }
+
+  .title p {
+    font-size: 16px;
+    max-width: 100%;
+    text-wrap: wrap;
+  }
+}
+@media (max-width: 540px) {
+  .mainContainer {
+    padding: 0px;
+  }
+
+  .value {
+    flex-direction: column;
+  }
+  .card {
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .holder_content {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .title {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .inputs input {
+    width: 100%;
+  }
+
+  .button {
+    padding: 20px;
+    font-size: 10px !important;
+    height: auto;
+  }
+
+  .button span {
+    font-size: 20px;
+  }
+  .ArrowRight {
+    width: 24px;
+  }
+}
