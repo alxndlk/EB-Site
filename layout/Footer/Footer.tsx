@@ -26,9 +26,12 @@ export const Footer = () => {
           <h4>Ресурсы</h4>
           <div className="flex flex-col">
             <Link href="">Серверы</Link>
-            <Link href="">Обновления</Link>
-            <Link href="">Донат</Link>
-            <Link href="">Дискорд</Link>
+            <Link href="/donate" target="_blank">
+              Донат
+            </Link>
+            <Link href="/rules" target="_blank">
+              Правила
+            </Link>
           </div>
         </div>
         <div className={styles.content}>

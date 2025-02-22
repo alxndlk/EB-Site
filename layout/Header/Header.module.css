@@ -352,8 +352,17 @@
   padding: 0.5rem 1rem;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  border-image: linear-gradient(90deg, rgba(0,230,119,0.5) 0%, rgba(255,201,44,0) 50%) 1;
-  background: linear-gradient(90deg, rgba(0,230,119,0.5) 0%, rgba(255,201,44,0) 50%);
+  border-image: linear-gradient(
+      90deg,
+      rgba(0, 230, 119, 0.5) 0%,
+      rgba(255, 201, 44, 0) 50%
+    )
+    1;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 230, 119, 0.5) 0%,
+    rgba(255, 201, 44, 0) 50%
+  );
   z-index: 0;
 }
 
@@ -382,4 +391,36 @@
 
 .xicon_holder:hover {
   scale: 105%;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 12%);
+  flex-direction: column;
+  margin-top: 2.8rem;
+  padding: 12px 20px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  min-width: 150px;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 12%);
+  transition: 0.1s ease;
+  backdrop-filter: blur(10px) saturate(180%);
+}
+
+.dropdown_item {
+  font-size: 14px !important;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  transition: 0.1s ease;
+}
+
+.dropdown_item:hover {
+  color: #fff !important;
 }

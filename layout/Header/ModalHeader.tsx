@@ -67,6 +67,30 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
             </Link>
             <ChevronRight size={16} />
           </li>
+          <li>
+            <Link href="https://t.me/+vO9cZ8FtLD85YmYy" target="__blank">
+              Телеграм канал
+            </Link>
+            <ChevronRight size={16} />
+          </li>
+          <li>
+            <Link href="https://www.youtube.com/@epohablokov" target="__blank">
+              YouTube
+            </Link>
+            <ChevronRight size={16} />
+          </li>
+          <li>
+            <Link href="https://www.tiktok.com/@epohablokov" target="__blank">
+              TikTok
+            </Link>
+            <ChevronRight size={16} />
+          </li>
+          <li>
+            <Link href="https://t.me/alxndlk" target="__blank">
+              Админстрация
+            </Link>
+            <ChevronRight size={16} />
+          </li>
         </div>
 
         <div className={styles.image_header}>
