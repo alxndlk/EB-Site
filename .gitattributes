@@ -1,0 +1,2 @@
+bellsoft-jdk21-windows-x32.zip filter=lfs diff=lfs merge=lfs -text
+bellsoft-jdk21-windows-x64.zip filter=lfs diff=lfs merge=lfs -text
