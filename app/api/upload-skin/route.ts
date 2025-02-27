@@ -1,53 +1,66 @@
 import { NextResponse } from "next/server";
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
-export async function POST(req: Request) {
+const s3Client = new S3Client({
+  region: process.env.AWS_S3_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+});
+
+async function uploadFileToS3(file, fileName, bucketName) {
+  const fileBuffer = file;
+  console.log(fileName);
+
+  const params = {
+    Bucket: bucketName,
+    Key: fileName,
+    Body: fileBuffer,
+    ContentType: "image/png",
+  };
+
+  const command = new PutObjectCommand(params);
+  await s3Client.send(command);
+  return fileName;
+}
+
+export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions);
+    const formData = await request.formData();
+    const skinFile = formData.get("skin");
+    const cloakFile = formData.get("cloak");
 
-    if (!session || !session.user) {
+    if (!skinFile) {
       return NextResponse.json(
-        { error: "Неавторизованный доступ" },
-        { status: 401 }
-      );
-    }
-
-    await connectMongoDB();
-
-    const { skin } = await req.json();
-
-    if (!skin || typeof skin !== "string") {
-      return NextResponse.json(
-        { error: "Скин не предоставлен или имеет неверный формат" },
+        { error: "Skin file is required." },
         { status: 400 }
       );
     }
 
-    const result = await User.findOneAndUpdate(
-      { email: session.user.email },
-      { $set: { skin } },
-      { new: true, upsert: true }
+    const skinBuffer = Buffer.from(await skinFile.arrayBuffer());
+    const skinFileName = await uploadFileToS3(
+      skinBuffer,
+      skinFile.name,
+      process.env.AWS_S3_SKINS_BUCKET_NAME
     );
 
-    if (!result) {
-      return NextResponse.json(
-        { error: "Ошибка при обновлении данных" },
-        { status: 500 }
+    let cloakFileName = null;
+    if (cloakFile) {
+      const cloakBuffer = Buffer.from(await cloakFile.arrayBuffer());
+      cloakFileName = await uploadFileToS3(
+        cloakBuffer,
+        cloakFile.name,
+        process.env.AWS_S3_CLOAKS_BUCKET_NAME
       );
     }
 
-    return NextResponse.json(
-      { message: "Скин успешно загружен!" },
-      { status: 200 }
-    );
+    return NextResponse.json({
+      success: true,
+      skinFileName: skinFileName,
+      cloakFileName: cloakFileName,
+    });
   } catch (error) {
-    console.error("Ошибка при загрузке скина:", error);
-    return NextResponse.json(
-      { error: "Внутренняя ошибка сервера" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message || "Произошла ошибка" });
   }
 }

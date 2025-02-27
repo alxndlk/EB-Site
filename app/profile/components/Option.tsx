@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUserData } from "@/hooks/useUserData";
 import styles from "./Option.module.css";
 import { InputActive } from "@/app/ui/input";

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
+import { query } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
@@ -8,18 +7,19 @@ export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session || !session.user) {
+    if (!session?.user) {
       return NextResponse.json(
         { error: "Неавторизованный доступ" },
         { status: 401 }
       );
     }
 
-    await connectMongoDB();
+    const rows: any[] = await query(
+      "SELECT balance, uuid FROM users WHERE email = ?",
+      [session.user.email]
+    );
 
-    const user = await User.findOne({ email: session.user.email });
-
-    if (!user) {
+    if (rows.length === 0) {
       return NextResponse.json(
         { error: "Пользователь не найден" },
         { status: 404 }
@@ -27,11 +27,8 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({
-      balance: user.balance,
-      role: user.role,
-      skin: user.skin,
-      active: user.active,
-      roleExpiresAt: user.roleExpiresAt,
+      balance: rows[0].balance,
+      uuid: rows[0].uuid,
     });
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);

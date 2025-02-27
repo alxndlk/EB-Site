@@ -12,6 +12,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { ArrowRight, CheckIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -134,10 +135,18 @@ const PaymentForm = ({ value, session, name }) => {
           },
         }}
       />
+      <div className={styles.images}>
+        <Image src="/visa.png" height={25} width={50} alt="visa" />
+        <Image src="/mastercard.png" height={25} width={50} alt="visa" />
+      </div>
+
       <p className={styles.pay_paragraph}>
-        Транзакция происходит в долларах. Некоторые карты могут не принимать эти
-        платежи или будут требовать подтверждение. В случае ошибки, пишите в
-        поддержку.
+        UAH, KZT, EUR, DOL. Транзакция происходит в долларах. Некоторые карты
+        могут не принимать эти платежи или потребовать подтверждение. Доступно
+        для всех стран, кроме PБ и РФ. Для оплаты в рублях пишите лично в {""}
+        <Link href="https://t.me/alxndlk" className={styles.link}>
+          Telegram.
+        </Link>
       </p>
 
       {error.text && (

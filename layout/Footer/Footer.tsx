@@ -81,20 +81,6 @@ export const Footer = () => {
             NOT OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH
             MOJANG SYNERGIES AB.
           </p>
-          <a
-            href="https://freekassa.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="https://cdn.freekassa.net/banners/small-dark-1.png"
-              title="Прием платежей на сайте"
-              width={85}
-              quality={100}
-              height={30}
-              alt="freekassa"
-            />
-          </a>
         </div>
       </div>
     </footer>

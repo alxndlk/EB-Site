@@ -38,7 +38,10 @@ export const Main = () => {
       return true;
     } else {
       setNameIcon(false);
-      setMessage({ text: "Не менее 3 символов", type: "error" });
+      setMessage({
+        text: "Ник: > 3 символов, латиница, без спец. символов.",
+        type: "error",
+      });
       return false;
     }
   };
@@ -126,7 +129,10 @@ export const Main = () => {
       }
     } catch (error) {
       console.error("Ошибка при регистрации: ", error);
-      setMessage({ text: "Произошла ошибка при регистрации", type: "error" });
+      setMessage({
+        text: "Пользователь с таким email уже существует",
+        type: "error",
+      });
     } finally {
       setButtonText("Создать аккаунт");
     }
@@ -177,7 +183,6 @@ export const Main = () => {
                     <p>
                       Никнейм{""}
                       {""}
-                      <span>(только латиница)</span>
                     </p>
                     <InputActive
                       placeholder="Мой ник"
