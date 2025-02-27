@@ -1,16 +1,16 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import connectMongoDB from "@/lib";
-import User from "@/models/user";
 import bcrypt from "bcrypt";
+import { query } from "@/lib/db"; // Используем query() для выполнения запросов
 
 interface UserType {
-  _id: string;
-  name: string;
+  uuid: string;
+  username: string;
   email: string;
   password: string;
-  role: string;
   balance: number;
+  created_at: Date;
+  created_ip: string;
 }
 
 export const authOptions: AuthOptions = {
@@ -21,9 +21,7 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(
-        credentials: Record<"email" | "password", string> | undefined
-      ) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Отсутствуют учетные данные");
         }
@@ -31,14 +29,19 @@ export const authOptions: AuthOptions = {
         const { email, password } = credentials;
 
         try {
-          await connectMongoDB();
+          // Выполняем запрос через query()
+          const rows: any[] = await query(
+            "SELECT * FROM users WHERE email = ?",
+            [email]
+          );
 
-          const user = await User.findOne<UserType>({ email });
-
-          if (!user) {
+          if (rows.length === 0) {
             throw new Error("Пользователь не найден");
           }
 
+          const user = rows[0] as UserType;
+
+          // Сравниваем пароли
           const passwordsMatch = await bcrypt.compare(password, user.password);
 
           if (!passwordsMatch) {
@@ -46,18 +49,13 @@ export const authOptions: AuthOptions = {
           }
 
           return {
-            id: user._id.toString(),
-            name: user.name,
+            id: user.uuid,
+            name: user.username,
             email: user.email,
-            role: user.role,
             balance: user.balance,
           };
         } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.error("Ошибка авторизации:", error.message);
-            throw new Error(error.message);
-          }
-          console.error("Неизвестная ошибка авторизации");
+          console.error("Ошибка авторизации:", error);
           throw new Error("Не удалось выполнить авторизацию");
         }
       },

@@ -3,10 +3,7 @@ import { useSession } from "next-auth/react";
 
 interface UserData {
   balance: number;
-  role: string;
-  skin: string;
-  active: boolean;
-  roleExpiresAt: Date;
+  uuid: string;
 }
 
 export const useUserData = () => {

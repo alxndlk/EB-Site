@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import React, { useState, useEffect } from "react";
 
 import styles from "./Main.module.css";
 
@@ -9,24 +8,11 @@ import SkinViewerComponent from "./skinViewer";
 import { Option } from "./Option";
 import { SkinUploader } from "./skinChange";
 import { useRouter } from "next/navigation";
-import { useUserData } from "@/hooks/useUserData";
 
 export const Main = () => {
   const { data: session } = useSession();
 
   const router = useRouter();
-  const { userData } = useUserData();
-  const [isDonated, setIsDonated] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (userData?.role !== "default") {
-      const expirationDate = userData?.roleExpiresAt;
-      const parsedDate = new Date(expirationDate);
-
-      // Если дата валидна, устанавливаем ее, иначе null
-      setIsDonated(isNaN(parsedDate.getTime()) ? null : parsedDate);
-    }
-  }, [userData]);
 
   return (
     <main className={styles.profile}>
@@ -53,19 +39,6 @@ export const Main = () => {
               status="feature"
               onClick={() => {
                 router.push("/payment");
-              }}
-            />
-            <Option
-              title="Донат-статус"
-              topTitle="При покупке донат-статуса Вам станут доступны новые возможности во время игры в зависимости от самого донат-статуса."
-              value="Текущий статус:"
-              date={isDonated}
-              bottomTitle="Донат-статус применяется на все сервера."
-              button="Улучшить"
-              status="feature"
-              role={true}
-              onClick={() => {
-                router.push("/donate");
               }}
             />
             <Option

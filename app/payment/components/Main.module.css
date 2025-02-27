@@ -490,3 +490,27 @@
     width: 24px;
   }
 }
+
+.link {
+  color: #06c;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.cardHolder {
+  display: flex;
+}
+
+.images {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding-top: 10px;
+}

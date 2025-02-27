@@ -3,44 +3,68 @@
 import { useState, useRef } from "react";
 import { UploadCloudIcon } from "lucide-react";
 import styles from "./Main.module.css";
-import { useSession } from "next-auth/react";
 import { ThreeDots } from "react-loader-spinner";
+import { useUserData } from "@/hooks/useUserData";
 
 export const SkinUploader: React.FC = () => {
-  const { data: session } = useSession();
   const [fileInfo, setFileInfo] = useState<{
     name: string;
     size: string;
-    data?: string;
   } | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [message, setMessage] = useState<{
-    text: string | null;
-    type: "success" | "error" | null;
-  }>({
-    text: null,
-    type: null,
-  });
+
+  const [cloakInfo, setCloakInfo] = useState<{
+    name: string;
+    size: string;
+  } | null>(null);
+
+  const [file, setFile] = useState<File | null>(null);
+  const [cloak, setCloak] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { userData } = useUserData();
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const cloakRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const sizeInKB = (file.size / 1024).toFixed(2);
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      const sizeInKB = (selectedFile.size / 1024).toFixed(2);
 
       const reader = new FileReader();
       reader.onload = () => {
         setFileInfo({
-          name: file.name,
+          name: selectedFile.name,
           size: `${sizeInKB} KB`,
-          data: reader.result as string,
         });
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(selectedFile);
+
+      setFile(selectedFile);
     } else {
       setFileInfo(null);
+      setFile(null);
+    }
+  };
+
+  const handleCloakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      const sizeInKB = (selectedFile.size / 1024).toFixed(2);
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setCloakInfo({
+          name: selectedFile.name,
+          size: `${sizeInKB} KB`,
+        });
+      };
+      reader.readAsDataURL(selectedFile);
+
+      setCloak(selectedFile); // Сохраняем файл плаща
+    } else {
+      setCloakInfo(null);
+      setCloak(null); // Если файл не выбран, сбрасываем состояние
     }
   };
 
@@ -48,56 +72,59 @@ export const SkinUploader: React.FC = () => {
     if (inputRef.current) {
       inputRef.current.value = "";
     }
+    if (cloakRef.current) {
+      cloakRef.current.value = "";
+    }
     setFileInfo(null);
+    setCloakInfo(null);
+    setFile(null);
+    setCloak(null);
+    setError(null);
   };
 
-  const uploadSkin = async () => {
-    if (!session?.user?.email) {
-      setMessage({ text: "Пользователь не авторизован.", type: "error" });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!file) {
+      setError("Файл скина не выбран.");
       return;
     }
 
-    if (!fileInfo?.data) {
-      setMessage({ text: "Файл не выбран.", type: "error" });
-      return;
-    }
+    setUploading(true);
+    setError(null);
 
-    setIsLoading(true);
-    setMessage({ text: null, type: null });
+    const uniqueSkinFileName = `${userData.uuid}.png`;
+    const uniqueCloakFileName = `${userData.uuid}.png`;
+
+    const formData = new FormData();
+    formData.append("skin", file, uniqueSkinFileName);
+    if (cloak) {
+      formData.append("cloak", cloak, uniqueCloakFileName);
+    }
 
     try {
       const response = await fetch("/api/upload-skin", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: session.user.email,
-          skin: fileInfo.data,
-        }),
+        body: formData,
       });
 
-      if (response.ok) {
-        setMessage({ text: "Скин успешно загружен!", type: "success" });
-        clearFile();
+      const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.error || "Произошла ошибка при загрузке.");
+      }
+
+      if (response.ok) {
+        clearFile();
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-      } else {
-        const error = await response.json();
-        setMessage({
-          text: error.error || "Ошибка загрузки скина.",
-          type: "error",
-        });
       }
-    } catch (error) {
-      setMessage({
-        text: `Ошибка соединения с сервером: ${error}`,
-        type: "error",
-      });
-    } finally {
-      setIsLoading(false);
+
+      console.log(data);
+      setUploading(false);
+    } catch (error: any) {
+      setError(error.message || "Неизвестная ошибка");
+      setUploading(false);
     }
   };
 
@@ -105,19 +132,21 @@ export const SkinUploader: React.FC = () => {
     <div className={styles.avatar}>
       <div className={styles.top_text}>
         <h4>
-          Скин
+          Скин и Плащ
           <span className={styles.info}>Инфо</span>
         </h4>
         <span>
-          Вы можете установить свой скин, чтобы выделяться среди других игроков.
-          Изображение должно быть строго в формате <strong>PNG</strong> и иметь
-          размеры <strong>64x64</strong> пикселя.
+          Вы можете установить свой скин и плащ, чтобы выделяться среди других
+          игроков. Изображение должно быть строго в формате <strong>PNG</strong>{" "}
+          и иметь размеры <strong>64x64</strong> пикселя для скина и{" "}
+          <strong>64x64</strong> для плаща.
         </span>
+
         <label className={styles.upload} htmlFor="upload-photo">
           {!fileInfo ? (
             <div className="flex flex-col justify-center text-center items-center gap-2">
               <UploadCloudIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
-              <p>Выберите файл PNG</p>
+              <p>Выберите файл PNG для скина</p>
             </div>
           ) : (
             <div className={styles.file_info}>
@@ -132,10 +161,34 @@ export const SkinUploader: React.FC = () => {
           id="upload-photo"
           className={styles.input_file}
           onChange={handleFileChange}
-          accept=".png"
+          accept="image/*"
           ref={inputRef}
         />
+
+        <label className={styles.upload} htmlFor="upload-cloak">
+          {!cloakInfo ? (
+            <div className="flex flex-col justify-center text-center items-center gap-2">
+              <UploadCloudIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
+              <p>Выберите файл PNG для плаща (не обязательно)</p>
+            </div>
+          ) : (
+            <div className={styles.file_info}>
+              {cloakInfo.name}
+              <div className={styles.size}>{cloakInfo.size}</div>
+            </div>
+          )}
+        </label>
+        <input
+          type="file"
+          name="cloak"
+          id="upload-cloak"
+          className={styles.input_file}
+          onChange={handleCloakChange}
+          accept="image/*"
+          ref={cloakRef}
+        />
       </div>
+
       {fileInfo && (
         <div className={styles.title_skin}>
           <button className={styles.cancel} onClick={clearFile}>
@@ -143,17 +196,21 @@ export const SkinUploader: React.FC = () => {
           </button>
           <button
             className={styles.apply}
-            onClick={uploadSkin}
-            disabled={isLoading}
+            onClick={handleSubmit}
+            disabled={uploading}
           >
-            {isLoading ? (
-              <>
-                <ThreeDots width={20} height={20} color="gray" />
-              </>
+            {uploading ? (
+              <ThreeDots width={20} height={20} color="gray" />
             ) : (
               `Применить`
             )}
           </button>
+        </div>
+      )}
+
+      {error && (
+        <div className={styles.error_message}>
+          <span>{error}</span>
         </div>
       )}
     </div>

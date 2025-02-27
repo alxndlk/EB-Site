@@ -1,7 +1,12 @@
-import React from "react";
+import { Wrapper } from "@/layout/Wrapper/Wrapper";
+import { Main } from "./components/Main";
 
-const page = () => {
-  return <div></div>;
+const Launcher = () => {
+  return (
+    <Wrapper>
+      <Main />
+    </Wrapper>
+  );
 };
 
-export default page;
+export default Launcher;

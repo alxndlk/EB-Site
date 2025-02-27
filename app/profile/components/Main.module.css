@@ -273,3 +273,15 @@
     padding: 0 1rem;
   }
 }
+
+.error_message {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  justify-content: end;
+  font-size: 14px;
+  background-color: rgb(255 255 255 / 12%);
+  text-align: left;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+}
