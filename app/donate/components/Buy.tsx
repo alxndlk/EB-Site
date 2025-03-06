@@ -217,11 +217,8 @@ export const Buy: React.FC<BuyProps> = ({
                   <Check size={42} />
                 </div>
                 <div className={styles.text}>
-                  Оплата прошла успешно. Статус установлен до{" "}
-                  {isNaN(new Date(expireDateResult).getTime())
-                    ? "Неизвестная дата"
-                    : new Date(expireDateResult).toLocaleDateString()}
-                  .
+                  Оплата прошла успешно. Статус установлен на {dataToBuy.days}{" "}
+                  дней.
                 </div>
               </div>
             </div>

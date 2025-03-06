@@ -65,10 +65,7 @@ export const Footer = () => {
         </div>
         <div className={`${styles.content}`}>
           <div className="flex flex-col">
-            <Link
-              href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
-              className={styles.button}
-            >
+            <Link href="/Эпоха Блоков.exe" className={styles.button}>
               Скачать лаунчер
             </Link>
           </div>

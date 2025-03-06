@@ -1,50 +1,53 @@
-import { createConnection } from "@/lib/db";
-import { v4 } from "uuid";
+import { query } from "@/lib/db";
+import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
 export async function POST(req) {
   try {
     const { name, email, password } = await req.json();
-    const uuid = v4();
-    console.log("Generated UUID:", uuid);
 
-    const connection = await createConnection();
-
-    console.log("Checking if email already exists:", email);
-
-    const [rows] = await connection.execute(
-      "SELECT * FROM users WHERE email = ?",
-      [email]
-    );
-
-    if (rows.length > 0) {
+    if (!name || !email || !password) {
       return NextResponse.json(
-        { message: "Пользователь с таким email уже существует" },
+        { message: "Заполните все поля" },
         { status: 400 }
       );
     }
+
+    console.log("Checking if email or username exists");
+
+    const [{ count }] = await query(
+      "SELECT COUNT(*) AS count FROM users WHERE email = ? OR username = ?",
+      [email, name]
+    );
+
+    if (count > 0) {
+      return NextResponse.json(
+        { message: "Пользователь с таким email или именем уже существует" },
+        { status: 400 }
+      );
+    }
+
+    const uuid = uuidv4();
+    console.log(`Generated UUID: ${uuid}`);
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     console.log("Inserting new user into the database");
 
-    await connection.execute(
-      "INSERT INTO users (uuid, name, email, password, balance) VALUES (?, ?, ?, ?, ?)",
+    await query(
+      "INSERT INTO users (uuid, username, email, password, balance) VALUES (?, ?, ?, ?, ?)",
       [uuid, name, email, hashedPassword, 0]
     );
 
     return NextResponse.json(
-      { message: "User registered successfully." },
+      { message: "Пользователь успешно зарегистрирован" },
       { status: 201 }
     );
   } catch (error) {
     console.error("Ошибка при регистрации:", error);
     return NextResponse.json(
-      {
-        message: "Не удалось зарегистрировать пользователя",
-        error: error.message,
-      },
+      { message: "Не удалось зарегистрировать пользователя" },
       { status: 500 }
     );
   }
