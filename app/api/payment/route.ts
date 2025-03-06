@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { connectMongoDB } from "@/lib/mongodb";
+import { createConnection } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import User from "@/models/user";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-12-18.acacia",
@@ -30,7 +29,7 @@ export async function POST(req: NextRequest) {
         payment_method: paymentMethodId,
         confirm: true,
         receipt_email: email,
-        return_url: "https://epohablokov.com/payment-status",
+        return_url: "https://epohablokov.com/profile",
       });
     } catch (stripeError: any) {
       console.error("Ошибка Stripe:", stripeError);
@@ -40,7 +39,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Логирование деталей платежа
     console.log("Статус платежа:", paymentIntent.status);
 
     if (paymentIntent.status === "requires_action") {
@@ -64,16 +62,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await connectMongoDB();
-    const result = await User.findOneAndUpdate(
-      { name: userName },
-      { $inc: { balance: amount } },
-      { new: true, upsert: true }
+    const connection = await createConnection();
+
+    const [rows]: any[] = await connection.execute(
+      "UPDATE users SET balance = balance + ? WHERE username = ?",
+      [amount, userName]
     );
 
-    if (!result) {
+    if (rows.affectedRows === 0) {
       return NextResponse.json(
-        { error: "Ошибка при обновлении данных" },
+        { error: "Ошибка при обновлении данных пользователя" },
         { status: 500 }
       );
     }

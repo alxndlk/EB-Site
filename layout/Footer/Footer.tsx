@@ -65,10 +65,7 @@ export const Footer = () => {
         </div>
         <div className={`${styles.content}`}>
           <div className="flex flex-col">
-            <Link
-              href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
-              className={styles.button}
-            >
+            <Link href="/Эпоха Блоков.exe" className={styles.button}>
               Скачать лаунчер
             </Link>
           </div>
@@ -81,20 +78,6 @@ export const Footer = () => {
             NOT OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH
             MOJANG SYNERGIES AB.
           </p>
-          <a
-            href="https://freekassa.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="https://cdn.freekassa.net/banners/small-dark-1.png"
-              title="Прием платежей на сайте"
-              width={85}
-              quality={100}
-              height={30}
-              alt="freekassa"
-            />
-          </a>
         </div>
       </div>
     </footer>

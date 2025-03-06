@@ -492,10 +492,7 @@ export const Main = () => {
               </p>
             </div>
             <div className={styles.launcher_buttons}>
-              <Link
-                href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
-                className={styles.button}
-              >
+              <Link href="/Эпоха Блоков.exe" className={styles.button}>
                 Скачать лаунчер
               </Link>
               <Link href="/auth">Войти в аккаунт</Link>
