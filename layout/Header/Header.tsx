@@ -67,10 +67,7 @@ export const Header: React.FC = () => {
                 Войти
               </Link>
             )}
-            <Link
-              className={styles.button}
-              href="https://github.com/alxndlk/MLauncher/releases/latest/download/Launcher.exe"
-            >
+            <Link className={styles.button} href="/Эпоха Блоков.exe">
               Начать играть
             </Link>
           </li>
