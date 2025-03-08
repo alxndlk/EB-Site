@@ -83,7 +83,11 @@
 .skin_container {
   display: flex;
   height: 80vh;
+  width: 100%;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   position: relative;
 }
 
@@ -284,4 +288,18 @@
   background-color: rgb(255 255 255 / 12%);
   text-align: left;
   border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.preloader {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.preloader span {
+  font-size: 14px;
+  color: #a1a1a1;
 }

@@ -1,17 +1,17 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import styles from "./Main.module.css";
-
 import SkinViewerComponent from "./skinViewer";
 import { Option } from "./Option";
 import { SkinUploader } from "./skinChange";
-import { useRouter } from "next/navigation";
 
 export const Main = () => {
-  const { data: session } = useSession();
-
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   return (
@@ -40,13 +40,17 @@ export const Main = () => {
               onClick={() => {
                 router.push("/payment");
               }}
+              loading={status}
             />
+
             <Option
               title="Почта"
               topTitle="Ваш основной адрес электронной почты будет использоваться для уведомлений, связанных с учетной записью."
               value={session?.user?.email}
               status="info"
+              loading={status}
             />
+
             <Option
               title="Промокод"
               topTitle="Введите промокод, чтобы получить скидку на донат-группы или другие бонусы."
@@ -55,12 +59,14 @@ export const Main = () => {
               status="feature"
               button="Применить"
               disabled={true}
+              loading={status}
             />
             <Option
               title="Стать разработчиком"
               topTitle="Вы можете узнать более подробно и пройти собеседование по ссылкам ниже."
               status="info"
               links={["Telegram", "Discord"]}
+              loading={status}
             />
             <Option
               title="Выйти с аккаунта"
@@ -68,6 +74,7 @@ export const Main = () => {
               bottomTitle="Вы уверены, что хотите выйти?"
               exitButton="Выйти"
               status="danger"
+              loading={status}
             />
           </div>
         </div>

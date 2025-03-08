@@ -1,18 +1,23 @@
 import { useUserData } from "@/hooks/useUserData";
 import React, { useEffect, useRef, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import { SkinViewer, WalkingAnimation } from "skinview3d";
+import styles from "./Main.module.css";
+import Skeleton from "react-loading-skeleton";
 
 const SkinViewerComponent: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { userData } = useUserData();
   const [skinUrl, setSkinUrl] = useState<string | null>(null);
   const [capeUrl, setCapeUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState<Boolean | null>(true);
 
   useEffect(() => {
     if (!userData?.uuid) return;
 
     const fetchSkin = async () => {
       try {
+        setLoading(true);
         const res = await fetch("/api/skins", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -27,6 +32,7 @@ const SkinViewerComponent: React.FC = () => {
         const blob = await res.blob();
         const localUrl = URL.createObjectURL(blob);
         setSkinUrl(localUrl);
+        setLoading(false);
       } catch (error) {
         console.error("Ошибка загрузки скина:", error);
         setSkinUrl("/default.png");
@@ -35,6 +41,7 @@ const SkinViewerComponent: React.FC = () => {
 
     const fetchCape = async () => {
       try {
+        setLoading(true);
         const res = await fetch("/api/cloaks", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,6 +56,7 @@ const SkinViewerComponent: React.FC = () => {
         const blob = await res.blob();
         const localUrl = URL.createObjectURL(blob);
         setCapeUrl(localUrl);
+        setLoading(false);
       } catch (error) {
         console.error("Ошибка загрузки плаща:", error);
         setCapeUrl(null);
@@ -82,7 +90,16 @@ const SkinViewerComponent: React.FC = () => {
 
   return (
     <div>
-      <canvas ref={canvasRef} />
+      {!loading && <canvas ref={canvasRef} />}
+      {loading && (
+        <Skeleton
+          width={595}
+          height={600}
+          baseColor="transparent"
+          borderRadius={10}
+          highlightColor="#ffffff1a"
+        />
+      )}
     </div>
   );
 };
