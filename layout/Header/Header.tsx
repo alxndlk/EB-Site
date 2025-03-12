@@ -12,7 +12,7 @@ import { Servers } from "./Servers";
 import { XIcon } from "lucide-react";
 
 export const Header: React.FC = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { userData } = useUserData();
   const [scrolled, setScrolled] = useState(false);
   const [showServers, setShowServers] = useState(false);
@@ -61,6 +61,16 @@ export const Header: React.FC = () => {
             {session ? (
               <Link href="/profile" className={styles.profile}>
                 {session.user?.name}
+                <div className={styles.balance_header}>
+                  {userData?.balance}
+                  <Image
+                    width={16}
+                    height={16}
+                    alt="rubby"
+                    className={styles.rubby}
+                    src={"/rubby.png"}
+                  />
+                </div>
               </Link>
             ) : (
               <Link className={styles.button_login} href="/auth">
@@ -68,7 +78,7 @@ export const Header: React.FC = () => {
               </Link>
             )}
             <Link className={styles.button} href="/Эпоха Блоков.exe">
-              Начать играть
+              Скачать лаунчер
             </Link>
           </li>
         </ul>

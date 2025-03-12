@@ -109,7 +109,7 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
             </Link>
           )}
           <Link className={styles.button} href="/">
-            Начать играть
+            Скачать лаунчер
           </Link>
         </div>
       </div>

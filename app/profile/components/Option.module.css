@@ -105,6 +105,12 @@
 .balance_value {
   color: #fff;
   font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .danger {

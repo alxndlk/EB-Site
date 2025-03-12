@@ -5,6 +5,7 @@ import { ExternalLinkIcon } from "lucide-react";
 import { ButtonRed } from "@/app/ui/buttonRed";
 import { signOut } from "next-auth/react";
 import Skeleton from "react-loading-skeleton";
+import Image from "next/image";
 
 interface IOption {
   title?: string;
@@ -91,13 +92,19 @@ export const Option = ({
                 <span className={styles.balance}>
                   {value}
                   {balance && (
-                    <div className={styles.balance_value}>{`${(
-                      userData?.balance ?? 0
-                    ).toLocaleString("ru-RU", {
-                      style: "decimal",
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })} $`}</div>
+                    <div className={styles.balance_value}>
+                      {`${(userData?.balance ?? 0).toLocaleString("ru-RU", {
+                        style: "decimal",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}`}
+                      <Image
+                        width={16}
+                        height={16}
+                        alt="rubby"
+                        src={"/rubby.png"}
+                      />
+                    </div>
                   )}
                   {role && userData?.role && (
                     <div
@@ -176,13 +183,14 @@ export const Option = ({
           <span className={styles.balance}>
             {value}
             {balance && (
-              <div className={styles.balance_value}>{`${(
-                userData?.balance ?? 0
-              ).toLocaleString("ru-RU", {
-                style: "decimal",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })} $`}</div>
+              <div className={styles.balance_value}>
+                {`${(userData?.balance ?? 0).toLocaleString("ru-RU", {
+                  style: "decimal",
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`}
+                <Image width={16} height={16} alt="rubby" src={"/rubby.png"} />
+              </div>
             )}
             {role && userData?.role && (
               <div

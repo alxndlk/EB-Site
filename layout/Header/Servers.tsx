@@ -99,7 +99,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
             <div className={styles.text}>
               <div className={styles.title}>
                 <h4>КЛАССИКА +</h4>
-                <span>1.21.4</span>
+                <span>1.20.1</span>
               </div>
               <div className={styles.holder}>
                 <p>НА CТАДИИ РАЗРАБОТКИ</p>
