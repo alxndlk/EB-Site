@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Number(amount) * 100,
+      amount: amount, // в долларах
       currency: "usd",
       payment_method: paymentMethodId,
       confirm: true,
@@ -53,9 +53,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const UPDATED_USER_BALANCE: number = Number(amount * 85);
+
     const result = await query(
       "UPDATE users SET balance = balance + ? WHERE username = ?",
-      [amount, userName]
+      [UPDATED_USER_BALANCE, userName]
     );
     if (result.affectedRows === 0) {
       return NextResponse.json(
