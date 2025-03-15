@@ -113,35 +113,35 @@ export const DonateMain = () => {
                   text="Vip"
                   background="bg_0"
                   border=""
-                  price="0.99$"
+                  price="99"
                 />
                 <TableTitle
                   src="/premium_picture.png"
                   text="Premium"
                   background="bg_1"
                   border=""
-                  price="2.99$"
+                  price="299"
                 />
                 <TableTitle
                   src="/deluxe_picture.png"
                   text="Deluxe"
                   background="bg_2"
                   border=""
-                  price="4.99$"
+                  price="499"
                 />
                 <TableTitle
                   src="/ultra_picture.png"
                   text="ULTRA"
                   background="bg_3"
                   border="border_ultra"
-                  price="9.99$"
+                  price="999"
                 />
                 <TableTitle
                   src="/legend_picture.png"
                   text="LEGEND"
                   background="bg_4"
                   border="border_legend"
-                  price="14.99$"
+                  price="1499"
                 />
               </div>
             </div>
@@ -269,7 +269,7 @@ export const DonateMain = () => {
       {showBuy && (
         <Buy
           onClose={closeBuy}
-          nameStatus={selectedStatus.name}
+          PERMISSION_NAME={selectedStatus.name}
           priceStatus={selectedStatus.price}
           imageURL={selectedStatus.imageURL}
           bg_color={selectedStatus.bg_color}

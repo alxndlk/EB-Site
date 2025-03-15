@@ -38,6 +38,13 @@ const ExpensiveStatus: React.FC<ExpensiveStatusProps> = ({
         </div>
         <div className={styles.price}>
           {price}
+          <Image
+            width={24}
+            height={24}
+            alt="rubby"
+            className={styles.rubby}
+            src={"/rubby.png"}
+          />
           <h3>/</h3>
           <span> мес.</span>
         </div>

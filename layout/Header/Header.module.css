@@ -122,6 +122,7 @@
   justify-content: center;
   text-align: center;
   align-items: center;
+  position: relative;
   font-weight: 500;
 }
 
@@ -440,4 +441,39 @@
   width: 16px;
   aspect-ratio: 1/1;
   max-height: 16px;
+}
+
+.player_currency {
+  background-color: #2b2b2b;
+  height: 32px;
+  position: absolute;
+  border-radius: 6px;
+  padding: 0px 12px;
+  width: auto;
+  top: 3rem;
+  color: #fff;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+  gap: 5px;
+  animation: moveUp 0.3s ease;
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 12%);
+  box-shadow: 0 10px 20px #00010a26;
+}
+
+.profile:hover > .player_currency {
+  display: flex;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(0);
+  }
 }

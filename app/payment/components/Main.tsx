@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Main.module.css";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -13,12 +13,15 @@ import {
 import { ArrowRight, CheckIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUserData } from "@/hooks/useUserData";
+import { TailSpin } from "react-loader-spinner";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
 const PaymentForm = ({ value, session, name }) => {
+  const PAYMENT_AMOUNT: number = Number((value / 85).toFixed(2));
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<{
@@ -60,10 +63,10 @@ const PaymentForm = ({ value, session, name }) => {
       return;
     }
 
-    // if (!session?.user?.email) {
-    //   setError({ text: "Необходимо авторизоваться"});
-    //   return;
-    // }
+    if (!session?.user?.email) {
+      setError({ text: "Необходимо авторизоваться", status: 403 });
+      return;
+    }
 
     if (!name) {
       setError({ text: "Введите никнейм", status: 400 });
@@ -71,7 +74,7 @@ const PaymentForm = ({ value, session, name }) => {
     }
 
     if (Number(value) === 0) {
-      setError({ text: "Минимальная сумма пополнения 1$", status: 400 });
+      setError({ text: "Минимальное пополнение на 100 валюты", status: 400 });
       return;
     }
 
@@ -98,7 +101,7 @@ const PaymentForm = ({ value, session, name }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: Number(value),
+          amount: PAYMENT_AMOUNT,
           email: session?.user?.email,
           paymentMethodId: paymentMethod.id,
           userName: name,
@@ -161,7 +164,11 @@ const PaymentForm = ({ value, session, name }) => {
 
       {!error.text && !warning.text && !success.text && (
         <div className={styles.button} onClick={handleUpdateBalance}>
-          <span>Продолжить</span>
+          <span>
+            {value == Number(0)
+              ? `Введите сумму`
+              : `Пополнить на ${value}₽ / ${PAYMENT_AMOUNT}$`}
+          </span>
           <ArrowRight className={styles.ArrowRight} />
         </div>
       )}
@@ -184,15 +191,22 @@ const PaymentForm = ({ value, session, name }) => {
 };
 
 export const Main = () => {
+  const { userData, pending } = useUserData();
+
+  const [name, setName] = useState(userData?.username || "");
+
+  useEffect(() => {
+    setName(userData?.username || "");
+  }, [userData]);
+
   const { data: session } = useSession();
-  const [value, setValue] = useState("2.5");
-  const [name, setName] = useState(session?.user?.name || "");
+  const [value, setValue] = useState("250");
   const [error, setError] = useState<string | null>(null);
 
   const validateForm = () => {
     setError(null);
     if (Number(value) < 1) {
-      setError("Ошибка: Минимальная сумма пополнения 1$");
+      setError("Ошибка: Минимальное пополнение на 100 валюты");
       return false;
     }
     if (!name) {
@@ -205,75 +219,96 @@ export const Main = () => {
   return (
     <div className={styles.main}>
       <div className={styles.mainContainer}>
-        <div className={styles.holder_content}>
-          <div className={styles.title}>
-            <h4>Пополнить баланс</h4>
-            <p>
-              Все ваши платежи надежно защищены благодаря современным
-              технологиям безопасности
-            </p>
+        {pending ? (
+          <TailSpin width={48} height={48} color="#fff" />
+        ) : (
+          <div className={styles.holder_content}>
+            <div className={styles.title}>
+              <h4>Пополнить баланс</h4>
+              <p>
+                Все ваши платежи надежно защищены благодаря современным
+                технологиям безопасности
+              </p>
+            </div>
+
+            <div className={styles.content}>
+              <div className={styles.container}>
+                <div className={styles.title_container}>
+                  <h4>1. Введите ник</h4>
+                </div>
+                <div className={styles.info}>
+                  <div className={styles.inputs}>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Ник игрока"
+                    />
+                    <p>
+                      Можно написать ник другого игрока — тогда покупка придёт к
+                      нему на аккаунт. Поздравь и порадуй друга или подругу :)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.container}>
+                <div className={styles.title_container}>
+                  <h4>2. Выберите сумму</h4>
+                </div>
+                <div className={styles.values}>
+                  <div className={styles.value}>
+                    {[250, 500, 1000, 2500, 5000].map((amount) => (
+                      <button
+                        className="flex gap-2"
+                        key={amount}
+                        onClick={() => setValue(String(amount))}
+                      >
+                        {amount}{" "}
+                        <Image
+                          width={20}
+                          height={20}
+                          alt="rubby"
+                          className={styles.rubby}
+                          src={"/rubby.png"}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                  <div className={styles.finish}>
+                    <input
+                      type="number"
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      placeholder="Не менее 100"
+                    />
+                    <div className={styles.dollar}>
+                      {" "}
+                      <Image
+                        width={20}
+                        height={20}
+                        alt="rubby"
+                        className={styles.rubby}
+                        src={"/rubby.png"}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.container}>
+                <div className={styles.title_container}>
+                  <h4>3. Оплата</h4>
+                </div>
+                <div className={styles.pay}>
+                  <Elements stripe={stripePromise}>
+                    <PaymentForm value={value} session={session} name={name} />
+                  </Elements>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className={styles.content}>
-            <div className={styles.container}>
-              <div className={styles.title_container}>
-                <h4>1. Введите ник</h4>
-              </div>
-              <div className={styles.info}>
-                <div className={styles.inputs}>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Ник игрока"
-                  />
-                  <p>
-                    Можно написать ник другого игрока — тогда покупка придёт к
-                    нему на аккаунт. Поздравь и порадуй друга или подругу :)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.container}>
-              <div className={styles.title_container}>
-                <h4>2. Выберите сумму</h4>
-              </div>
-              <div className={styles.values}>
-                <div className={styles.value}>
-                  {[2.5, 5, 10, 25, 50].map((amount) => (
-                    <button
-                      key={amount}
-                      onClick={() => setValue(String(amount))}
-                    >
-                      {amount} $
-                    </button>
-                  ))}
-                </div>
-                <div className={styles.finish}>
-                  <input
-                    type="number"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Не менее 1 $"
-                  />
-                  <div className={styles.dollar}>$</div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.container}>
-              <div className={styles.title_container}>
-                <h4>3. Оплата</h4>
-              </div>
-              <div className={styles.pay}>
-                <Elements stripe={stripePromise}>
-                  <PaymentForm value={value} session={session} name={name} />
-                </Elements>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
       <div className={styles.radial}></div>
       <div className={styles.line}></div>

@@ -31,7 +31,7 @@ async function checkServerAvailability() {
   }
 }
 
-async function checkPlayerOnline(userName: string): Promise<boolean> {
+async function checkPlayerOnline(user_name: string): Promise<boolean> {
   const rcon = new Rcon({
     host: process.env.RCON_HOST,
     port: Number(process.env.RCON_PORT),
@@ -43,7 +43,7 @@ async function checkPlayerOnline(userName: string): Promise<boolean> {
     const listResult = await rcon.send("list");
     await rcon.end();
 
-    return listResult.toLowerCase().includes(userName.toLowerCase());
+    return listResult.toLowerCase().includes(user_name.toLowerCase());
   } catch (err) {
     console.error("Ошибка при проверке онлайн-статуса игрока:", err);
     return false;
@@ -68,9 +68,16 @@ export async function POST(req: Request) {
       );
     }
 
-    const { status, userName, amount, daysToBuy } = await req.json();
+    const {
+      permission_price,
+      user_uuid,
+      user_name,
+      permission_name,
+      permission_duration,
+      server,
+    } = await req.json();
 
-    const isPlayerOnline = await checkPlayerOnline(userName);
+    const isPlayerOnline = await checkPlayerOnline(user_name);
     if (!isPlayerOnline) {
       return NextResponse.json(
         { error: "Игрок не найден на сервере" },
@@ -78,39 +85,39 @@ export async function POST(req: Request) {
       );
     }
 
-    const userResult = await query(
-      "SELECT balance FROM users WHERE username = ?",
-      [userName]
+    const UUID_BALANCE = await query(
+      "SELECT balance FROM users WHERE uuid = ?",
+      [user_uuid]
     );
-    if (userResult.length === 0) {
+
+    if (UUID_BALANCE.length === 0) {
       return NextResponse.json(
         { error: "Пользователь не найден" },
         { status: 404 }
       );
     }
 
-    const userBalance = userResult[0].balance;
+    const CURRENT_USER_BALANCE = UUID_BALANCE[0].balance;
 
-    if (userBalance < amount) {
+    if (CURRENT_USER_BALANCE < permission_price) {
       return NextResponse.json(
         { error: "Недостаточно средств на балансе" },
         { status: 400 }
       );
     }
 
-    const updateResult = await query(
-      "UPDATE users SET balance = balance - ? WHERE username = ?",
-      [amount, userName]
+    const UPDATE_BALANCE = await query(
+      "UPDATE users SET balance = balance - ? WHERE uuid = ?",
+      [permission_price, user_uuid]
     );
 
-    if (updateResult.affectedRows === 0) {
+    if (UPDATE_BALANCE.affectedRows === 0) {
       return NextResponse.json(
         { error: "Ошибка при обновлении данных" },
         { status: 500 }
       );
     }
 
-    // Отправляем команду в RCON
     const rcon = new Rcon({
       host: process.env.RCON_HOST,
       port: Number(process.env.RCON_PORT),
@@ -119,10 +126,10 @@ export async function POST(req: Request) {
 
     await rcon.connect();
     await rcon.send(
-      `lp user ${userName} parent addtemp ${status} ${daysToBuy}d`
+      `lp user ${user_name} parent addtemp ${permission_name} ${permission_duration}d`
     );
     await rcon.send(
-      `tell ${userName} &aСпасибо за покупку! Ваша роль ${status} активирована на ${daysToBuy} дней.`
+      `tell ${user_name} &aСпасибо за покупку! Ваша роль ${permission_name} активирована на ${permission_duration} дней.`
     );
     await rcon.end();
 

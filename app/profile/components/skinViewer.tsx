@@ -1,8 +1,7 @@
 import { useUserData } from "@/hooks/useUserData";
 import React, { useEffect, useRef, useState } from "react";
-import { TailSpin } from "react-loader-spinner";
+
 import { SkinViewer, WalkingAnimation } from "skinview3d";
-import styles from "./Main.module.css";
 import Skeleton from "react-loading-skeleton";
 
 const SkinViewerComponent: React.FC = () => {

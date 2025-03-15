@@ -16,7 +16,6 @@ export const Header: React.FC = () => {
   const { userData } = useUserData();
   const [scrolled, setScrolled] = useState(false);
   const [showServers, setShowServers] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +38,9 @@ export const Header: React.FC = () => {
     setShowServers(false);
   };
 
+  const USERNAME = userData?.username;
+  const BALANCE = userData?.balance;
+
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.nav_bar}>
@@ -60,9 +62,9 @@ export const Header: React.FC = () => {
           <li className={styles.gap_li}>
             {session ? (
               <Link href="/profile" className={styles.profile}>
-                {session.user?.name}
+                {USERNAME}
                 <div className={styles.balance_header}>
-                  {userData?.balance}
+                  {BALANCE}
                   <Image
                     width={16}
                     height={16}
@@ -70,6 +72,17 @@ export const Header: React.FC = () => {
                     className={styles.rubby}
                     src={"/rubby.png"}
                   />
+                </div>
+                <div className={styles.player_currency}>
+                  100{" "}
+                  <Image
+                    width={16}
+                    height={16}
+                    alt="rubby"
+                    className={styles.rubby}
+                    src={"/rubby.png"}
+                  />{" "}
+                  = 1$ / 100₽
                 </div>
               </Link>
             ) : (
@@ -85,20 +98,6 @@ export const Header: React.FC = () => {
       </div>
 
       {showServers && <Servers onClose={closeServers} />}
-      {/* {isVisible && (
-        <div className={styles.serverOpenDate}>
-          <div className={styles.serverOpenContainer}>
-            <div className={styles.xicon_holder}>
-              <XIcon
-                size={12}
-                onClick={() => setIsVisible(false)}
-                className={styles.xicon}
-              />
-            </div>
-            Открытие сервера уже c 14 февраля! 🥳
-          </div>
-        </div>
-      )} */}
     </header>
   );
 };

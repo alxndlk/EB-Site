@@ -269,3 +269,54 @@
     font-size: 12px;
   }
 }
+
+.rubby_change {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.rubby_holder {
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  border: 1px solid hsla(0, 0%, 100%, 0.05);
+  background-color: #2b2b2b;
+  gap: 10px;
+  padding: 0px 12px;
+  height: 36px;
+}
+
+.input {
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  background-color: rgb(255 255 255 / 10%);
+  color: #ededed;
+  transition: 0.1s ease;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 26px;
+  transition: 0.1s ease;
+  outline: 0;
+  font-weight: 400;
+  position: relative;
+  border: 1px solid rgb(255 255 255 / 5%);
+}
+.input:focus {
+  border: 1px solid #fff;
+}
+
+.input:-webkit-autofill {
+  background-color: #000 !important;
+  color: #ededed !important;
+  border: 1px solid #333 !important;
+  -webkit-text-fill-color: #ededed !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #ededed !important;
+  font-weight: 400 !important;
+}

@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     }
 
     const rows: any[] = await query(
-      "SELECT balance, uuid FROM users WHERE email = ?",
+      "SELECT balance, uuid, username FROM users WHERE email = ?",
       [session.user.email]
     );
 
@@ -29,6 +29,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       balance: rows[0].balance,
       uuid: rows[0].uuid,
+      username: rows[0].username,
     });
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);
