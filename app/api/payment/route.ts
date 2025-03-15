@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Number(amount), // в долларах
+      amount: Math.round(Number(amount) * 100), // в центах
       currency: "usd",
       payment_method: paymentMethodId,
       confirm: true,
