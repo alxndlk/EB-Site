@@ -9,26 +9,14 @@ import { useSession } from "next-auth/react";
 import { useUserData } from "@/hooks/useUserData";
 import { Menu } from "./Menu";
 import { Servers } from "./Servers";
-import { XIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FaRegUserCircle, FaUsers } from "react-icons/fa";
+import Skeleton from "react-loading-skeleton";
 
 export const Header: React.FC = () => {
   const { data: session, status } = useSession();
   const { userData } = useUserData();
-  const [scrolled, setScrolled] = useState(false);
   const [showServers, setShowServers] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition =
-        window.scrollY || document.documentElement.scrollTop;
-      const viewportHeight = document.documentElement.clientHeight;
-
-      setScrolled(scrollPosition > viewportHeight * 0.01);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleServers = () => {
     setShowServers((prev) => !prev);
@@ -39,60 +27,94 @@ export const Header: React.FC = () => {
   };
 
   const USERNAME = userData?.username;
-  const BALANCE = userData?.balance;
+
+  const router = useRouter();
+
+  const [serverData, setServerData] = useState<{
+    players: { online: number };
+  } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/mc-status")
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+  }, []);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={`${styles.header}`}>
       <div className={styles.nav_bar}>
         <div className={styles.logo}>
           <Image
-            width={24}
-            height={24}
-            src="/logo-top.png"
+            width={95}
+            height={46}
+            src="/icons/logo.png"
             alt="Эпоха Блоков"
             className={styles.logoImage}
+            onClick={() => {
+              router.push("/");
+            }}
           />
-          <Link href="/" className={styles.link}>
-            Эпоха Блоков
-          </Link>
+          <div className={styles.users_online}>
+            <FaUsers size={14} color="#ffffffbf" />
+            <h3>ОНЛАЙН:</h3>
+            <span>{serverData?.players.online}</span>
+          </div>
         </div>
-        <ul className={styles.ul}>
-          <Navbar toggleServers={toggleServers} />
+        <Navbar toggleServers={toggleServers} />
+
+        <ul className={`${styles.ul} ${styles.nav_buttons}`}>
           <Menu />
           <li className={styles.gap_li}>
-            {session ? (
-              <Link href="/profile" className={styles.profile}>
-                {USERNAME}
-                <div className={styles.balance_header}>
-                  {BALANCE}
-                  <Image
-                    width={16}
-                    height={16}
-                    alt="rubby"
-                    className={styles.rubby}
-                    src={"/rubby.png"}
-                  />
-                </div>
-                <div className={styles.player_currency}>
-                  100{" "}
-                  <Image
-                    width={16}
-                    height={16}
-                    alt="rubby"
-                    className={styles.rubby}
-                    src={"/rubby.png"}
-                  />{" "}
-                  = 1$ / 100₽
-                </div>
-              </Link>
+            {status === "loading" ? (
+              <Skeleton
+                height={32}
+                width={150}
+                baseColor="transparent"
+                borderRadius={6}
+                highlightColor="#ffffff1a"
+              />
+            ) : session ? (
+              <div className={styles.gap_li}>
+                <Link href="/profile" className={styles.profile}>
+                  {USERNAME ? (
+                    <div className={styles.profile}>
+                      <div className={styles.nickname}>
+                        {USERNAME.toUpperCase()}
+                      </div>
+                      <div className={styles.balance_header}>
+                        <FaRegUserCircle size={20} />
+                      </div>
+                    </div>
+                  ) : (
+                    <Skeleton
+                      height={32}
+                      width={150}
+                      baseColor="transparent"
+                      borderRadius={6}
+                      highlightColor="#ffffff1a"
+                    />
+                  )}
+                  <div className={styles.player_currency}>МОЙ ПРОФИЛЬ</div>
+                </Link>
+                <Link className={styles.button} href="/payment">
+                  ПОПОЛНИТЬ СЧЁТ
+                </Link>
+              </div>
             ) : (
-              <Link className={styles.button_login} href="/auth">
-                Войти
-              </Link>
+              <div className={styles.gap_li}>
+                <Link className={styles.button_login} href="/auth">
+                  ВОЙТИ
+                </Link>
+                <Link className={styles.button} href="/register">
+                  СОЗДАТЬ АККАУНТ
+                </Link>
+              </div>
             )}
-            <Link className={styles.button} href="/Эпоха Блоков.exe">
-              Скачать лаунчер
-            </Link>
           </li>
         </ul>
       </div>

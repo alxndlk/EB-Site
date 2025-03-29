@@ -9,7 +9,6 @@ const Register = async () => {
     <Wrapper>
       <Header />
       <Main />
-      <Footer />
     </Wrapper>
   );
 };

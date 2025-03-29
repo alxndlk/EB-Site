@@ -1,33 +1,16 @@
-import {
-  ChevronLeftIcon,
-  ChevronRight,
-  ChevronRightIcon,
-  PlayCircleIcon,
-} from "lucide-react";
+"use client";
+
+import { useState } from "react";
+
 import styles from "./Main.module.css";
-import Image from "next/image";
-import { ImageRow } from "./ImageRow";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Servers } from "./../../layout/Header/Servers";
+import { Servers } from "./Servers/Servers";
+import { Images } from "./Images";
+import { MainTop } from "./MainTop";
+
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 export const Main = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition =
-        window.scrollY || document.documentElement.scrollTop;
-      const viewportHeight = document.documentElement.clientHeight;
-
-      setScrolled(scrollPosition > viewportHeight * 0.2);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const urlArray = [
     "/Home/sky.png",
     "/Home/terrain.png",
@@ -36,7 +19,6 @@ export const Main = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showServers, setShowServers] = useState(false);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -50,159 +32,16 @@ export const Main = () => {
     );
   };
 
-  const toggleServers = () => {
-    setShowServers((prev) => !prev);
-  };
-
-  const closeServers = () => {
-    setShowServers(false);
-  };
-
-  const router = useRouter();
-
   return (
     <main className={styles.main}>
-      <div className={styles.top_main}>
-        <div className={styles.top_main_content}>
-          <video muted loop autoPlay className={styles.video} playsInline>
-            <source src="/videos/video.mp4" type="video/mp4" />
-          </video>
-          <div className={styles.video_overllay} />
-          <div className={styles.video_bottom} />
-          <div className={styles.top_main_content_title}>
-            <div className={styles.aviable}>
-              <Image
-                src="/anvil.gif"
-                alt="anvil"
-                width={40}
-                height={40}
-                unoptimized
-              />
-              <div className="flex flex-col items-start">
-                <span>Эпоха Блоков</span>
-                <p>Техно-Магия: Next уже доступна!</p>
-              </div>
-            </div>
-            <div className={styles.title}>
-              <h4>Лучшие сервера Minecraft с модами</h4>
-            </div>
-            <div className={styles.paragraph}>
-              <p>
-                Добро пожаловать в мир безграничных возможностей! Исследуйте и
-                создавайте вместе с нами.
-              </p>
-            </div>
-            <div className={styles.links}>
-              <Link className={styles.start_play} href="#launcher">
-                Начать играть
-              </Link>
-              <a
-                className={styles.watch_trailer}
-                href="https://www.youtube.com/@epohablokov/videos"
-                target="__blank"
-              >
-                <PlayCircleIcon size={16} />
-                Смотреть трейлер
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className={styles.line}></div>
-        <div className={styles.radial}></div>
-        <div className={styles.light}></div>
-      </div>
-
-      <div className={`${styles.images_container}`}>
-        <div className={styles.sticky_text}>
-          <div className={styles.text_sticky}>
-            <h4>Ваша галерея</h4>
-            <p>Лучшие снимки игроков попадут сюда.</p>
-          </div>
-        </div>
-        <div
-          className={`${styles.image_blocks} ${
-            scrolled ? styles.scrolled : ""
-          }`}
-        >
-          <ImageRow
-            images={[
-              { src: "/Home/1.png", height: "300px" },
-              { src: "/Home/2.png", height: "350px" },
-              { src: "/Home/3.png", height: "500px" },
-              { src: "/Home/4.png", height: "300px" },
-            ]}
-          />
-          <ImageRow
-            images={[
-              { src: "/Home/5.png", height: "350px" },
-              { src: "/Home/6.png", height: "450px" },
-              { src: "/Home/15.png", height: "300px" },
-              { src: "/Home/20.png", height: "350px" },
-            ]}
-          />
-          <ImageRow
-            images={[
-              { src: "/Home/9.png", height: "250px" },
-              { src: "/Home/10.png", height: "350px" },
-              { src: "/Home/11.png", height: "600px" },
-              { src: "/Home/12.png", height: "250px" },
-            ]}
-          />
-          <ImageRow
-            images={[
-              { src: "/Home/13.png", height: "400px" },
-              { src: "/Home/14.png", height: "300px" },
-              { src: "/Home/7.png", height: "450px" },
-              { src: "/Home/16.png", height: "300px" },
-            ]}
-          />
-          <ImageRow
-            images={[
-              { src: "/Home/17.png", height: "200px" },
-              { src: "/Home/18.png", height: "450px" },
-              { src: "/Home/19.png", height: "300px" },
-              { src: "/Home/8.png", height: "500px" },
-            ]}
-          />
-        </div>
-
-        <div className={styles.image_bottom} />
-        <div className={styles.image_text}>
-          <div className={styles.text_padding}>
-            <div className={styles.text_content}>
-              <div className={styles.logo}>
-                <Image
-                  width={24}
-                  height={24}
-                  src="/logo-top.png"
-                  alt="Эпоха Блоков"
-                  className={styles.logoImage}
-                />
-                <Link href="/" className={styles.link}>
-                  Эпоха Блоков
-                </Link>
-              </div>
-              <span>
-                Уникальные и современные серверы Minecraft, созданные командой
-                Эпохи Блоков.
-              </span>
-            </div>
-            <button
-              onClick={() => {
-                router.push("/tmnext");
-              }}
-            >
-              Подробнее
-            </button>
-          </div>
-        </div>
-      </div>
+      <MainTop />
+      <Images />
 
       <div className={styles.features}>
         <div className={styles.features_title}>
-          <span>Особенности</span>
+          <span>ОСОБЕННОСТИ</span>
           <div className={styles.features_header}>
-            <h3>Создай свой мир с полным набором инструментов!</h3>
+            <h3>СОЗДАЙ СВОЙ МИР С ПОЛНЫМ НАБОРОМ ИНСТРУМЕНТОВ!</h3>
             <p>
               Используй мощные инструменты, чтобы создавать, развивать и
               расширять свой мир, делая его таким, каким ты хочешь его видеть!
@@ -218,26 +57,18 @@ export const Main = () => {
             >
               <div className={styles.shadow_slider} />
               <div className={styles.block_header}>
-                <h4>Новая геренация</h4>
+                <h4>НОВАЯ ГЕНЕРАЦИЯ</h4>
                 <p>
                   Уникальная генерация ландшафта, неизведанные биомы и
                   захватывающие приключения ждут тебя на нашем сервере!
                 </p>
               </div>
               <div className={styles.arrows}>
-                <div className={styles.arrow}>
-                  <ChevronLeftIcon
-                    size={28}
-                    absoluteStrokeWidth
-                    onClick={handlePrev}
-                  />
+                <div className={styles.arrow} onClick={handlePrev}>
+                  <ChevronLeftIcon size={28} absoluteStrokeWidth />
                 </div>
-                <div className={styles.arrow}>
-                  <ChevronRightIcon
-                    size={28}
-                    absoluteStrokeWidth
-                    onClick={handleNext}
-                  />
+                <div className={styles.arrow} onClick={handleNext}>
+                  <ChevronRightIcon size={28} absoluteStrokeWidth />
                 </div>
               </div>
               <div
@@ -256,7 +87,7 @@ export const Main = () => {
 
             <div className={styles.block}>
               <div className={styles.block_header}>
-                <h4>Новые пещеры</h4>
+                <h4>НОВЫЕ ПЕЩЕРЫ</h4>
                 <p>
                   Мы добавили новые, уникальные пещеры, которые создадут ещё
                   больше захватывающих возможностей для исследований.
@@ -281,39 +112,38 @@ export const Main = () => {
             <div
               className={`${styles.block} ${styles.opt} `}
               style={{
-                border: "1px solid rgb(0, 39, 24)",
+                border: "1px solid #4543c0",
                 background:
-                  "radial-gradient(100% 64% at 50% 100%, #002618 0%, rgb(0, 0, 0) 100%)",
+                  "radial-gradient(100% 64% at 50% 100%, #4543c0 0%, rgb(14, 14, 14) 100%)",
               }}
             >
               <div className={styles.block_header}>
-                <h4>Оптимизация</h4>
+                <h4>ОПТИМИЗАЦИЯ</h4>
                 <p>
                   Повышенная производительность, стабильность и плавный игровой
                   процесс без лагов!
                 </p>
               </div>
               <div className={`${styles.optimization}`}>
-                <h3>Использование ресурсов</h3>
                 <div className={styles.circles}>
                   <div className={styles.circle_container}>
                     <div className={styles.circle}>
                       <div className={styles.circleBlock}>4-5 ГБ</div>
                     </div>
-                    <p>Память</p>
+                    <p>ПАМЯТЬ</p>
                   </div>
                   <div className={styles.circle_container}>
                     <div className={styles.circle} style={{ width: "140px" }}>
                       <div className={styles.circleBlock}>40-60 %</div>
                     </div>
-                    <p>Процессор</p>
+                    <p>ПРОЦЕССОР</p>
                   </div>
                 </div>
               </div>
             </div>
             <div className={styles.block}>
               <div className={styles.block_header}>
-                <h4>Новые моды</h4>
+                <h4>НОВЫЕ МОДЫ</h4>
                 <p>
                   С выходом новой версии стало возможным внедрить массу
                   оригинальных модификаций, которые принесут больше разнообразия
@@ -370,7 +200,7 @@ export const Main = () => {
           <div className={styles.features_blocks}>
             <div className={`${styles.block}`}>
               <div className={styles.block_header}>
-                <h4>Анимированные текстуры</h4>
+                <h4>АНИМИРОВАННЫЕ ТЕКСТУРЫ</h4>
                 <p>
                   Оживи мир с динамическими эффектами, плавными анимациями и
                   реалистичными деталями!
@@ -399,7 +229,7 @@ export const Main = () => {
               }}
             >
               <div className={styles.block_header}>
-                <h4>Новые шрифты и GUI</h4>
+                <h4>НОВЫЕ ШРИФТЫ И GUI</h4>
                 <p>
                   Улучшенный интерфейс с современным дизайном, удобной
                   навигацией и стильными шрифтами для комфортной игры!
@@ -413,79 +243,14 @@ export const Main = () => {
           </div>
         </div>
       </div>
-      <div className={styles.servers}>
-        <div className={styles.servers_title}>
-          <span>Игровые сервера</span>
-          <div className={styles.servers_header}>
-            <h3>Уникальные игровые сервера на любой вкус!</h3>
-            <p>
-              Исследуй миры, созданные для любого стиля игры — от знакомой
-              классики до тяжелых технологий и космоса!
-            </p>
-          </div>
-        </div>
-        <div className={styles.servers_container}>
-          <div
-            className={styles.server}
-            style={{
-              backgroundImage: `url('/Home/6.png')`,
-              backgroundPosition: "50%",
-            }}
-          >
-            <div className={styles.server_style}>
-              <div className={styles.server_text}>
-                <h4>Техно-Магия: Next</h4>1.20.1
-              </div>
-              <p>Погрузись в мир сложных технологий!</p>
-              <button onClick={toggleServers}>
-                Начать играть <ChevronRight size={18} />
-              </button>
-            </div>
-            <div className={styles.shadow}></div>
-          </div>
-          <div
-            className={styles.server}
-            style={{
-              backgroundImage: `url('/Home/10.png')`,
-              backgroundPosition: "50%",
-            }}
-          >
-            <div className={styles.server_style}>
-              <div className={styles.server_text}>
-                <h4>Технария</h4>1.19.2
-              </div>
-              <p>Оптимизация, механизмы, инновации для технической игры.</p>
-              <button onClick={toggleServers}>
-                Начать играть <ChevronRight size={18} />
-              </button>
-            </div>
-            <div className={styles.shadow}></div>
-          </div>
-          <div
-            className={styles.server}
-            style={{
-              backgroundImage: `url('/Home/17.png')`,
-              backgroundPosition: "50%",
-            }}
-          >
-            <div className={styles.server_style}>
-              <div className={styles.server_text}>
-                <h4>Классика +</h4>1.21.4
-              </div>
-              <p> улучшенная классика с новыми возможностями и оптимизацией.</p>
-              <button onClick={toggleServers}>
-                Начать играть <ChevronRight size={18} />
-              </button>
-            </div>
-            <div className={styles.shadow}></div>
-          </div>
-        </div>
-      </div>
+
+      <Servers />
+
       <div className={styles.launcher} id="launcher">
         <div className={styles.launcher_container}>
           <div className={styles.launcher_title}>
             <div className={styles.launcher_text}>
-              <h4>Загрузи наш лаунчер легко!</h4>
+              <h4>ЗАГРУЗИ НАШ ЛАУНЧЕР ЛЕГКО!</h4>
               <p>
                 Погрузись в мир захватывающих приключений с нашим удобным,
                 функциональным и надежным лаунчером!
@@ -493,7 +258,7 @@ export const Main = () => {
             </div>
             <div className={styles.launcher_buttons}>
               <Link href="/Эпоха Блоков.exe" className={styles.button}>
-                Скачать лаунчер
+                СКАЧАТЬ ЛАУНЧЕР
               </Link>
               <Link href="/auth">Войти в аккаунт</Link>
             </div>
@@ -505,7 +270,6 @@ export const Main = () => {
         <div className={styles.radialB}></div>
         <div className={styles.line}></div>
       </div>
-      {showServers && <Servers onClose={closeServers} />}
     </main>
   );
 };

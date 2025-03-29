@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Rcon } from "rcon-client";
 
+const ALLOWED_ORIGIN = "https://epohablokov.com";
 const rolesHierarchy: Record<string, number> = {
   default: 0,
   Vip: 1,
@@ -52,6 +53,12 @@ async function checkPlayerOnline(user_name: string): Promise<boolean> {
 
 export async function POST(req: Request) {
   try {
+    const origin = req.headers.get("origin") || req.headers.get("referer");
+    if (!origin || !origin.startsWith(ALLOWED_ORIGIN)) {
+      console.warn("Попытка запроса с недопустимого источника:", origin);
+      return NextResponse.json({ error: "Запрос отклонен" }, { status: 403 });
+    }
+
     const isServerAvailable = await checkServerAvailability();
     if (!isServerAvailable) {
       return NextResponse.json(
@@ -60,6 +67,16 @@ export async function POST(req: Request) {
       );
     }
 
+    // Проверка токена авторизации
+    const authHeader = req.headers.get("authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { error: "Неавторизованный доступ" },
+        { status: 401 }
+      );
+    }
+
+    // Получение сессии пользователя
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
       return NextResponse.json(
@@ -76,6 +93,19 @@ export async function POST(req: Request) {
       permission_duration,
       server,
     } = await req.json();
+
+    if (
+      !permission_price ||
+      !user_uuid ||
+      !user_name ||
+      !permission_name ||
+      !permission_duration
+    ) {
+      return NextResponse.json(
+        { error: "Некорректные параметры запроса" },
+        { status: 400 }
+      );
+    }
 
     const isPlayerOnline = await checkPlayerOnline(user_name);
     if (!isPlayerOnline) {
@@ -98,7 +128,6 @@ export async function POST(req: Request) {
     }
 
     const CURRENT_USER_BALANCE = UUID_BALANCE[0].balance;
-
     if (CURRENT_USER_BALANCE < permission_price) {
       return NextResponse.json(
         { error: "Недостаточно средств на балансе" },

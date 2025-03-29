@@ -1,0 +1,133 @@
+.swiper_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(30px) saturate(180%);
+  animation: fadeInOverlay 0.5s forwards;
+}
+
+.swiper_container {
+  background: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transform: scale(0.95);
+}
+
+.image_holder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.current_image {
+  width: 60%;
+  aspect-ratio: 16/9;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.images {
+  width: 50%;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  width: 100%;
+  height: 15vh;
+}
+
+.image_preview {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  filter: brightness(70%);
+}
+
+.image_preview:hover {
+  filter: brightness(100%);
+}
+
+.arrows {
+  width: 100%;
+  position: absolute;
+  justify-content: space-between;
+  display: flex;
+}
+
+.arrow {
+  background: #0f0f0fcc;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  padding: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+
+.arrow:hover {
+  border: 1px solid #4543c0;
+  box-shadow: 0 0 32px #4543c0;
+}
+
+@keyframes fadeInOverlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .current_image {
+    width: 100%;
+  }
+
+  .arrows {
+    display: none;
+  }
+
+  .images {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    width: 100%;
+    grid-gap: 16px;
+    height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .images {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    width: 100%;
+    grid-gap: 16px;
+  }
+
+  .image_preview {
+    height: 75px;
+  }
+}

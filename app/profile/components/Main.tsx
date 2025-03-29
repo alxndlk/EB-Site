@@ -18,6 +18,7 @@ export const Main = () => {
 
   return (
     <main className={styles.profile}>
+      <div className={styles.mask_bg} />
       <div className={styles.profile_padding}>
         <div className={styles.flex_holder}>
           <div className={styles.skin_holder}>
@@ -32,12 +33,12 @@ export const Main = () => {
           </div>
           <div className={styles.options}>
             <Option
-              title="Баланс"
+              title="БАЛАНС"
               topTitle="Используйте свой баланс для того, чтобы покупать предметы и донат-статусы."
-              value="Ваш баланс: "
+              value="ВАШ БАЛАНС: "
               balance={true}
               bottomTitle="Средства не подлежат ограничению по сроку использования."
-              button="Пополнить"
+              button="ПОПОЛНИТЬ"
               status="feature"
               onClick={() => {
                 router.push("/payment");
@@ -56,7 +57,7 @@ export const Main = () => {
             /> */}
 
             <Option
-              title="Почта"
+              title="ПОЧТА"
               topTitle="Ваш основной адрес электронной почты будет использоваться для уведомлений, связанных с учетной записью."
               value={session?.user?.email}
               status="info"
@@ -64,35 +65,33 @@ export const Main = () => {
             />
 
             <Option
-              title="Промокод"
+              title="ПРОМОКОД"
               topTitle="Введите промокод, чтобы получить скидку на донат-группы или другие бонусы."
               bottomTitle="Промокод можно использовать только 1 раз."
               input="Напишите код"
               status="feature"
-              button="Применить"
+              button="ПРИМЕНИТЬ"
               disabled={true}
               loading={status}
             />
             <Option
-              title="Стать разработчиком"
+              title="СТАТЬ РАЗРАБОТЧИКОМ"
               topTitle="Вы можете узнать более подробно и пройти собеседование по ссылкам ниже."
               status="info"
               links={["Telegram", "Discord"]}
               loading={status}
             />
             <Option
-              title="Выйти с аккаунта"
+              title="ВЫЙТИ С АККАУНТА"
               topTitle="В случае утраты пароля его можно восстановить на странице авторизации."
               bottomTitle="Вы уверены, что хотите выйти?"
-              exitButton="Выйти"
+              exitButton="ВЫЙТИ C АККАУНТА"
               status="danger"
               loading={status}
             />
           </div>
         </div>
       </div>
-      <div className={styles.radialB}></div>
-      <div className={styles.line}></div>
     </main>
   );
 };

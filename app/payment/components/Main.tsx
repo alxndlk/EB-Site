@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import styles from "./Main.module.css";
 import { loadStripe } from "@stripe/stripe-js";
@@ -10,91 +9,55 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { ArrowRight, CheckIcon } from "lucide-react";
-import Image from "next/image";
+import { Mail, User, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useUserData } from "@/hooks/useUserData";
-import { TailSpin } from "react-loader-spinner";
+import { useSession } from "next-auth/react";
+import { Currency } from "@/app/ui/currency";
+import { useRouter } from "next/navigation";
+import { Method } from "./SelectMethod/Method";
+import { v4 } from "uuid";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
-const PaymentForm = ({ value, session, name }) => {
-  const PAYMENT_AMOUNT: number = Number((value / 85).toFixed(2));
+const PaymentForm = ({ value, session, name, paymentType }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [message, setMessage] = useState<{
+    text: string | null;
+    type: "success" | "error" | null;
+  }>({ text: null, type: null });
+
+  const isDisabled =
+    !isChecked ||
+    !name.trim() ||
+    !session?.user?.email ||
+    parseFloat(value) < 100;
+
   const stripe = useStripe();
   const elements = useElements();
-  const [error, setError] = useState<{
-    text: string | null;
-    status: number | null;
-  }>({
-    text: null,
-    status: null,
-  });
+  const router = useRouter();
 
-  const [success, setSuccess] = useState<{
-    text: string | null;
-    status: number | null;
-  }>({
-    text: null,
-    status: null,
-  });
+  const PAYMENT_AMOUNT = Number((parseFloat(value) / 85).toFixed(2));
+  const PAYMENT_RUB_CURRENCY = "123.00";
 
-  const [warning, setWarning] = useState<{
-    text: string | null;
-    status: number | null;
-  }>({
-    text: null,
-    status: null,
-  });
+  const handlePayment = async () => {
+    setMessage({ text: null, type: null });
 
-  const handleResetErrors = () => {
-    setError({ text: null, status: null });
-  };
-
-  const handleUpdateBalance = async () => {
-    setError({ text: null, status: null });
-
-    if (!stripe || !elements) {
-      setError({
-        text: "Ошибка при инициализации платежной системы",
-        status: 500,
-      });
-      return;
-    }
-
-    if (!session?.user?.email) {
-      setError({ text: "Необходимо авторизоваться", status: 403 });
-      return;
-    }
-
-    if (!name) {
-      setError({ text: "Введите никнейм", status: 400 });
-      return;
-    }
-
-    if (Number(value) === 0) {
-      setError({ text: "Минимальное пополнение на 100 валюты", status: 400 });
-      return;
-    }
+    if (isDisabled) return;
 
     const cardElement = elements.getElement(CardElement);
-    if (!cardElement) {
-      setError({ text: "Данные карты не найдены", status: 400 });
-      return;
-    }
+    if (!cardElement)
+      return setMessage({ text: "Ошибка карты", type: "error" });
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
 
-    if (error) {
-      setError({ text: "Некорректные данные карты", status: 400 });
-      return;
-    }
-
-    console.log(Number(value));
+    if (error)
+      return setMessage({ text: "Некорректные данные карты", type: "error" });
 
     try {
       const response = await fetch("/api/payment", {
@@ -102,216 +65,255 @@ const PaymentForm = ({ value, session, name }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount: PAYMENT_AMOUNT,
-          email: session?.user?.email,
+          email: session.user.email,
           paymentMethodId: paymentMethod.id,
           userName: name,
         }),
       });
 
       const result = await response.json();
-
       if (result.success) {
-        setSuccess({ text: "Оплата прошла успешно", status: 200 });
-      } else if (!result.success) {
-        setError({ text: result.error, status: 500 });
-      } else if (result.requires_action) {
-        setWarning({
-          text: "Необходима дополнительная проверка платежа",
-          status: 300,
-        });
+        setMessage({ text: "Оплата успешна", type: "success" });
+        setTimeout(() => router.push("/profile"), 2000);
       } else {
-        setError({ text: "Ошибка при обработке платежа", status: 500 });
+        setMessage({
+          text: result.error || "Ошибка при обработке платежа",
+          type: "error",
+        });
+      }
+    } catch {
+      setMessage({ text: "Сервер недоступен", type: "error" });
+    }
+  };
+
+  const handlePaymentRUB = async () => {
+    setMessage({ text: null, type: null });
+
+    const uuid = v4();
+    console.log("UUID:", uuid);
+
+    if (isDisabled) return;
+
+    const paymentData = {
+      amount: {
+        value: "10.00",
+        currency: "RUB",
+      },
+      customer: {
+        id: uuid,
+        settlement_method: "card",
+      },
+      confirmation: {
+        type: "redirect",
+        return_url: "https://epohablokov.com/profile",
+      },
+      description: `Покупка игровой валюты на проекте "Эпоха Блоков" на сумму 123.00 RUB`,
+      metadata: {
+        order_id: uuid,
+      },
+    };
+
+    try {
+      const response = await fetch("/api/paymentRUB", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentData),
+      });
+
+      const result = await response.json();
+      console.log("Ответ от API:", result);
+
+      if (result.status === "pending") {
+        setMessage({
+          text: "Платеж успешно создан. Перенаправляем на страницу оплаты...",
+          type: "success",
+        });
+
+        window.location.href = result.confirmation_url;
+      } else {
+        setMessage({
+          text: `Ошибка: ${result.error?.message || "Неизвестная ошибка"}`,
+          type: "error",
+        });
       }
     } catch (error) {
-      setError({ text: "Сервер недоступен", status: 500 });
+      console.error("Ошибка запроса:", error);
+      setMessage({ text: "Ошибка сервера", type: "error" });
     }
   };
 
   return (
     <>
-      <CardElement
-        className={styles.card}
-        options={{
-          style: {
-            base: { fontSize: "16px", color: "#fff" },
-            invalid: { color: "red" },
-          },
-        }}
-      />
-      <div className={styles.images}>
-        <Image src="/visa.png" height={25} width={50} alt="visa" />
-        <Image src="/mastercard.png" height={25} width={50} alt="visa" />
+      {paymentType.type != null && paymentType.type != "Рубли" && (
+        <CardElement
+          className={styles.card}
+          options={{
+            style: {
+              base: { fontSize: "16px", color: "#fff" },
+              invalid: { color: "red" },
+            },
+          }}
+        />
+      )}
+
+      <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          className={styles.checkbox_button}
+          checked={isChecked}
+          onChange={(e) => setIsChecked(e.target.checked)}
+        />
+        <span className={styles.accept}>
+          Я соглашаюсь с<Link href="/rules">правилами сервера</Link>
+        </span>
       </div>
-
-      <p className={styles.pay_paragraph}>
-        UAH, KZT, EUR, DOL. Транзакция происходит в долларах. Некоторые карты
-        могут не принимать эти платежи или потребовать подтверждение. Доступно
-        для всех стран, кроме PБ и РФ. Для оплаты в рублях пишите лично в {""}
-        <Link href="https://t.me/alxndlk" className={styles.link}>
-          Telegram.
-        </Link>
-      </p>
-
-      {error.text && (
-        <div
-          className={`${styles.button} ${styles.error_button}`}
-          onClick={handleResetErrors}
+      {paymentType.type === "Рубли" ? (
+        <button
+          className={`${styles.button} ${isDisabled ? styles.disable : ""}`}
+          onClick={handlePaymentRUB}
+          disabled={isDisabled}
         >
-          <span>Ошибка</span>
-          <p>{error.text}</p>
-        </div>
-      )}
-
-      {!error.text && !warning.text && !success.text && (
-        <div className={styles.button} onClick={handleUpdateBalance}>
-          <span>
-            {value == Number(0)
-              ? `Введите сумму`
-              : `Пополнить на ${value}₽ / ${PAYMENT_AMOUNT}$`}
-          </span>
-          <ArrowRight className={styles.ArrowRight} />
-        </div>
-      )}
-
-      {warning.text && (
-        <div className={`${styles.button} ${styles.warning_button}`}>
-          <span>Ожидание подтверждения</span>
-          <ArrowRight className={styles.ArrowRight} />
-        </div>
-      )}
-
-      {success.text && (
-        <div className={`${styles.button} ${styles.warning_button}`}>
-          <span>Платеж прошел успешно</span>
-          <CheckIcon className={styles.ArrowRight} />
-        </div>
+          ПЕРЕЙТИ К ОПЛАТЕ В РУБЛЯХ
+        </button>
+      ) : message.text ? (
+        <button
+          className={`${styles.button} ${styles.disable}`}
+          onClick={() => setMessage({ text: null, type: null })}
+          disabled={isDisabled}
+        >
+          {message.text}
+        </button>
+      ) : (
+        <button
+          className={`${styles.button} ${isDisabled ? styles.disable : ""}`}
+          onClick={handlePayment}
+          disabled={isDisabled}
+        >
+          ПЕРЕЙТИ К ОПЛАТЕ
+        </button>
       )}
     </>
   );
 };
 
 export const Main = () => {
-  const { userData, pending } = useUserData();
+  const { userData } = useUserData();
+  const { data: session } = useSession();
+  const [name, setName] = useState("");
+  const [value, setValue] = useState(null);
 
-  const [name, setName] = useState(userData?.username || "");
+  const [paymentType, setPaymentType] = useState<{
+    type: "Гривны" | "Доллары" | "Евро" | "Рубли" | "Инностранные карты" | null;
+  }>({ type: null });
+
+  const [visible, setVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    setName(userData?.username || "");
-  }, [userData]);
-
-  const { data: session } = useSession();
-  const [value, setValue] = useState("250");
-  const [error, setError] = useState<string | null>(null);
-
-  const validateForm = () => {
-    setError(null);
-    if (Number(value) < 1) {
-      setError("Ошибка: Минимальное пополнение на 100 валюты");
-      return false;
-    }
-    if (!name) {
-      setError("Ошибка: Введите никнейм");
-      return false;
-    }
-    return true;
-  };
+    if (userData?.username) setName(userData.username);
+  }, [userData?.username]);
 
   return (
     <div className={styles.main}>
+      {visible && (
+        <Method
+          onClose={() => setVisible(false)}
+          onSelect={(type) => setPaymentType({ type })}
+        />
+      )}
       <div className={styles.mainContainer}>
-        {pending ? (
-          <TailSpin width={48} height={48} color="#fff" />
-        ) : (
-          <div className={styles.holder_content}>
-            <div className={styles.title}>
-              <h4>Пополнить баланс</h4>
-              <p>
-                Все ваши платежи надежно защищены благодаря современным
-                технологиям безопасности
-              </p>
-            </div>
-
-            <div className={styles.content}>
-              <div className={styles.container}>
-                <div className={styles.title_container}>
-                  <h4>1. Введите ник</h4>
-                </div>
-                <div className={styles.info}>
-                  <div className={styles.inputs}>
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Ник игрока"
-                    />
-                    <p>
-                      Можно написать ник другого игрока — тогда покупка придёт к
-                      нему на аккаунт. Поздравь и порадуй друга или подругу :)
-                    </p>
+        <div className={styles.mask} />
+        <div className={styles.left_holder}>
+          <div className={styles.title}>
+            <h4>Спасибо за поддержку проекта!</h4>
+            <span>
+              Благодаря Вашим донатам, мы можем развивать проект, добавлять
+              новые возможности и делать игру еще интереснее!
+            </span>
+          </div>
+        </div>
+        <div className={styles.holder_content}>
+          <h4 className={styles.title}>ПОПОЛНИТЬ БАЛАНС</h4>
+          <div className={styles.container}>
+            <div className={styles.info}>
+              <div className={styles.container_values}>
+                <div className={styles.flex_row}>
+                  <div className={styles.icon}>
+                    <User size={16} />
                   </div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Ник игрока"
+                  />
                 </div>
               </div>
-
-              <div className={styles.container}>
-                <div className={styles.title_container}>
-                  <h4>2. Выберите сумму</h4>
-                </div>
-                <div className={styles.values}>
-                  <div className={styles.value}>
-                    {[250, 500, 1000, 2500, 5000].map((amount) => (
-                      <button
-                        className="flex gap-2"
-                        key={amount}
-                        onClick={() => setValue(String(amount))}
-                      >
-                        {amount}{" "}
-                        <Image
-                          width={20}
-                          height={20}
-                          alt="rubby"
-                          className={styles.rubby}
-                          src={"/rubby.png"}
-                        />
-                      </button>
-                    ))}
+              <div className={styles.container_values}>
+                <div className={styles.flex_row}>
+                  <div className={styles.icon}>
+                    <Mail size={16} />
                   </div>
-                  <div className={styles.finish}>
-                    <input
-                      type="number"
-                      value={value}
-                      onChange={(e) => setValue(e.target.value)}
-                      placeholder="Не менее 100"
-                    />
-                    <div className={styles.dollar}>
-                      {" "}
-                      <Image
-                        width={20}
-                        height={20}
-                        alt="rubby"
-                        className={styles.rubby}
-                        src={"/rubby.png"}
-                      />
-                    </div>
-                  </div>
+                  <input
+                    type="text"
+                    value={session?.user?.email}
+                    placeholder="Email для квитанции"
+                  />
                 </div>
               </div>
-
-              <div className={styles.container}>
-                <div className={styles.title_container}>
-                  <h4>3. Оплата</h4>
+              <div className={styles.container_values}>
+                <div className={styles.flex_row}>
+                  <div className={styles.icon}>
+                    <Wallet size={16} />
+                  </div>
+                  {paymentType.type == null ? (
+                    <button
+                      className={styles.payment_type}
+                      onClick={() => {
+                        setVisible(true);
+                      }}
+                    >
+                      Способ оплаты
+                    </button>
+                  ) : (
+                    <button className={styles.payment_type}>
+                      {paymentType.type}
+                    </button>
+                  )}
                 </div>
-                <div className={styles.pay}>
-                  <Elements stripe={stripePromise}>
-                    <PaymentForm value={value} session={session} name={name} />
-                  </Elements>
+              </div>
+              <div className={styles.container_values}>
+                <div className={styles.flex_row}>
+                  <Currency />
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) => setValue(e.target.value.replace(/\D/, ""))}
+                    placeholder="Введите сумму в рублях"
+                  />
+                </div>
+                <div className={styles.text_money}>
+                  Мин: 100
+                  <Currency />
                 </div>
               </div>
             </div>
           </div>
-        )}
+          <div className={styles.pay}>
+            <Elements stripe={stripePromise}>
+              <PaymentForm
+                value={value}
+                session={session}
+                name={name}
+                paymentType={paymentType}
+              />
+            </Elements>
+          </div>
+        </div>
+        <div className={styles.radial}></div>
+        <div className={styles.line}></div>
       </div>
-      <div className={styles.radial}></div>
-      <div className={styles.line}></div>
     </div>
   );
 };

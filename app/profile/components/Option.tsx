@@ -4,31 +4,36 @@ import { InputActive } from "@/app/ui/input";
 import { ExternalLinkIcon } from "lucide-react";
 import { ButtonRed } from "@/app/ui/buttonRed";
 import { signOut } from "next-auth/react";
-import Skeleton from "react-loading-skeleton";
-import Image from "next/image";
+import Cookies from "js-cookie";
+import { Currency } from "@/app/ui/currency";
 
 interface IOption {
   title?: string;
   topTitle?: string;
-  input?: string | number | undefined;
+  input?: string | number;
   value?: any;
-  balance?: true;
+  balance?: boolean;
   status?: keyof typeof statuses;
-  links?: Array<string>;
+  links?: string[];
   bottomTitle?: string;
   button?: string;
   exitButton?: string;
   role?: boolean;
   disabled?: boolean;
   onClick?: () => void;
-  date?: string | null;
+  date?: string;
   loading?: string;
 }
 
 const statuses = {
-  info: "Инфо",
-  danger: "Опасно",
-  feature: "Опция",
+  info: "ИНФО",
+  danger: "ОПАСНО",
+  feature: "ОПЦИЯ",
+};
+
+const socialLinks: Record<string, string> = {
+  telegram: "https://t.me/+vO9cZ8FtLD85YmYy",
+  discord: "https://discord.gg/gQxQNpYjmy",
 };
 
 export const Option = ({
@@ -38,207 +43,88 @@ export const Option = ({
   balance,
   onClick,
   exitButton,
-  role,
   value,
   status,
   links,
-  bottomTitle,
   button,
   disabled = false,
   date,
-  loading,
 }: IOption) => {
   const { userData } = useUserData();
 
-  const generateLink = (name: string) => {
-    switch (name.toLowerCase()) {
-      case "telegram":
-        return "https://t.me/+vO9cZ8FtLD85YmYy";
-      case "discord":
-        return "https://discord.gg/gQxQNpYjmy";
-      default:
-        return "#";
-    }
-  };
-
-  if (loading == "loading") {
-    return (
-      <div>
-        <Skeleton
-          height={164}
-          baseColor="transparent"
-          borderRadius={10}
-          highlightColor="#ffffff1a"
-        >
-          <div className={styles.option}>
-            <div className={styles.top_text}>
-              {title && (
-                <h4>
-                  {title}
-                  {status && statuses[status] && (
-                    <span className={styles[status]}>{statuses[status]}</span>
-                  )}
-                </h4>
-              )}
-              {topTitle && <span>{topTitle}</span>}
-              {input && (
-                <InputActive
-                  placeholder={input}
-                  margin="8px 0px 0px 0px"
-                  disabled={disabled}
-                />
-              )}
-              {value && (
-                <span className={styles.balance}>
-                  {value}
-                  {balance && (
-                    <div className={styles.balance_value}>
-                      {`${(userData?.balance ?? 0).toLocaleString("ru-RU", {
-                        style: "decimal",
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}`}
-                      <Image
-                        width={16}
-                        height={16}
-                        alt="rubby"
-                        src={"/rubby.png"}
-                      />
-                    </div>
-                  )}
-                  {role && userData?.role && (
-                    <div
-                      className={`${styles.role} ${
-                        styles[userData.role.toLowerCase()]
-                      }`}
-                    >
-                      {userData.role.toUpperCase()}
-                    </div>
-                  )}
-                </span>
-              )}
-              {date && (
-                <div className={styles.date}>
-                  Донат-статус действителен до{" "}
-                  {new Date(date).toLocaleDateString()}.
-                </div>
-              )}
-              {links && links.length > 0 && (
-                <ul className={styles.links}>
-                  {links.map((link, index) => (
-                    <li key={index} className={styles.link}>
-                      <a href={generateLink(link)} target="_blank">
-                        {link}
-                      </a>
-                      <ExternalLinkIcon size={14} />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            {(bottomTitle || button || exitButton) && (
-              <div className={styles.bottom_text}>
-                {bottomTitle && <p>{bottomTitle}</p>}
-                {button && (
-                  <button
-                    className={styles.button}
-                    style={disabled ? { cursor: "no-drop" } : {}}
-                    disabled={disabled}
-                    onClick={onClick}
-                  >
-                    {button}
-                  </button>
-                )}
-                {exitButton && (
-                  <ButtonRed onClick={() => signOut()} text={exitButton} />
-                )}
-              </div>
-            )}
-          </div>
-        </Skeleton>
-      </div>
-    );
-  }
+  const USER_BALANCE = Number(userData?.balance).toFixed(2);
 
   return (
     <div className={styles.option}>
       <div className={styles.top_text}>
         {title && (
           <h4>
-            {title}
-            {status && statuses[status] && (
+            {title}{" "}
+            {status && (
               <span className={styles[status]}>{statuses[status]}</span>
             )}
           </h4>
         )}
         {topTitle && <span>{topTitle}</span>}
-        {input && (
-          <InputActive
-            placeholder={input}
-            margin="8px 0px 0px 0px"
-            disabled={disabled}
-          />
-        )}
-        {value && (
-          <span className={styles.balance}>
-            {value}
-            {balance && (
-              <div className={styles.balance_value}>
-                {`${(userData?.balance ?? 0).toLocaleString("ru-RU", {
-                  style: "decimal",
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}`}
-                <Image width={16} height={16} alt="rubby" src={"/rubby.png"} />
-              </div>
-            )}
-            {role && userData?.role && (
-              <div
-                className={`${styles.role} ${
-                  styles[userData.role.toLowerCase()]
-                }`}
-              >
-                {userData.role.toUpperCase()}
-              </div>
-            )}
-          </span>
-        )}
-        {date && (
-          <div className={styles.date}>
-            Донат-статус действителен до {new Date(date).toLocaleDateString()}.
-          </div>
-        )}
-        {links && links.length > 0 && (
-          <ul className={styles.links}>
-            {links.map((link, index) => (
-              <li key={index} className={styles.link}>
-                <a href={generateLink(link)} target="_blank">
-                  {link}
-                </a>
-                <ExternalLinkIcon size={14} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      {(bottomTitle || button || exitButton) && (
-        <div className={styles.bottom_text}>
-          {bottomTitle && <p>{bottomTitle}</p>}
+
+        <div className={styles.bottom_title}>
+          {input && (
+            <InputActive
+              placeholder={String(input)}
+              margin="8px 0 0 0"
+              disabled={disabled}
+            />
+          )}
+          {value && (
+            <span className={styles.balance}>
+              <span className={styles.balance_value_span}>{value}</span>
+              {balance && (
+                <div className={styles.balance_value}>
+                  {userData?.balance && USER_BALANCE}
+                  <Currency />
+                </div>
+              )}
+            </span>
+          )}
           {button && (
             <button
               className={styles.button}
-              style={disabled ? { cursor: "no-drop" } : {}}
+              style={{ cursor: disabled ? "no-drop" : "pointer" }}
               disabled={disabled}
               onClick={onClick}
             >
               {button}
             </button>
           )}
+
+          {links && links.length > 0 && (
+            <ul className={styles.links}>
+              {links.map((link, index) => (
+                <li key={index} className={styles.link}>
+                  <a
+                    href={socialLinks[link.toLowerCase()] || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link}
+                  </a>
+                  <ExternalLinkIcon size={14} />
+                </li>
+              ))}
+            </ul>
+          )}
           {exitButton && (
-            <ButtonRed onClick={() => signOut()} text={exitButton} />
+            <ButtonRed
+              onClick={() => {
+                Cookies.remove("user_name");
+                Cookies.remove("user_email");
+                signOut();
+              }}
+              text={exitButton}
+            />
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

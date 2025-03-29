@@ -1,45 +1,46 @@
 .statusBar {
-    padding: 0px 12px;
-    height: 32px;
-    transition: 0.1s ease;
-    border-radius: 6px;
-    z-index: 999;
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    font-weight: 500;
-    position: absolute;
-    top: 6rem;
-    min-width: 300px;
-    transform: translateY(-20px);
-    animation: slideIn 0.8s ease forwards;
-    gap: 2rem;
+  padding: 0 20px;
+  height: 48px;
+  transition: 0.1s ease;
+  border-radius: 6px;
+  z-index: 999;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  font-weight: 600;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  min-width: 300px;
+  transform: translateY(-20px);
+  animation: slideIn 0.8s ease forwards;
+  gap: 2rem;
+  border: 1px solid #2e2e2e;
 }
 
 .success {
-    color: #449d5d;
-    background: #449d5d25;
+  color: #449d5d;
+  background: #449d5d25;
 }
 
 .error {
-    background: hsla(357, 37%, 12%, 1);
-    color: hsla(358, 100%, 69%, 1);
+  background: hsla(357, 37%, 12%, 1);
+  color: hsla(358, 100%, 69%, 1);
 }
 
 @keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    20% {
-        opacity: 1;
-        transform: translateY(10px);
-}
-    100% {
-        transform: translateY(0px);
-}
-
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }

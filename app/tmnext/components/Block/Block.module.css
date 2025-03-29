@@ -1,0 +1,89 @@
+.blockContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 1rem;
+  transition: 0.3s ease;
+}
+.blockContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden; /* Скрываем лишнее за пределами контейнера */
+  position: relative;
+}
+
+.block {
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  display: grid;
+  gap: 1rem;
+  will-change: transform; /* Оптимизация анимации */
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.image {
+  background-size: contain;
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+  width: 100%;
+  z-index: 999;
+}
+
+.block {
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  display: grid;
+  gap: 1rem;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.image {
+  background-size: contain;
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.moveRight {
+  animation: moveRight 10s linear infinite alternate;
+}
+
+.moveLeft {
+  animation: moveLeft 10s linear infinite alternate;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(-25px);
+  }
+  100% {
+    transform: translateX(-125px);
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(25px);
+  }
+  100% {
+    transform: translateX(125px);
+  }
+}

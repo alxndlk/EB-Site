@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import styles from "./ui.module.css";
 import { CheckIcon } from "lucide-react";
+import * as Icons from "lucide-react";
 
 interface I_InputActive {
   placeholder?: any;
@@ -12,6 +12,7 @@ interface I_InputActive {
   icon?: boolean;
   margin?: string;
   disabled?: boolean;
+  iconName?: keyof typeof Icons;
 }
 
 export const InputActive = ({
@@ -24,9 +25,13 @@ export const InputActive = ({
   icon,
   margin,
   disabled = false,
+  iconName,
 }: I_InputActive) => {
+  const LucideIcon = iconName ? Icons[iconName] : null;
+
   return (
     <div className={styles.inputContainer} style={{ margin }}>
+      {LucideIcon && <LucideIcon size={16} color="gray" absoluteStrokeWidth />}
       <input
         className={`${styles.InputActive}`}
         placeholder={placeholder}

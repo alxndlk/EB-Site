@@ -1,265 +1,222 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Main.module.css";
-import { TableRow } from "./TableRow";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import Link from "next/link";
+import { FaWindows } from "react-icons/fa";
+import { ArrowRight, Download } from "lucide-react";
+import { UpdateList } from "@/app/updates/updateList";
+import { Block } from "./Block/Block";
+import { IoPlayCircle } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export const Main = () => {
-  const urlArray = [
-    "/Home/home_tmnext.png",
-    "/Home/123.png",
-    "/Home/3.png",
-    "/Home/4.png",
-    "/Home/5.png",
-    "/Home/6.png",
-    "/Home/7.png",
-    "/Home/8.png",
-    "/Home/9.png",
-    "/Home/10.png",
-    "/Home/11.png",
-    "/Home/12.png",
-    "/Home/13.png",
-    "/Home/14.png",
-    "/Home/15.png",
-    "/Home/16.png",
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? urlArray.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === urlArray.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  const router = useRouter();
 
   return (
     <main className={styles.main}>
-      <div className={styles.top_container}>
-        <div className={styles.holder}>
-          <p>СЕЗОН 2</p>
-          <h1>Техно-Магия: NEXT Уже доступна!</h1>
-          <span>
-            Добро пожаловать в мир безграничных возможностей! Исследуйте и
-            создавайте вместе с нами.
-          </span>
-          <Link href="#launcher">Начать играть</Link>
-        </div>
-        <div className={styles.items}>
-          <div className={styles.item}>
-            <h4>1.20.1</h4>
-            <p>Версия Minecraft</p>
-          </div>
-          <div className={styles.item}>
-            <h4>БЕСКОНЕЧНЫЙ</h4>
-            <p>Площадь мира</p>
-          </div>
-          <div className={styles.item}>
-            <h4>PVP</h4>
-            <p>Режим сервера</p>
-          </div>
-          <div className={styles.item}>
-            <h4>250+</h4>
-            <p>Количество модов</p>
-          </div>
-          <div className={styles.item}>
-            <h4>HARD</h4>
-            <p>Сложность игры</p>
-          </div>
-        </div>
-      </div>
-      <div className={styles.mods}>
-        <div className={styles.features_title}>
-          <span>Список модов</span>
-          <div className={styles.features_header}>
-            <h3>Все, что нужно для уникального приключения!</h3>
-            <p>
-              Используй мощные инструменты, чтобы создавать, развивать и
-              расширять свой мир, делая его таким, каким ты хочешь его видеть!
-            </p>
-          </div>
-        </div>
+      <section className={styles.holder_top}>
+        <div className={styles.shadow} />
+        <div className={styles.top}>
+          <div className={styles.shadow} />
 
-        <div className={styles.features}>
-          <div className={styles.table_header}>
-            <h3>Название мода</h3>
-            <h3>Описание</h3>
-          </div>
-          <TableRow
-            modName="Applied Energistics 2"
-            description="Организуйте свои ресурсы и автоматизируйте производство с помощью мощной системы хранения и обработки предметов. Создавайте сложные сети, оптимизируйте процессы и управляйте своим миром с максимальной эффективностью!"
-          />
-          <TableRow
-            modName="Avaritia"
-            description="Создавайте невероятно мощные предметы и инструменты с использованием редких ресурсов и сложных рецептов. Раскройте потенциал безграничной мощи и достигните вершины игры!"
-          />
-          <TableRow
-            modName="Botania"
-            description="Исследуйте таинственные цветы, используйте ману для создания мощных артефактов и автоматизации процессов. Украсьте мир и откройте новые возможности через природную магию!"
-          />
-          <TableRow
-            modName="Deeper Caves"
-            description="Добавляет опасные уровни пещер с уникальными биомами и редкими ресурсами. Исследуйте глубины и открывайте неизведанное!"
-          />
-          <TableRow
-            modName="Divine RPG"
-            description="Расширяет мир новыми измерениями, монстрами и боссами. Откройте новые миры, сражайтесь с могущественными врагами и добывайте уникальные ресурсы для создания легендарного снаряжения!"
-          />
-          <TableRow
-            modName="Ender IO"
-            description="Передовые технологии для автоматизации, транспорта и хранения предметов. Создайте мощные машины, сети и системы, которые упростят вашу жизнь и повысят эффективность в игре!"
-          />
-          <TableRow
-            modName="Industrial Foregoing"
-            description="мод для автоматизации процессов, включая переработку ресурсов и управление животными. Упростите свою игру с помощью мощных машин!"
-          />
-          <TableRow
-            modName="Mekanism"
-            description="Высокотехнологичные устройства и механизмы для автоматизации, переработки ресурсов и создания мощных энергосистем. Расширьте возможности своего мира с помощью передовых технологий и инновационных решений!"
-          />
-          <TableRow
-            modName="Thermal Series"
-            description="Hабор модов для создания мощных машин и систем автоматизации. Используйте энергогенерацию, переработку ресурсов и улучшение инструментов для оптимизации процессов в вашем мире!"
-          />
-          <TableRow
-            modName="Iron Chest"
-            description="Добавляет улучшенные сундуки с увеличенной вместимостью. Используйте новые типы сундуков для эффективного хранения предметов!"
-          />
-          <TableRow
-            modName="Advanced AE"
-            description="Дополнение для Applied Energistics 2, расширяющее возможности автоматизации и хранения ресурсов!"
-          />
-          <TableRow
-            modName="Mekanism: EXTRA"
-            description="Дополнение к Mekanism, добавляющее новые механизмы, улучшенные генераторы и расширенные системы переработки ресурсов!"
-          />
-          <TableRow
-            modName="Powah"
-            description="Высокотехнологичная генерация энергии с множеством уровней улучшений. Оптимизируйте энергообеспечение вашего мира!"
-          />
-          <TableRow
-            modName="Productive Bees"
-            description="Мод, добавляющий пчёл для автоматизированного сбора ресурсов. Выводите новые виды и получайте ценные материалы!"
-          />
-          <TableRow
-            modName="Solar Flux"
-            description="Добавляет солнечные панели для экологичной генерации энергии. Развивайте свою энергетическую систему!"
-          />
-          <TableRow
-            modName="Artifacts"
-            description="Набор уникальных артефактов, улучшающих характеристики игрока. Найдите редкие предметы и станьте сильнее!"
-          />
-          <TableRow
-            modName="Relics"
-            description="Добавляет магические реликвии с особыми эффектами. Исследуйте мир и найдите могущественные предметы!"
-          />
-          <TableRow
-            modName="Gobber 2"
-            description="Дополняет игру мощными инструментами, бронёй и магическими предметами. Улучшите свои способности и станьте непобедимым!"
-          />
-          <TableRow
-            modName="Forbidden and Arcanus"
-            description="Исследуйте древнюю магию, создавайте мощные артефакты и изучайте тёмные заклинания!"
-          />
-          <TableRow
-            modName="Backpacks"
-            description="Добавляет удобные рюкзаки для расширения инвентаря. Носите больше вещей с комфортом!"
-          />
-          <TableRow
-            modName="Angel Ring"
-            description="Открывает возможность раннего полёта, облегчая исследование мира!"
-          />
-          <TableRow
-            modName="Iron Furnaces"
-            description="Добавляет новые способы выплавки руд и обработки материалов!"
-          />
-          <TableRow
-            modName="Waystones"
-            description="Мод для удобных телепортов с использованием путевых камней. Перемещайтесь по миру быстрее!"
-          />
+          <video muted loop autoPlay className={styles.video} playsInline>
+            <source src="/videos/videotm.mp4" type="video/mp4" />
+          </video>
 
-          <TableRow
-            modName="Еще 200+ модов"
-            description="Мы просто не смогли бы уместить все моды, которые добавили на 1 страницу. Мы написали только основные."
-          />
-        </div>
-      </div>
-      <div className={styles.container}>
-        <div className={styles.features_title}>
-          <span>Галерея</span>
-          <div className={styles.features_header}>
-            <h3>Исследуйте мир через яркие кадры!</h3>
-            <p>
-              Посмотрите наши скриншоты ниже и погрузитесь в мир, который мы
-              создали!
-            </p>
+          <div className={styles.title}>
+            <h3>“Такая, которой её еще не показывали.”</h3>
+            <span>Сезон 2.1</span>
+            <button
+              className={styles.button}
+              onClick={() => {
+                router.push("/Эпоха Блоков.exe");
+              }}
+            >
+              <FaWindows size={48} />
+              <div className={styles.flex_col}>
+                <h4>НАЧАТЬ ИГРАТЬ</h4>
+                <h5>БЕСПЛАТНО</h5>
+              </div>
+            </button>
           </div>
-        </div>
-        <div className={styles.gallery}>
-          <div className={styles.arrows}>
-            <div className={styles.arrow}>
-              <ChevronLeftIcon
-                size={28}
-                absoluteStrokeWidth
-                onClick={handlePrev}
-              />
+
+          <div className={styles.content}>
+            <div className={styles.flex_row}>
+              <h2>ПОСЛЕДНИЕ ОБНОВЛЕНИЯ</h2>
+              <h1>
+                СМОТРЕТЬ ВСЕ <ArrowRight size={14} />
+              </h1>
             </div>
-            <div className={styles.arrow}>
-              <ChevronRightIcon
-                size={28}
-                absoluteStrokeWidth
-                onClick={handleNext}
-              />
+            <div className={styles.container}>
+              {Object.entries(UpdateList.tmnext).map(([key, update]) => (
+                <div
+                  key={key}
+                  className={
+                    key === "0.2"
+                      ? styles.updates
+                      : `${styles.updates} ${styles.disable}`
+                  }
+                >
+                  <div className={styles.text}>
+                    <span>{update.date}</span>
+                    <h3>{update.name}</h3>
+                    <p>{update.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <div
-            className={styles.slider}
-            style={{ transform: `translateX(-${currentIndex * 6.25}%)` }}
+        </div>
+      </section>
+
+      <section className={styles.image}>
+        <div className={styles.shadow} />
+        <div className={styles.shadow_t} />
+
+        <div className={styles.text_image}>
+          <span>v1.20.1</span>
+          <h3>ТЕХНО-МАГИЯ: NEXT</h3>
+          <p>
+            Добро пожаловать в мир безграничных возможностей! Здесь вас ждут
+            удивительные приключения, захватывающие открытия и бесконечные
+            горизонты для творчества. Исследуйте, создавайте и станьте частью
+            уникального сообщества!
+          </p>
+          <button
+            className={styles.button}
+            onClick={() => {
+              router.push("/Эпоха Блоков.exe");
+            }}
           >
-            {urlArray.map((src, index) => (
-              <div
-                className={styles.slide}
-                style={{ background: `url(${src}) no-repeat center/cover` }}
-                key={index}
-              />
-            ))}
-          </div>
+            <Download /> СКАЧАТЬ ЛАУНЧЕР
+          </button>
         </div>
-      </div>
-      <div className={styles.launcher} id="launcher">
-        <div className={styles.launcher_container}>
-          <div className={styles.launcher_title}>
-            <div className={styles.launcher_text}>
-              <h4>Загрузи наш лаунчер легко!</h4>
+      </section>
+      <section className={styles.mods}>
+        <div className={styles.shadow_mods} />
+        <div className={styles.shadow_mods_l} />
+        <div className={styles.shadow_mods_r} />
+        <div className={styles.shadow_mods_t} />
+        <div className={styles.mods_holder}>
+          <Block />
+        </div>
+      </section>
+      <section className={styles.hold}>
+        <div className={styles.shadow} />
+        <div className={styles.shadow_t} />
+
+        <div className={styles.hold_image}>
+          <div className={styles.text_holder}>
+            <div className={`${styles.text_content} ${styles.title_text}`}>
+              <span>СПИСОК</span>
+              <div className={styles.mod_list}>
+                <div className={styles.mod_title}>
+                  <h3>Технические и индустриальные моды:</h3>
+                  <p>
+                    Applied Energistics 2 – система хранения предметов и
+                    автоматизация.
+                  </p>
+                  <p>
+                    Mekanism – расширенная индустриальная механика, генерация
+                    энергии, машины.
+                  </p>
+                  <p>Thermal Series – базовые ресурсы для Thermal серии.</p>
+                  <p>Powah – альтернативная система генерации энергии.</p>
+                  <p>Flux Networks – беспроводная передача энергии.</p>
+                </div>
+                <div className={styles.mod_title}>
+                  <h3>Магические моды:</h3>
+                  <p>
+                    Applied Botanics – связка Botania и Applied Energistics 2.
+                  </p>
+                  <p>
+                    Botania (через Botanical Machinery и MythicBotany) – магия
+                    через растения и мана-систему.
+                  </p>
+                  <p>Enigmatic Legacy – магические предметы и способности.</p>
+                  <p>
+                    Forbidden and Arcanus – магия, алтари и еще раз магия...
+                  </p>
+                </div>
+                <div className={styles.mod_title}>
+                  <h3>Геймплейные улучшения:</h3>
+                  <p>Tectonic – генерация мира.</p>
+                  <p>Falling Tree – реалистичное срубание деревьев.</p>
+                  <p>Artifacts – уникальные артефакты с эффектами.</p>
+                  <p>Better Stats – улучшенные характеристики игрока.</p>
+                  <p>Mouse Tweaks – удобное управление инвентарем.</p>
+                  <p>JEI – просмотр рецептов крафта.</p>
+                  <p>Loot Beams – подсветка предметов при дропе.</p>
+                  <p>Jade – аналог WAILA для просмотра информации о блоках.</p>
+                  <p>Curios API – система аксессуаров и слотов.</p>
+                </div>
+                <div className={styles.mod_title}>
+                  <h3>Графические и UI-улучшения:</h3>
+                  <p>Oculus – альтернативный рендерер (аналог Optifine).</p>
+                  <p>
+                    Embeddium – улучшение производительности (аналог Sodium).
+                  </p>
+                  <p>Iris – поддержка шейдеров.</p>
+                  <p>Blur – размытый фон в меню.</p>
+                  <p>Legendary Tooltips – улучшенные подсказки предметов.</p>
+                  <p>Better Tab – улучшенное меню вкладок.</p>
+                  <p>И много других...</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.text_content}>
+              <div className={styles.left_text}>
+                <h3>БОЛЕЕ 200</h3>
+                <span>МОДОВ</span>
+              </div>
               <p>
-                Погрузись в мир захватывающих приключений с нашим удобным,
-                функциональным и надежным лаунчером!
+                Модпак с 200+ модами полностью обновляет игру, добавляя новые
+                биомы, структуры, квесты и сложных боссов, а продвинутая
+                оптимизация обеспечивает стабильную и плавную работу без
+                просадок FPS.
               </p>
             </div>
-            <div className={styles.launcher_buttons}>
-              <Link href="/Эпоха Блоков.exe" className={styles.button}>
-                Скачать лаунчер
-              </Link>
-              <Link href="/auth">Войти в аккаунт</Link>
-            </div>
-          </div>
-          <div className={styles.image}>
-            <div className={styles.image_container} />
           </div>
         </div>
-        <div className={styles.radialB}></div>
-        <div className={styles.line}></div>
-      </div>
-      <div className={styles.line} />
-      <div className={styles.radial} />
-      <div className={styles.light} />
+      </section>
+      <section className={styles.download}>
+        <div className={styles.shadow} />
+        <div className={styles.shadow_t} />
+        <div className={styles.container_download}>
+          <div className={styles.donwload_section}>
+            <h3>ЗАГРУЗИ НАШ ЛАУНЧЕР ЛЕГКО!</h3>
+            <button
+              className={styles.button}
+              onClick={() => {
+                router.push("/Эпоха Блоков.exe");
+              }}
+            >
+              <FaWindows size={48} />
+              <div className={styles.flex_col}>
+                <h4>НАЧАТЬ ИГРАТЬ</h4>
+                <h5>БЕСПЛАТНО</h5>
+              </div>
+            </button>
+          </div>
+          <div className={styles.video_section}>
+            <div
+              className={styles.video_container}
+              onClick={() => {
+                router.push(
+                  "https://www.youtube.com/watch?v=VaBb_42FKOs&ab_channel=%D0%AD%D0%BF%D0%BE%D1%85%D0%A0%D0%91%D0%BB%D0%9A%D0%9E%D0%92"
+                );
+              }}
+            >
+              <div className={styles.play}>
+                <IoPlayCircle size={64} height={32} width={32} />
+                <span className={styles.span_text}>
+                  ПОСМОТРЕТЬ ТРЕЙЛЕР НАШЕГО СЕРВЕРА
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

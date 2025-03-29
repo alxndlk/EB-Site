@@ -25,6 +25,7 @@ const SkinViewerComponent: React.FC = () => {
 
         if (!res.ok) {
           setSkinUrl("/default.png");
+          setLoading(false);
           return;
         }
 
@@ -64,7 +65,7 @@ const SkinViewerComponent: React.FC = () => {
 
     fetchSkin();
     fetchCape();
-  }, [userData?.uuid]); // Зависимость от userData?.uuid для загрузки скина и плаща
+  }, [userData?.uuid]);
 
   useEffect(() => {
     if (!canvasRef.current || !skinUrl) return;
@@ -72,7 +73,7 @@ const SkinViewerComponent: React.FC = () => {
     const skinViewer = new SkinViewer({
       canvas: canvasRef.current,
       width: 500,
-      height: 700,
+      height: 600,
       pixelRatio: "match-device",
       skin: skinUrl,
     });

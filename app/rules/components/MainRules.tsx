@@ -7,10 +7,10 @@ export const MainRules = () => {
       <div className={styles.mainContainer}>
         <div className={styles.holder_content}>
           <div className={styles.title}>
-            <h4>Игровые правила</h4>
+            <h4>ИГРОВЫЕ ПРАВИЛА</h4>
             <p>
-              Все правила вступают в силу с того момента, когда вы зашли на
-              сервер.
+              ВСЕ ПРАВИЛА ВСТУПАЮТ В СИЛУ С ТОГО МОМЕНТА, КОГДА ВЫ ЗАШЛИ НА
+              СЕРВЕР.
             </p>
           </div>
 

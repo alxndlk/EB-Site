@@ -1,29 +1,34 @@
+"use client";
+
 import styles from "./Footer.module.css";
 
 import Link from "next/link";
 import Image from "next/image";
 import { FaDiscord, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export const Footer = () => {
+  const router = useRouter();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer_content}>
         <div className={styles.content_logo}>
           <div className={styles.logo}>
             <Image
-              width={24}
-              height={24}
-              src="/logo-top.png"
-              alt=""
-              className={`${styles.logoImage}`}
+              width={95}
+              height={46}
+              src="/icons/logo.png"
+              alt="Эпоха Блоков"
+              className={styles.logoImage}
+              onClick={() => {
+                router.push("/");
+              }}
             />
-            <Link href="/" className={`${styles.link}`}>
-              Эпоха Блоков
-            </Link>
           </div>
         </div>
         <div className={styles.content}>
-          <h4>Ресурсы</h4>
+          <h4>РЕСУРСЫ</h4>
           <div className="flex flex-col">
             <Link href="">Серверы</Link>
             <Link href="/donate" target="_blank">
@@ -35,7 +40,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className={styles.content}>
-          <h4>Социальные сети</h4>
+          <h4>СОЦИАЛЬНЫЕ СЕТИ</h4>
           <div className="flex flex-col">
             <Link href="https://t.me/+vO9cZ8FtLD85YmYy">
               <FaTelegram />
@@ -56,7 +61,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className={styles.content}>
-          <h4>Разное</h4>
+          <h4>РАЗНОЕ</h4>
           <div className="flex flex-col">
             <Link target="_blank" href="https://t.me/alxndlk">
               Работа у нас
@@ -65,7 +70,7 @@ export const Footer = () => {
         </div>
         <div className={`${styles.content}`}>
           <div className="flex flex-col">
-            <Link href="/Эпоха Блоков.exe" className={styles.button}>
+            <Link href="/launcher" className={styles.button}>
               Скачать лаунчер
             </Link>
           </div>

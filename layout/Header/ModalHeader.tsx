@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useUserData } from "@/hooks/useUserData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Servers } from "./Servers";
+import { useRouter } from "next/navigation";
+import { FaUsers } from "react-icons/fa";
 
 type ModalHeaderProps = {
   onClose: () => void;
@@ -16,6 +18,8 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
   const { userData } = useUserData();
   const [showServers, setShowServers] = useState(false);
 
+  const router = useRouter();
+
   const toggleServers = () => {
     setShowServers((prev) => !prev);
   };
@@ -24,78 +28,93 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
     setShowServers(false);
   };
 
+  const [serverData, setServerData] = useState<{
+    players: { online: number };
+  } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/mc-status")
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data);
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+  }, []);
+
   return (
     <div className={styles.modalHeader}>
       <div className={styles.close}>
         <div className={styles.logo}>
           <Image
-            width={24}
-            height={24}
-            src="/logo-top.png"
+            width={95}
+            height={46}
+            src="/icons/logo.png"
             alt="Эпоха Блоков"
             className={styles.logoImage}
+            onClick={() => {
+              router.push("/");
+            }}
           />
-          <Link href="/" className={styles.link}>
-            Эпоха Блоков
-          </Link>
+          <div className={styles.users_online}>
+            <FaUsers size={14} color="#ffffffbf" />
+            <h3>ОНЛАЙН:</h3>
+            <span>{serverData?.players.online}</span>
+          </div>
         </div>
         <div className={styles.menu} onClick={onClose}>
-          Меню <XIcon />
+          <XIcon />
         </div>
       </div>
       <div className={styles.menu_content}>
         <div className={styles.menu_link}>
           <li>
             <button onClick={toggleServers} className={styles.link}>
-              Сервера
+              СЕРВЕРА
             </button>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="/rules" target="_self">
-              Правила
+              ПРАВИЛА
             </Link>
             <ChevronRight size={16} />
           </li>
           <li>
-            <Link href="/donate">Донат</Link>
+            <Link href="/donate">ДОНАТ</Link>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="https://discord.gg/gQxQNpYjmy" target="__blank">
-              Дискорд
+              ДИСКОРД
             </Link>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="https://t.me/+vO9cZ8FtLD85YmYy" target="__blank">
-              Телеграм канал
+              ТЕЛЕГРАМ КАНАЛ
             </Link>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="https://www.youtube.com/@epohablokov" target="__blank">
-              YouTube
+              YOUTUBE
             </Link>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="https://www.tiktok.com/@epohablokov" target="__blank">
-              TikTok
+              TIKTOK
             </Link>
             <ChevronRight size={16} />
           </li>
           <li>
             <Link href="https://t.me/alxndlk" target="__blank">
-              Админстрация
+              АДМИНИСТРАЦИЯ
             </Link>
             <ChevronRight size={16} />
           </li>
-        </div>
-
-        <div className={styles.image_header}>
-          <div className={styles.image} />
-          <div className={styles.shadow} />
         </div>
 
         <div className={styles.buttons}>

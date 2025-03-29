@@ -8,6 +8,7 @@
   position: relative;
   background-size: cover;
   min-height: 100vh;
+  background-color: #0e0e0e;
 }
 
 .line {
@@ -15,10 +16,11 @@
   background: linear-gradient(
     199deg,
     rgba(6, 182, 212, 0) 0%,
-    rgb(255, 89, 111) 50%,
+    rgb(67, 125, 192) 50%,
     rgba(74, 222, 128, 0) 100%
   );
   width: 100%;
+
   height: 1px;
   position: absolute;
   bottom: 0;
@@ -30,7 +32,7 @@
 .radial {
   background: radial-gradient(
     50% 50% at 50% 50%,
-    #ff005583 0%,
+    rgb(67, 125, 192) 0%,
     rgba(171, 171, 171, 0) 100%
   );
   border-radius: 8px;
@@ -51,7 +53,7 @@
   width: 100%;
   height: 100%;
   border-radius: 60px 60px 0px 0;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,13 +66,6 @@
   font-size: 52px;
   font-weight: 700;
   line-height: 60px;
-  background: linear-gradient(
-    45deg,
-    hsl(0deg 0% 0% / 70%) 15%,
-    hsl(0deg 0% 0% / 20%) 85%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .title {
@@ -82,48 +77,33 @@
   max-width: 800px;
   justify-content: left;
   align-items: left;
-  background: linear-gradient(
-    45deg,
-    hsl(0deg 0% 0% / 70%) 15%,
-    hsl(0deg 0% 0% / 20%) 85%
-  );
-  background-color: rgb(158, 158, 158);
   border-radius: 16px;
-  box-shadow: 0 20px 40px #0009;
   overflow: hidden;
   position: relative;
-  padding: 45px 60px;
+  padding: 20px;
 }
 
 .title p {
   font-size: 20px;
-  color: rgb(255 255 255 / 60%);
+  color: #ffffffbf;
   text-wrap: balance;
-  background: linear-gradient(
-    45deg,
-    hsl(0deg 0% 0% / 70%) 15%,
-    hsl(0deg 0% 0% / 20%) 85%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 
 .holder_content {
-  background-color: white;
   border-radius: 16px;
   background-size: cover;
   position: relative;
   overflow: hidden;
   max-width: 880px;
   width: 100%;
-  padding: 40px;
+  padding: 20px;
   transition: 0.1s ease;
   align-items: left;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  box-shadow: 0 10px 20px #00010a26;
   animation: Buy_moveUp__qKJT6 0.3s ease;
 }
 
@@ -140,13 +120,13 @@
   flex-direction: column;
   width: 100%;
   height: min-content;
-  padding: 30px 45px;
-  gap: 40px;
+  padding: 20px;
+  gap: 20px;
   text-align: left;
   border-radius: 16px;
-  background-color: #000;
+  background-color: #0f0f0f;
   border-radius: 16px;
-  box-shadow: 0 20px 40px #0009;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
 }
 
 .title_container {
@@ -174,7 +154,7 @@
 
 .ban {
   font-size: 14px;
-  color: rgb(255, 0, 0);
+  color: #4543c0;
   font-weight: 600;
 }
 
@@ -194,6 +174,10 @@
 @media (max-width: 540px) {
   .mainContainer {
     padding: 0px;
+  }
+
+  .holder_content {
+    margin-top: 2rem;
   }
 
   .value {

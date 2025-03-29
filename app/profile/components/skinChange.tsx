@@ -132,8 +132,8 @@ export const SkinUploader: React.FC = () => {
     <div className={styles.avatar}>
       <div className={styles.top_text}>
         <h4>
-          Скин и Плащ
-          <span className={styles.info}>Инфо</span>
+          СКИН И ПЛАЩ
+          <span className={styles.info}>ИНФО</span>
         </h4>
         <span>
           Вы можете установить свой скин и плащ, чтобы выделяться среди других
@@ -146,7 +146,7 @@ export const SkinUploader: React.FC = () => {
           {!fileInfo ? (
             <div className="flex flex-col justify-center text-center items-center gap-2">
               <UploadCloudIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
-              <p>Выберите файл PNG для скина</p>
+              <p>ВЫБЕРИРЕ ФАЙЛ PNG ДЛЯ СКИНА</p>
             </div>
           ) : (
             <div className={styles.file_info}>
@@ -169,7 +169,7 @@ export const SkinUploader: React.FC = () => {
           {!cloakInfo ? (
             <div className="flex flex-col justify-center text-center items-center gap-2">
               <UploadCloudIcon size={32} color="#a1a1a1" absoluteStrokeWidth />
-              <p>Выберите файл PNG для плаща (не обязательно)</p>
+              <p>ВЫБЕРИТЕ ФАЙЛ PNG ДЛЯ ПЛАЩА (НЕ ОБЯЗАТЕЛЬНО)</p>
             </div>
           ) : (
             <div className={styles.file_info}>

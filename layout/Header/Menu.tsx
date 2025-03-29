@@ -23,7 +23,7 @@ export const Menu: React.FC = () => {
   return (
     <>
       <div className={styles.menu} onClick={() => setVisible(true)}>
-        Меню <MenuIcon />
+        <MenuIcon />
       </div>
       {visible && <ModalHeaader onClose={handleClose} />}
     </>

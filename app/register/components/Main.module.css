@@ -8,13 +8,9 @@
   text-align: center;
   height: 90vh;
   justify-content: space-around;
-  background: radial-gradient(
-    100% 75% at 50% 86.3%,
-    #000e3b 0%,
-    rgba(0, 128, 255, 0) 100%
-  );
   color: #ededed;
   position: relative;
+  background-color: #0e0e0e;
 }
 
 .wrapper_main {
@@ -23,7 +19,7 @@
   flex: none;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 2rem;
+  gap: 1rem;
   height: min-content;
   justify-content: space-between;
   max-width: 1200px;
@@ -42,13 +38,11 @@
 
 .form_padding {
   border-style: solid;
-  border: 1px solid #ffffff1f;
   align-content: flex-start;
   align-items: flex-start;
   border-radius: 24px;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(5px);
   gap: 15px;
   height: 500px;
   padding: 10px;
@@ -99,13 +93,6 @@
 .form_content {
   width: 100%;
   padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: radial-gradient(
-    140% 100% at 50% 0%,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(0, 0, 0, 0) 77.93496621621621%
-  );
-  box-shadow: 0 10px 20px #00010a26;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -120,44 +107,10 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   text-align: center;
   align-items: left;
-  gap: 24px;
-}
-
-.line {
-  background: rgb(6, 182, 212);
-  background: linear-gradient(
-    199deg,
-    rgba(6, 182, 212, 0) 0%,
-    rgb(89, 167, 255) 50%,
-    rgba(74, 222, 128, 0) 100%
-  );
-  width: 60%;
-  height: 1px;
-  position: absolute;
-  bottom: 0;
-  z-index: 2;
-}
-
-.radial {
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    #0095ff 0%,
-    rgba(171, 171, 171, 0) 100%
-  );
-  border-radius: 8px;
-  bottom: -430px;
-  flex: none;
-  height: 730px;
-  left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
-  max-width: 1800px;
-  opacity: 0.4;
-  overflow: hidden;
-  position: absolute;
-  width: 1440px;
-  z-index: 5;
+  gap: 1rem;
 }
 
 .form_title {
@@ -167,10 +120,10 @@
 }
 
 .form_title h4 {
-  font-size: 20px;
+  font-size: 24px;
   color: #ededed;
   line-height: 2rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .form_title p {
@@ -183,6 +136,7 @@
   text-align: left;
   justify-content: left;
   gap: 6px;
+  font-weight: 600;
 }
 
 .form_title a {
@@ -192,6 +146,7 @@
   color: hsla(210, 100%, 66%, 1);
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .form_title a:hover {
@@ -201,7 +156,7 @@
 .form_input_content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .input_content {
@@ -262,25 +217,36 @@
 }
 
 .button {
-  padding: 0px 12px;
-  height: 40px;
-  transition: 0.1s ease;
-  border-radius: 8px;
-  z-index: 999;
-  font-size: 14px;
-  cursor: pointer;
+  background-color: #2e2e2e;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 0 25px #e81c5a00;
+  color: #fffc;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  height: 60px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  text-align: center;
   align-items: center;
-  font-weight: 500;
-  background-color: #fff;
-  color: #000 !important;
+  text-align: center;
+  outline: none;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+  transition-property: background-color, color, box-shadow;
+}
+
+.active {
+  background: #59a7ff;
+  #232266box-shadow: 0 0 25px #232266;
 }
 
 .button:hover {
-  background-color: #dbdbdb;
+  color: #fff;
+}
+
+.active:hover {
+  box-shadow: 0 0 25px #232266;
 }
 
 .StatusBar {
@@ -300,7 +266,7 @@
 }
 
 .form_content input {
-  width: 300px;
+  width: 100%;
 }
 
 .red {
@@ -327,7 +293,7 @@
   flex-direction: column;
   gap: 30px;
   justify-content: center;
-  width: 570px;
+  width: 650px;
   overflow: visible;
   padding: 0;
   position: relative;
@@ -336,17 +302,118 @@
 
 .text h4 {
   font-size: 72px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 80px;
   justify-content: left;
   text-align: left;
+  text-wrap: balance;
 }
 
 .text p {
-  font-size: 24px;
-  color: rgb(255 255 255 / 60%);
+  font-size: 20px;
+  color: #ffffffbf;
   justify-content: left;
   text-align: left;
+  text-wrap: balance;
+  width: 630px;
+  font-weight: 600;
+}
+
+.input_content span {
+  opacity: 0.7;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.checkbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1;
+  appearance: none;
+  cursor: pointer;
+  background-color: #181818;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+}
+
+.checkbox input:checked {
+  background-color: #59a7ff;
+  color: #fff;
+}
+
+.checkbox input:checked::after {
+  content: "";
+  position: absolute;
+  left: 5.5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.accept {
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  color: #ffffffcc;
+  font-weight: 600;
+  gap: 0.25rem;
+}
+
+.accept a {
+  opacity: 1;
+  text-decoration: underline;
+  color: #fff;
+  font-weight: 600;
+}
+
+.line {
+  background: rgb(6, 182, 212);
+  background: linear-gradient(
+    199deg,
+    rgba(6, 182, 212, 0) 0%,
+    rgb(89, 167, 255) 50%,
+    rgba(74, 222, 128, 0) 100%
+  );
+  width: 60%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+
+.radial {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #0095ff 0%,
+    rgba(171, 171, 171, 0) 100%
+  );
+  border-radius: 8px;
+  bottom: -430px;
+  flex: none;
+  height: 730px;
+  left: calc(50.00000000000002% - min(1800px, 1440px) / 2);
+  max-width: 1800px;
+  opacity: 0.4;
+  overflow: hidden;
+  position: absolute;
+  width: 1440px;
+  z-index: 1;
+  scale: 100%;
 }
 
 @media (max-width: 1400px) {
@@ -379,6 +446,7 @@
 
   .text p {
     font-size: 20px;
+    width: auto;
   }
 
   .form_content_wrapper {
@@ -409,6 +477,11 @@
 }
 
 @media (max-width: 768px) {
+  .main {
+    height: auto;
+    padding-top: 2rem;
+  }
+
   .wrapper_main {
     flex-direction: column;
   }
@@ -418,7 +491,7 @@
   }
 
   .form {
-    max-width: 450px;
+    max-width: 100%;
   }
 
   .text {
@@ -434,7 +507,7 @@
   .main {
     height: auto;
     padding: 2rem;
-    padding-top: 0rem;
+    padding-top: 4rem;
   }
 
   .text {
@@ -454,20 +527,24 @@
 
   .form_content_wrapper {
     width: 100%;
+    justify-content: start;
+    margin-top: 1rem;
   }
 
   .form_padding {
+    padding: 0;
     height: auto;
   }
 
-  .form_content input {
-    width: 100%;
+  .form_content {
+    padding: 0;
   }
-}
 
-.input_content span {
-  opacity: 0.7;
-  font-size: 14px;
-  font-weight: 400;
-  margin-left: 0.5rem;
+  .accept {
+    font-size: 12px;
+  }
+
+  .checkbox {
+    gap: 0.5rem;
+  }
 }

@@ -1,23 +1,23 @@
 "use client";
 
 import styles from "./Main.module.css";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { signIn } from "next-auth/react";
-import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { InputActive } from "@/app/ui/input";
 import StatusBar from "@/app/ui/StatusBar";
 import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
-import Image from "next/image";
 
 export const Main = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [message, setMessage] = useState<{
     text: string | null;
     type: "success" | "error" | null;
   }>({ text: null, type: null });
+
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -25,6 +25,11 @@ export const Main = () => {
 
     if (!email || !password) {
       setMessage({ text: "Заполните все поля!", type: "error" });
+      return;
+    }
+
+    if (!isChecked) {
+      setMessage({ text: "Подтвердите согласие с правилами!", type: "error" });
       return;
     }
 
@@ -55,22 +60,13 @@ export const Main = () => {
     <main className={styles.main}>
       <div className={styles.wrapper_main}>
         <div className={styles.text}>
-          <h4>Мир ждёт тебя, бери его в свои руки!</h4>
+          <h4>МИР ЖДЁТ ТЕБЯ, БЕРИ ЕГО В СВОИ РУКИ!</h4>
           <p>
-            Для игроков, которые не боятся принимать вызовы, строить свои миры и
-            достигать новых высот в каждом приключении!
+            ДЛЯ ИГРОКОВ, КОТОРЫЕ НЕ БОЯТСЯ ПРИНИМАТЬ ВЫЗОВЫ, СТРОИТЬ СВОИ МИРЫ И
+            ДОСТИГАТЬ НОВЫХ ВЫСОТ В КАЖДОМ ПРИКЛЮЧЕНИИ!
           </p>
         </div>
-        <Image
-          src="/island.png"
-          alt="image"
-          height={500}
-          width={500}
-          className={styles.image}
-          quality={100}
-        />
-        <div className={styles.red}></div>
-        <div className={styles.light_2}></div>
+
         {message.text && (
           <StatusBar
             message={message.text}
@@ -78,6 +74,7 @@ export const Main = () => {
             onClose={() => setMessage({ text: null, type: null })}
           />
         )}
+
         <div className={styles.form}>
           <div className={styles.form_padding}>
             <div className={styles.form_content}>
@@ -86,14 +83,13 @@ export const Main = () => {
                 onSubmit={handleSubmit}
               >
                 <div className={styles.form_title}>
-                  <h4>Авторизация</h4>
+                  <h4>АВТОРИЗАЦИЯ</h4>
                   <p>
                     Нет аккаунта?<Link href="/register">Создать</Link>
                   </p>
                 </div>
                 <div className={styles.form_input_content}>
                   <div className={styles.input_content}>
-                    <p>Почта</p>
                     <InputActive
                       placeholder="you@example.com"
                       onChange={(e) => setEmail(e.target.value)}
@@ -103,12 +99,7 @@ export const Main = () => {
                   </div>
 
                   <div className={styles.input_content}>
-                    <div className={styles.input_content_password}>
-                      <span>Пароль</span>
-                      <Link href="/reset" tabIndex={-1}>
-                        Забыли пароль?
-                      </Link>
-                    </div>
+                    <div className={styles.input_content_password}></div>
                     <InputActive
                       placeholder="Введите пароль"
                       onChange={(e) => setPassword(e.target.value)}
@@ -117,9 +108,27 @@ export const Main = () => {
                     />
                   </div>
                 </div>
-                <button className={styles.button} type="submit">
+                <div className={styles.checkbox}>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox_button}
+                    checked={isChecked}
+                    onChange={(e) => setIsChecked(e.target.checked)}
+                  />
+                  <span className={styles.accept}>
+                    Я соглашаюсь с<Link href="/rules">правилами сервера</Link>
+                  </span>
+                </div>
+
+                <button
+                  className={`${styles.button} ${
+                    isChecked ? styles.active : styles.disabled
+                  }`}
+                  type="submit"
+                  disabled={!isChecked}
+                >
                   {message.type === "success" ? (
-                    <ThreeDots width={32} height={32} color="#000" />
+                    <ThreeDots width={16} height={16} color="#fff" />
                   ) : (
                     "Войти в аккаунт"
                   )}
