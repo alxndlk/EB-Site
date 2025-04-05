@@ -499,7 +499,7 @@
 }
 
 .users_online {
-  background: #1d1d1d;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   margin-left: 32px;
   padding: 10px;

@@ -4,8 +4,11 @@ import { ChevronRight } from "lucide-react";
 import { FaDiscord, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const Servers = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.servers}>
       <div className={styles.servers_title}>
@@ -43,7 +46,11 @@ export const Servers = () => {
                     <p>Погрузись в мир сложных технологий!</p>
                   </div>
                 </div>
-                <button>
+                <button
+                  onClick={() => {
+                    router.push("/tmnext");
+                  }}
+                >
                   ПОДРОБНЕЕ <ChevronRight size={18} />
                 </button>
               </div>
@@ -64,9 +71,7 @@ export const Servers = () => {
                     <p>Улучшенная классика с новой графикой и оптимизацией.</p>
                   </div>
                 </div>
-                <button>
-                  ПОДРОБНЕЕ <ChevronRight size={18} />
-                </button>
+                <button className={styles.disable}>СКОРО!</button>
               </div>
             </div>
             <div className={styles.server} style={{}}>
@@ -94,7 +99,7 @@ export const Servers = () => {
           </div>
           <span className={styles.helper}>
             Не можете выбрать где поиграть?
-            <Link href="https://t.me/alxndlk">
+            <Link href="https://discord.gg/gQxQNpYjmy">
               <FaDiscord />
               Дискорд в помощь!
             </Link>
@@ -109,19 +114,39 @@ export const Servers = () => {
           </div>
           <div className={styles.servers_holder}>
             <div className={styles.grid}>
-              <div className={styles.link}>
+              <div
+                className={styles.link}
+                onClick={() => {
+                  router.push("https://discord.gg/gQxQNpYjmy");
+                }}
+              >
                 <FaDiscord />
                 Discord
               </div>
-              <div className={styles.link}>
+              <div
+                className={styles.link}
+                onClick={() => {
+                  router.push("https://t.me/+vO9cZ8FtLD85YmYy");
+                }}
+              >
                 <FaTelegram />
                 Telegram
               </div>
-              <div className={styles.link}>
+              <div
+                className={styles.link}
+                onClick={() => {
+                  router.push("https://www.youtube.com/@epohablokov");
+                }}
+              >
                 <FaYoutube />
                 YouTube
               </div>
-              <div className={styles.link}>
+              <div
+                className={styles.link}
+                onClick={() => {
+                  router.push("https://www.tiktok.com/@epohablokov");
+                }}
+              >
                 <FaTiktok />
                 TikTok
               </div>

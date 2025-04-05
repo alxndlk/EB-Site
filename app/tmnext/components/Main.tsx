@@ -51,6 +51,7 @@ export const Main = () => {
               {Object.entries(UpdateList.tmnext).map(([key, update]) => (
                 <div
                   key={key}
+                  onClick={() => {router.push(update?.url)}}
                   className={
                     key === "0.2"
                       ? styles.updates

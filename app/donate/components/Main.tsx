@@ -1,14 +1,22 @@
 "use client";
 
-import styles from "./DonateMain.module.css";
-import CheapStatus from "./CheapStatus";
-import ExpensiveStatus from "./ExpensiveStatus";
+import styles from "./Main.module.css";
+import PermBlock from "./PermBlock";
 
-import { TableTitle } from "./TableTitle";
-import { cheapData, expensiveData } from "./constants";
-import { Modal, Status } from "./Status";
-import { Buy } from "./Buy";
+import { TableTitle } from "./Table/TableTitle";
+import { Data } from "./constants";
+import { Status } from "./Table/TableStatus";
+import { Buy } from "./Buy/Buy";
 import { useState } from "react";
+import KitVipTMNext from "./Kit/KitVipTMNext";
+import KitEmpty from "./Kit/KitEmpty";
+import KitPremiumTMNext from "./Kit/KitPremiumTMNext";
+import KitDeluxeTMNext from "./Kit/KitDeluxeTMNext";
+import KitUltraTMNext from "./Kit/KitUltraTMNext";
+import KitLegendTMNext from "./Kit/KitLegendTMNext";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { KITS_LIST } from "./kits";
+import KitMap from "./Kit/KitMap";
 
 export const DonateMain = () => {
   const [showBuy, setShowBuy] = useState(false);
@@ -37,72 +45,60 @@ export const DonateMain = () => {
   return (
     <div className={styles.DonateMain}>
       <div className={styles.status_content}>
-        <div className={`${styles.top}`}>
-          <div className={styles.title}>
-            <h4 className={`text-white`}>Магазин привилегий</h4>
-          </div>
+        <div className={styles.top_holder}>
+          <div className={styles.image_top} />
+          <div className={styles.shadow} />
+          <div className={`${styles.top}`}>
+            <div className={styles.title}>
+              <h4 className={`text-white`}>ПОКУПКА ПРИВИЛЕГИЙ</h4>
+              <p>
+                Покупка привилегий даст доступ к уникальным возможностям,
+                дополнительным правам и бонусам, сделав игру комфортнее и
+                интереснее.
+              </p>
+            </div>
 
-          <div className={styles.status_container}>
-            <div className={styles.statuses}>
-              <div className={styles.stat}>
-                {cheapData.map(
-                  ({
-                    src,
-                    statusClass,
-                    statusName,
-                    price,
-                    buttonColor,
-                    bg_color,
-                  }) => (
-                    <CheapStatus
-                      key={statusClass}
-                      src={src}
-                      statusClass={statusClass}
-                      statusName={statusName}
-                      price={price}
-                      buttonColor={buttonColor}
-                      onClick={() =>
-                        handleStatusSelect(statusName, price, src, bg_color)
-                      }
-                    />
-                  )
-                )}
-                {expensiveData.map(
-                  ({
-                    src,
-                    statusClass,
-                    statusName,
-                    price,
-                    buttonColor,
-                    bg_color,
-                  }) => (
-                    <ExpensiveStatus
-                      key={statusClass}
-                      src={src}
-                      statusClass={statusClass}
-                      statusName={statusName}
-                      price={price}
-                      buttonColor={buttonColor}
-                      onClick={() =>
-                        handleStatusSelect(statusName, price, src, bg_color)
-                      }
-                    />
-                  )
-                )}
+            <div className={styles.status_container}>
+              <div className={styles.statuses}>
+                <div className={styles.stat}>
+                  {Data.map(
+                    ({
+                      src,
+                      statusClass,
+                      statusName,
+                      price,
+                      buttonColor,
+                      bg_color,
+                    }) => (
+                      <PermBlock
+                        key={statusClass}
+                        src={src}
+                        statusClass={statusClass}
+                        statusName={statusName}
+                        price={price}
+                        buttonColor={buttonColor}
+                        onClick={() =>
+                          handleStatusSelect(statusName, price, src, bg_color)
+                        }
+                      />
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>
           <div className={styles.line}></div>
           <div className={styles.radial}></div>
-          <div className={styles.light}></div>
         </div>
+        <KitMap />
         <div className={`${styles.donate_container}`}>
           <div className={styles.title_holder}>
-            <h4 id="improve">
-              Стань лучше других.
-              <br />
-              Подробнее в деталях.
-            </h4>
+            <h4 id="improve">ПОПРОБУЙ УЖЕ СЕЙЧАС.</h4>
+            <p>
+              Покупка привилегий даст доступ к уникальным возможностям,
+              дополнительным правам и бонусам, сделав игру комфортнее и
+              интереснее.
+            </p>
           </div>
           <div className={styles.donate_table}>
             <div className={styles.donate_table_header}>
@@ -262,10 +258,10 @@ export const DonateMain = () => {
               />
             </div>
           </div>
+          <div className={styles.line}></div>
+          <div className={styles.radial}></div>
         </div>
       </div>
-      <div className={styles.radial}></div>
-      <div className={styles.line}></div>
       {showBuy && (
         <Buy
           onClose={closeBuy}

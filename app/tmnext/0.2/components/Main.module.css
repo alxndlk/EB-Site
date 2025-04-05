@@ -1,0 +1,160 @@
+.backToServer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  color: #ffffff90;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 3px #000;
+  font-weight: 600;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.backToServer:hover {
+  color: #fff;
+  gap: 1.5rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mainContainer {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  text-align: left;
+  height: 100%;
+  padding: 5rem 2rem;
+}
+
+.changelog {
+  width: 100%;
+  justify-items: left;
+  position: relative;
+  text-align: left;
+  border-left: 2px solid rgba(0, 195, 255, 0.6);
+  background-color: #0b0b0b;
+  padding: 20px 20px;
+  margin-top: 40px;
+}
+
+.text {
+  width: 100%;
+  justify-items: left;
+  position: relative;
+  text-align: left;
+  border-left: 2px solid rgba(0, 195, 255, 0.6);
+  background-color: #0b0b0b;
+  padding: 20px 40px;
+}
+
+.text h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(255 255 255 / 70%);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-left: 20px;
+  z-index: 2;
+}
+
+.title h3 {
+  margin-left: 20px;
+  text-shadow: 0px 0px 10px #000;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.title p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 2;
+  margin-left: 20px;
+}
+
+.update_block {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding: 20px;
+  border-left: 2px rgba(0, 195, 255, 0.6);
+  border-style: dashed;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.update_block h4 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
+
+.update_block p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.update_block span {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.image {
+  width: 300px;
+  aspect-ratio: 16/9;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.image_contain {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.image_container {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  gap: 1rem;
+}
+
+@media (max-width: 500px) {
+  .mainContainer {
+    padding: 5rem 0rem;
+  }
+
+  .backToServer {
+    margin-left: 1rem;
+  }
+}

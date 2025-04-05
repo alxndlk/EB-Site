@@ -1,4 +1,4 @@
-export const cheapData = [
+export const Data = [
   {
     src: "/vip_picture.png",
     statusClass: "vip",
@@ -23,9 +23,6 @@ export const cheapData = [
     buttonColor: "deluxe_b",
     bg_color: "hsl(151, 100%, 45%)",
   },
-];
-
-export const expensiveData = [
   {
     src: "/ultra_picture.png",
     statusClass: "ultra",

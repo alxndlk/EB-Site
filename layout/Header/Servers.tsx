@@ -83,9 +83,7 @@ export const Servers: React.FC<ServersProps> = ({ onClose }) => {
                     <p>Улучшенная классика с новой графикой и оптимизацией.</p>
                   </div>
                 </div>
-                <button>
-                  ПОДРОБНЕЕ <ChevronRight size={18} />
-                </button>
+                <button className={styles.disable}>СКОРО!</button>
               </div>
             </div>
             <div className={styles.server} style={{}}>

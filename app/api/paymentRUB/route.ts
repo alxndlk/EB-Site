@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Basic ${Buffer.from(
-          "003892:0bJ91423a405EPeL8e502TG06K7A5D1HfV16"
+          `${process.env.TOME_KEY}:${process.env.TOME_SECRET_KEY}`
         ).toString("base64")}`,
         "Idempotency-Key": uuid,
       },

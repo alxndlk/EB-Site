@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #282828;
+  border: 3px solid #353535;
+  z-index: 9999;
+  position: relative;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: auto;
+  width: 100%;
+  grid-gap: 8px;
+  padding: 0.5rem 1rem;
+  padding-top: 1rem;
+}
+
+.item {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  background-color: #191919;
+  border-top: 5px solid #111111;
+  border-left: 2px solid #111111;
+  border-right: 2px solid #111111;
+}
+
+.text h4 {
+  font-size: 32px;
+  background-color: #282828;
+  padding: 0 1rem;
+  font-family: "VT323", monospace;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.line {
+  background-color: #191919;
+  width: 100%;
+  height: 10px;
+}
+
+.outline {
+  outline: 3px solid #070707;
+}
+
+.margin {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: auto;
+  width: 100%;
+  grid-gap: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #fff;
+  z-index: 99999;
+  backdrop-filter: blur(30px) saturate(180%);
+}
+
+.itemImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5px;
+  width: 90%;
+  transition: 0.1s ease;
+  scale: 100%;
+  cursor: pointer;
+}
+
+.item:hover > .itemImage {
+  scale: 120%;
+}
+
+.stack {
+  position: absolute;
+  bottom: -3px;
+  right: 0;
+  z-index: 999;
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 2px 2px 3px #000;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.item:hover .stack {
+  scale: 120%;
+}
+
+@media (max-width: 1700px) {
+  .outline {
+    width: 534px;
+  }
+}

@@ -1,3 +1,3 @@
-import { DonateMain } from "./DonateMain";
+import { DonateMain } from "./Main";
 
 export default DonateMain;

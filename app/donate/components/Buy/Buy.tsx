@@ -7,6 +7,7 @@ import Image from "next/image";
 import { ArrowRight, Check, XIcon } from "lucide-react";
 import { FaExclamation } from "react-icons/fa";
 import { useUserData } from "@/hooks/useUserData";
+import { Currency } from "@/app/ui/currency";
 
 interface BuyProps {
   onClose: () => void;
@@ -292,20 +293,15 @@ export const Buy: React.FC<BuyProps> = ({
                     >
                       <div className={styles.text_info}>
                         <span>Купить на 30 дней.</span>
-                        <p id="price30" className={styles.price_holder}>
-                          за{" "}
-                          {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(
-                            1
-                          )}
-                          <Image
-                            width={36}
-                            height={36}
-                            alt="rubby"
-                            className={styles.rubby}
-                            src={"/rubby.png"}
-                          />{" "}
-                          / мес.
-                        </p>
+                        <div className={styles.flex_buy}>
+                          <p id="price30" className={styles.price_holder}>
+                            за{" "}
+                            {Number(priceStatus.replace(/[^\d.]/g, "")).toFixed(
+                              1
+                            )}
+                          </p>
+                          <Currency />
+                        </div>
                       </div>
                       <ArrowRight size={64} />
                     </div>
@@ -324,20 +320,15 @@ export const Buy: React.FC<BuyProps> = ({
                     >
                       <div className={styles.text_info}>
                         <span>Купить на 3 месяца.</span>
-                        <p className={styles.price_holder}>
-                          за{" "}
-                          {(
-                            Number(priceStatus.replace(/[^\d.]/g, "")) * 2.4
-                          ).toFixed(1)}
-                          <Image
-                            width={36}
-                            height={36}
-                            alt="rubby"
-                            className={styles.rubby}
-                            src={"/rubby.png"}
-                          />
-                          / 3 мес.
-                        </p>
+                        <div className={styles.flex_buy}>
+                          <p className={styles.price_holder}>
+                            за{" "}
+                            {(
+                              Number(priceStatus.replace(/[^\d.]/g, "")) * 2.4
+                            ).toFixed(1)}
+                          </p>
+                          <Currency />
+                        </div>
                       </div>
                       <ArrowRight size={64} />
                     </div>
@@ -348,17 +339,15 @@ export const Buy: React.FC<BuyProps> = ({
                 <div className={styles.continue_to_buy}>
                   <div className={styles.question}>
                     <span>Действительно купить на {dataToBuy.days} дней</span>
-                    <p className={styles.price_holder}>
-                      за {dataToBuy.price}{" "}
-                      <Image
-                        width={36}
-                        height={36}
-                        alt="rubby"
-                        className={styles.rubby}
-                        src={"/rubby.png"}
-                      />
-                      ?
-                    </p>
+
+                    <div className={styles.flex}>
+                      <p className={styles.price_holder}>
+                        за {dataToBuy.price}
+                      </p>
+                      <h6>
+                        <Currency /> ?
+                      </h6>
+                    </div>
                   </div>
                   <div className={styles.buttons}>
                     <button

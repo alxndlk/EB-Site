@@ -4,7 +4,7 @@ import "./globals.css";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AuthProvider } from "./Providers";
-import { montserrat, cyrillic } from "./fonts/fonts";
+import { montserrat, cyrillic, minecraft } from "./fonts/fonts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Preloader from "@/components/Preloader/Preloader";
@@ -38,7 +38,9 @@ export default function RootLayout({
         />
         <link rel="icon" href="/logo.ico" />
       </head>
-      <body className={`${montserrat.className} ${cyrillic.className}`}>
+      <body
+        className={`${montserrat.className} ${cyrillic.className} ${minecraft.className}`}
+      >
         {loading ? (
           <Preloader>
             <div></div>

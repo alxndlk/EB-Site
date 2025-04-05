@@ -1,7 +1,8 @@
 import Image from "next/image";
-import styles from "./DonateMain.module.css";
+import styles from "./Main.module.css";
+import { Currency } from "@/app/ui/currency";
 
-interface ExpensiveStatusProps {
+interface PermBlockProps {
   src: string;
   statusClass: string;
   statusName: string;
@@ -10,7 +11,7 @@ interface ExpensiveStatusProps {
   onClick: () => void;
 }
 
-const ExpensiveStatus: React.FC<ExpensiveStatusProps> = ({
+const PermBlock: React.FC<PermBlockProps> = ({
   src,
   statusClass,
   statusName,
@@ -19,7 +20,7 @@ const ExpensiveStatus: React.FC<ExpensiveStatusProps> = ({
   onClick,
 }) => {
   return (
-    <div className={`${styles.Expensive_status} ${styles[statusClass]}`}>
+    <div className={`${styles.cheap_status}`}>
       <div className={styles.donate_status_container}>
         <Image
           src={src}
@@ -29,24 +30,16 @@ const ExpensiveStatus: React.FC<ExpensiveStatusProps> = ({
           height={150}
           className={styles.image}
         />
-
-        <div className={styles.donate_status_title}>Привилегия</div>
+        <div className={styles.donate_status_title}>ПРИВИЛЕГИЯ</div>
         <div
           className={`${styles.donate_status_naming} ${styles[buttonColor]}`}
         >
           {statusName}
         </div>
         <div className={styles.price}>
-          {price}
-          <Image
-            width={24}
-            height={24}
-            alt="rubby"
-            className={styles.rubby}
-            src={"/rubby.png"}
-          />
-          <h3>/</h3>
-          <span> мес.</span>
+          <h3>{price}</h3>
+          <Currency />
+          <span> / мес.</span>
         </div>
       </div>
       <div className={styles.button_get} onClick={onClick}>
@@ -56,4 +49,4 @@ const ExpensiveStatus: React.FC<ExpensiveStatusProps> = ({
   );
 };
 
-export default ExpensiveStatus;
+export default PermBlock;

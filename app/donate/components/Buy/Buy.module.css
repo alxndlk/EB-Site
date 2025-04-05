@@ -33,7 +33,6 @@
   scale: 110%;
 }
 .donate {
-  background-color: white;
   border-radius: 16px;
   width: 100%;
   background-size: cover;
@@ -46,7 +45,6 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  box-shadow: 0 10px 20px #00010a26;
   animation: moveUp 0.3s ease;
 }
 
@@ -288,10 +286,13 @@
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 104px;
 }
 
 .holder_top h4 {
-  font-size: 54px;
+  font-size: 36px;
   background: linear-gradient(
     45deg,
     hsl(0deg 0% 0% / 70%) 15%,
@@ -299,6 +300,9 @@
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 44px;
 }
 
 .bottom {
@@ -308,11 +312,10 @@
 }
 
 .buy_holder {
-  box-shadow: 0 20px 40px #0009;
+  box-shadow: 0 20px 20px #0009;
   width: 100%;
   height: 150px;
   border-radius: 16px;
-  background-color: #000;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -321,6 +324,9 @@
   transition: 0.1s ease;
   padding: 30px 45px;
   cursor: pointer;
+  background-color: #101010;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  text-transform: uppercase;
 }
 
 .buy_holder span {
@@ -430,11 +436,12 @@
 }
 
 .continue_to_buy {
-  box-shadow: 0 20px 40px #0009;
   width: 100%;
   height: 150px;
   border-radius: 16px;
-  background-color: #000;
+  background-color: #101010;
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  text-transform: uppercase;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -467,11 +474,12 @@
   font-size: 20px;
   cursor: pointer;
   display: flex;
+  text-transform: uppercase;
   flex-direction: row;
   justify-content: center;
   text-align: center;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
   background-color: #fff;
   color: #000;
 }
@@ -488,18 +496,64 @@
   z-index: 999;
   font-size: 20px;
   cursor: pointer;
+  text-transform: uppercase;
   display: flex;
   flex-direction: row;
   justify-content: center;
   text-align: center;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
   background-color: #ffffff17;
   color: #fff;
 }
 
 .decline:hover {
   background-color: #ffffff27;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.flex_buy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.flex_buy h6 {
+  font-size: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+}
+
+.flex_buy svg {
+  font-size: 16px;
+}
+
+.flex h6 {
+  font-size: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex svg {
+  font-size: 16px;
 }
 
 .question span {
@@ -556,7 +610,7 @@
 }
 
 .disabled {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: hsla(0, 0%, 100%, 0.1) !important;
   cursor: default;
 }
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import ReusableIcon from "./ReusableIcon";
-import styles from "./DonateMain.module.css";
+import styles from "../Main.module.css";
 import { EyeOpenIcon } from "@radix-ui/react-icons";
 
 interface IStatus {
@@ -79,15 +79,6 @@ export const Status: React.FC<IStatus> = ({
       )}
       <div className={styles.donate_table_skills}>
         <div className={styles.donate_table_skills_name}>
-          {kit && (
-            <div className={styles.eye_container}>
-              <EyeOpenIcon
-                className="cursor-pointer"
-                color="white"
-                onClick={openModal}
-              />
-            </div>
-          )}
           {text}
           {spanText && <span>{spanText}</span>}
         </div>
