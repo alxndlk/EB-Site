@@ -67,15 +67,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Проверка токена авторизации
-    const authHeader = req.headers.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json(
-        { error: "Неавторизованный доступ" },
-        { status: 401 }
-      );
-    }
-
     // Получение сессии пользователя
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
