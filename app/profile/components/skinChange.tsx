@@ -138,8 +138,7 @@ export const SkinUploader: React.FC = () => {
         <span>
           Вы можете установить свой скин и плащ, чтобы выделяться среди других
           игроков. Изображение должно быть строго в формате <strong>PNG</strong>{" "}
-          и иметь размеры <strong>64x64</strong> пикселя для скина и{" "}
-          <strong>64x64</strong> для плаща.
+          и иметь размеры <strong>64x64</strong> пикселя для скина.
         </span>
 
         <label className={styles.upload} htmlFor="upload-photo">
