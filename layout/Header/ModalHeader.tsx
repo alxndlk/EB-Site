@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Servers } from "./Servers";
 import { useRouter } from "next/navigation";
 import { FaUsers } from "react-icons/fa";
+import { useServerStatus } from "@/context/ServerStatusContext";
 
 type ModalHeaderProps = {
   onClose: () => void;
@@ -28,20 +29,7 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
     setShowServers(false);
   };
 
-  const [serverData, setServerData] = useState<{
-    players: { online: number };
-  } | null>(null);
-
-  useEffect(() => {
-    fetch("/api/mc-status")
-      .then((res) => res.json())
-      .then((data) => {
-        setServerData(data);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
-  }, []);
+  const serverData = useServerStatus();
 
   return (
     <div className={styles.modalHeader}>

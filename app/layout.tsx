@@ -8,6 +8,7 @@ import { montserrat, cyrillic, minecraft } from "./fonts/fonts";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Preloader from "@/components/Preloader/Preloader";
+import { ServerStatusProvider } from "@/context/ServerStatusContext";
 
 export default function RootLayout({
   children,
@@ -46,11 +47,13 @@ export default function RootLayout({
             <div></div>
           </Preloader>
         ) : (
-          <AuthProvider>
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </AuthProvider>
+          <ServerStatusProvider>
+            <AuthProvider>
+              {children}
+              <Analytics />
+              <SpeedInsights />
+            </AuthProvider>
+          </ServerStatusProvider>
         )}
       </body>
     </html>

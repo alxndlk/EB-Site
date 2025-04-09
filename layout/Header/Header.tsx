@@ -12,6 +12,7 @@ import { Servers } from "./Servers";
 import { useRouter } from "next/navigation";
 import { FaRegUserCircle, FaUsers } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
+import { useServerStatus } from "@/context/ServerStatusContext";
 
 export const Header: React.FC = () => {
   const { data: session, status } = useSession();
@@ -30,20 +31,7 @@ export const Header: React.FC = () => {
 
   const router = useRouter();
 
-  const [serverData, setServerData] = useState<{
-    players: { online: number };
-  } | null>(null);
-
-  useEffect(() => {
-    fetch("/api/mc-status")
-      .then((res) => res.json())
-      .then((data) => {
-        setServerData(data);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
-  }, []);
+  const serverData = useServerStatus();
 
   return (
     <header className={`${styles.header}`}>
