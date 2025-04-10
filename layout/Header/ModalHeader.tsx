@@ -48,7 +48,7 @@ export const ModalHeaader: React.FC<ModalHeaderProps> = ({ onClose }) => {
           <div className={styles.users_online}>
             <FaUsers size={14} color="#ffffffbf" />
             <h3>ОНЛАЙН:</h3>
-            <span>{serverData?.players.online}</span>
+            <span>{serverData?.players?.online}</span>
           </div>
         </div>
         <div className={styles.menu} onClick={onClose}>

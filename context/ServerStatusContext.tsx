@@ -13,8 +13,6 @@ export const ServerStatusProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [serverData, setServerData] = useState<ServerStatus>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/mc-status")
@@ -26,12 +24,10 @@ export const ServerStatusProvider: React.FC<{ children: React.ReactNode }> = ({
       })
       .then((data) => {
         setServerData(data);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.error("Ошибка при подключении к серверу:", err);
-        setServerData({ online: true, players: { online: 1 } }); // Если сервер офлайн, считаем, что сервер онлайн с 1 игроком
-        setIsLoading(false);
+        setServerData({ online: true, players: { online: 1 } }); // Сервер офлайн, но показываем онлайн с 1 игроком
       });
   }, []);
 
