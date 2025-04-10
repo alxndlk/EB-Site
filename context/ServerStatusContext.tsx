@@ -13,8 +13,8 @@ export const ServerStatusProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [serverData, setServerData] = useState<ServerStatus>(null);
-  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
-  const [error, setError] = useState<string | null>(null); // Ошибка
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/mc-status")
