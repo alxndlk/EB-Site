@@ -30,18 +30,10 @@ export const ServerStatusProvider: React.FC<{ children: React.ReactNode }> = ({
       })
       .catch((err) => {
         console.error("Ошибка при подключении к серверу:", err);
-        setServerData({ online: false, players: { online: 0 } }); // Если сервер офлайн, устанавливаем статус оффлайн
+        setServerData({ online: true, players: { online: 1 } }); // Если сервер офлайн, считаем, что сервер онлайн с 1 игроком
         setIsLoading(false);
       });
   }, []);
-
-  if (isLoading) {
-    return;
-  }
-
-  if (serverData?.online === false) {
-    return;
-  }
 
   return (
     <ServerStatusContext.Provider value={serverData}>
