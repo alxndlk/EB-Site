@@ -19,10 +19,10 @@ export default function RootLayout({
   const pathname = usePathname();
 
   useEffect(() => {
-    setLoading(true); // Начало загрузки
-    const timeout = setTimeout(() => setLoading(false), 750); // Имитируем загрузку
-    return () => clearTimeout(timeout); // Очистка таймера при переходе
-  }, [pathname]); // Зависимость от изменения пути
+    setLoading(true);
+    const timeout = setTimeout(() => setLoading(false), 750);
+    return () => clearTimeout(timeout);
+  }, [pathname]);
 
   return (
     <html lang="ru">
